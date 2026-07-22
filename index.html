@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0F9488">
+<title>FirVet — Clínica Veterinaria</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F5;
+    --surface:#FFFFFF;
+    --ink:#14201B;
+    --primary:#0F9488;
+    --secondary:#14B8A6;
+    --accent:#F5A623;
+    --text-sub:#5B6660;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* FLOATING NAV */
+  .brand-chip{
+    position:fixed;
+    top:24px;left:24px;
+    z-index:110;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border-radius:999px;
+    padding:10px 18px 10px 12px;
+    box-shadow:0 6px 20px rgba(20,32,27,0.1);
+    font-weight:700;
+    font-size:16px;
+  }
+  .brand-chip img{width:auto;height:26px;}
+  .menu-btn{
+    position:fixed;
+    top:24px;right:24px;
+    z-index:110;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--ink);
+    border:none;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px rgba(20,32,27,0.18);
+    transition:transform .2s ease;
+  }
+  .menu-btn:hover{transform:scale(1.06);}
+  .menu-btn svg{width:20px;height:20px;}
+  .menu-btn .bar{
+    stroke:#fff;
+    transition:transform .3s ease, opacity .2s ease;
+    transform-box:fill-box;
+    transform-origin:center;
+  }
+  .menu-btn.open .bar1{transform:translateY(6px) rotate(45deg);}
+  .menu-btn.open .bar2{opacity:0;}
+  .menu-btn.open .bar3{transform:translateY(-6px) rotate(-45deg);}
+
+  /* OFF-CANVAS MENU */
+  .menu-panel{
+    position:fixed;
+    inset:0;
+    z-index:105;
+    background:var(--ink);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:32px;
+    transform:translateX(100%);
+    opacity:0;
+    transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+  }
+  .menu-panel.open{transform:translateX(0);opacity:1;}
+  .menu-panel-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .menu-links{display:flex;flex-direction:column;gap:6px;}
+  .menu-links a{
+    font-family:'Fraunces',serif;
+    font-size:clamp(32px,7vw,56px);
+    font-weight:600;
+    padding:10px 0;
+    display:inline-block;
+    color:rgba(255,255,255,0.55);
+    transition:color .25s ease, padding-left .25s ease;
+  }
+  .menu-links a:hover{color:#fff;padding-left:12px;}
+  .menu-links a.active{color:var(--secondary);}
+  .menu-foot{
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    font-size:14px;
+    color:rgba(255,255,255,0.6);
+  }
+
+  /* HERO */
+  .hero{
+    padding:150px 0 90px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  .eyebrow{
+    color:var(--primary);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:block;
+  }
+  .hero h1{
+    font-size:clamp(34px,5.2vw,58px);
+    font-weight:600;
+    line-height:1.15;
+    margin-bottom:22px;
+  }
+  .hero h1 em{color:var(--primary);font-style:normal;}
+  .hero p{
+    font-size:17px;
+    color:var(--text-sub);
+    max-width:440px;
+    margin-bottom:36px;
+    line-height:1.7;
+  }
+  .hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+  .pill-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--primary);
+    color:#fff;
+    padding:16px 30px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15px;
+    box-shadow:0 10px 26px rgba(15,148,136,0.32);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,148,136,0.4);}
+  .link-cta{
+    font-weight:700;
+    font-size:15px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:3px;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .link-cta:hover{border-color:var(--primary);color:var(--primary);}
+
+  .hero-visual{position:relative;height:380px;}
+  .blob{
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:320px;height:320px;
+    background:linear-gradient(135deg, rgba(15,148,136,0.5), rgba(12,123,113,0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
+    background-size:cover;
+    background-position:center;
+    border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;
+    animation:blobMove 9s ease-in-out infinite;
+  }
+  @keyframes blobMove{
+    0%,100%{border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;}
+    50%{border-radius:45% 55% 38% 62% / 62% 38% 55% 45%;}
+  }
+  .chip{
+    position:absolute;
+    background:var(--surface);
+    border-radius:999px;
+    padding:10px 18px;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:0 8px 22px rgba(20,32,27,0.12);
+  }
+  .chip-1{top:8%;left:0;}
+  .chip-2{bottom:14%;right:0;color:var(--primary);}
+  .chip-3{top:46%;right:-4%;background:var(--accent);color:#fff;}
+
+  .reveal{
+    opacity:0;
+    transform:scale(.97);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible{opacity:1;transform:scale(1);}
+
+  section{padding:100px 0;}
+  .section-head{margin-bottom:56px;}
+  .section-head .eyebrow{text-align:left;}
+  .section-head h2{
+    font-size:clamp(26px,3.6vw,40px);
+    font-weight:600;
+    max-width:640px;
+  }
+  .section-head p{color:var(--text-sub);font-size:16px;margin-top:14px;max-width:520px;}
+
+  /* SERVICIOS - BENTO */
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:repeat(2,auto);
+    gap:20px;
+  }
+  .bento-item{
+    border-radius:22px;
+    padding:32px;
+    background:var(--surface);
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+  }
+  .bento-feature{
+    grid-column:span 2;
+    grid-row:span 2;
+    background:linear-gradient(0deg, rgba(20,32,27,0.92) 0%, rgba(20,32,27,0.35) 55%, rgba(20,32,27,0.55) 100%), url('https://postgradoveterinaria.com/wp-content/uploads/veterinario-de-urgencias.jpg');
+    background-size:cover;
+    background-position:center;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    min-height:340px;
+  }
+  .bento-feature .tag{color:var(--secondary);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+  .bento-feature h3{font-size:26px;font-weight:600;margin-bottom:12px;}
+  .bento-feature p{color:rgba(255,255,255,0.7);font-size:14px;line-height:1.7;}
+  .bento-item:not(.bento-feature){grid-column:span 2;}
+  .bento-icon{
+    width:44px;height:44px;
+    border-radius:12px;
+    background:rgba(15,148,136,0.12);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .bento-icon svg{width:22px;height:22px;stroke:var(--primary);}
+  .bento-item h3{font-size:18px;font-weight:600;margin-bottom:8px;}
+  .bento-item p{font-size:14px;color:var(--text-sub);line-height:1.6;}
+
+  /* CASOS - SCROLL HORIZONTAL */
+  .scroll-hint{font-size:13px;color:var(--text-sub);margin-top:14px;}
+  .cases-scroll{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    padding-bottom:16px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .cases-scroll::-webkit-scrollbar{display:none;}
+  .case-card{
+    scroll-snap-align:start;
+    flex:0 0 300px;
+    background:var(--surface);
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+  }
+  .case-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .case-avatar{
+    width:48px;height:48px;
+    border-radius:50%;
+    background:rgba(245,166,35,0.16);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+  }
+  .case-name{font-weight:700;font-size:16px;}
+  .case-condition{font-size:12px;color:var(--primary);font-weight:700;}
+  .case-card p{font-size:14px;color:var(--text-sub);line-height:1.7;}
+
+  /* STATS BAND */
+  .stats-band{background:var(--ink);color:#fff;}
+  .stats-row{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:40px;
+    text-align:center;
+  }
+  .stat{flex:1;min-width:140px;}
+  .stat-num{font-size:clamp(36px,5vw,58px);font-weight:600;color:var(--secondary);}
+  .stat-label{font-size:14px;color:rgba(255,255,255,0.65);margin-top:8px;}
+
+  /* CONTACT BAND */
+  .contact-band{position:relative;padding:110px 0;color:#fff;overflow:hidden;}
+  .contact-band::before{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(135deg, var(--primary), #0C7B71);
+    clip-path:polygon(0 9%,100% 0,100% 91%,0 100%);
+    z-index:0;
+  }
+  .contact-band .container{position:relative;z-index:1;text-align:center;}
+  .contact-band h2{font-size:clamp(28px,4.4vw,44px);font-weight:600;margin-bottom:16px;}
+  .contact-band p{color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto 34px;}
+  .contact-band .pill-btn{background:#fff;color:var(--primary);}
+
+  /* FOOTER */
+  .footer-mini{padding:44px 0;text-align:center;}
+  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;}
+  .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
+  .footer-links-row{font-size:13px;color:var(--text-sub);}
+  .footer-links-row a{font-weight:700;color:var(--ink);}
+  .footer-links-row a:hover{color:var(--primary);}
+  .dot{margin:0 10px;color:var(--text-sub);}
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:260px;order:-1;}
+    .bento{grid-template-columns:repeat(2,1fr);}
+    .bento-feature{grid-column:span 2;min-height:260px;}
+    .bento-item:not(.bento-feature){grid-column:span 1;}
+  }
+  @media(max-width:640px){
+    section{padding:64px 0;}
+    .container{padding:0 20px;}
+    .brand-chip{top:16px;left:16px;padding:8px 16px 8px 10px;font-size:14px;}
+    .brand-chip img{width:auto;height:22px;}
+    .menu-btn{top:16px;right:16px;width:46px;height:46px;}
+    .hero{padding:110px 0 60px;}
+    .hero p{max-width:none;}
+    .hero-ctas{width:100%;}
+    .pill-btn{width:100%;justify-content:center;}
+    .section-head{margin-bottom:36px;}
+    .stats-row{justify-content:flex-start;gap:32px;}
+    .stat{min-width:45%;text-align:left;}
+    .menu-links a{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="brand-chip">
+  <img src="logo-icon.png" alt="FirVet">
+  FirVet
+</a>
+
+<button class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line class="bar bar1" x1="3" y1="6" x2="21" y2="6"/>
+    <line class="bar bar2" x1="3" y1="12" x2="21" y2="12"/>
+    <line class="bar bar3" x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div class="menu-panel" id="menuPanel">
+  <div class="menu-panel-inner">
+    <nav class="menu-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#casos">Casos de éxito</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="menu-foot">
+      <span>info@FirVet.com</span>
+      <span>+54 9 11 5555-0123</span>
+      <span>Buenos Aires, Argentina</span>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Clínica veterinaria integral</span>
+      <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
+      <p>Consultas, cirugías, vacunación y emergencias las 24 horas, con un equipo que trata a cada paciente como familia.</p>
+      <div class="hero-ctas">
+        <a href="contacto.html" class="pill-btn">Reservar turno →</a>
+        <a href="#servicios" class="link-cta">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="blob"></div>
+      <span class="chip chip-1">★ 4.9/5 valoración</span>
+      <span class="chip chip-2">+500 familias felices</span>
+      <span class="chip chip-3">24/7 emergencias</span>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Todo lo que tu mascota necesita, en un solo lugar</h2>
+      <p>Un equipo veterinario preparado para acompañar cada etapa de su vida.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item bento-feature reveal">
+        <span class="tag">Disponible siempre</span>
+        <h3>Emergencias 24hs</h3>
+        <p>Atención de urgencias todos los días del año, sin excepción, con guardia veterinaria activa.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Consultas y chequeos</h3>
+        <p>Revisiones periódicas para prevenir enfermedades y mantenerla sana.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/></svg>
+        </div>
+        <h3>Vacunación</h3>
+        <p>Planes de vacunación y desparasitación al día durante toda su vida.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Cirugías</h3>
+        <p>Procedimientos con equipamiento moderno y seguimiento post-operatorio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Casos de éxito</span>
+      <h2>Historias que nos llenan de orgullo</h2>
+      <p>Algunos de los pacientes que pasaron por nuestra clínica y hoy están mejor que nunca.</p>
+      <p class="scroll-hint">Deslizá para ver más →</p>
+    </div>
+    <div class="cases-scroll">
+      <div class="case-card reveal">
+        <div class="case-top">
+          <div class="case-avatar">🐕</div>
+          <div>
+            <div class="case-name">Rocky</div>
+            <div class="case-condition">Fractura de pata trasera</div>
+          </div>
+        </div>
+        <p>"Después de la cirugía y varias semanas de rehabilitación, Rocky volvió a correr como si nada hubiera pasado."</p>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-top">
+          <div class="case-avatar">🐈</div>
+          <div>
+            <div class="case-name">Luna</div>
+            <div class="case-condition">Insuficiencia renal</div>
+          </div>
+        </div>
+        <p>"Con un tratamiento a tiempo y control constante, Luna recuperó su energía y hoy disfruta de una vida plena."</p>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-top">
+          <div class="case-avatar">🐕‍🦺</div>
+          <div>
+            <div class="case-name">Max</div>
+            <div class="case-condition">Intoxicación de urgencia</div>
+          </div>
+        </div>
+        <p>"Llegó en estado crítico y, gracias a la atención inmediata del equipo, se recuperó por completo en 48 horas."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="stats-band">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:var(--secondary)">Por qué elegirnos</span>
+      <h2 style="color:#fff">Cuidado con profesionalismo y cariño</h2>
+    </div>
+    <div class="stats-row">
+      <div class="stat reveal">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Mascotas atendidas por año</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Disponibilidad ante emergencias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-band">
+  <div class="container reveal">
+    <h2>¿Tu mascota necesita atención?</h2>
+    <p>Escribinos y coordinamos un turno a la brevedad, o contactanos ante cualquier emergencia.</p>
+    <a href="contacto.html" class="pill-btn">Escribinos →</a>
+  </div>
+</section>
+
+<footer class="footer-mini">
+  <div class="container">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="68" rx="26" ry="20" fill="#0F9488"/>
+      <circle cx="18" cy="42" r="11" fill="#5EEAD4"/>
+      <circle cx="40" cy="16" r="11" fill="#5EEAD4"/>
+      <circle cx="62" cy="16" r="11" fill="#5EEAD4"/>
+      <circle cx="84" cy="42" r="11" fill="#5EEAD4"/>
+    </svg>
+    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado</p>
+    <div class="footer-links-row">
+      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Casos de éxito</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const menuToggle = document.getElementById('menuToggle');
+  const menuPanel = document.getElementById('menuPanel');
+
+  function closeMenu(){
+    menuPanel.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = menuPanel.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  menuPanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0F9488">
+<title>Contacto — FirVet</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F5;
+    --surface:#FFFFFF;
+    --ink:#14201B;
+    --primary:#0F9488;
+    --secondary:#14B8A6;
+    --accent:#F5A623;
+    --text-sub:#5B6660;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* FLOATING NAV */
+  .brand-chip{
+    position:fixed;
+    top:24px;left:24px;
+    z-index:110;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border-radius:999px;
+    padding:10px 18px 10px 12px;
+    box-shadow:0 6px 20px rgba(20,32,27,0.1);
+    font-weight:700;
+    font-size:16px;
+  }
+  .brand-chip img{width:auto;height:26px;}
+  .menu-btn{
+    position:fixed;
+    top:24px;right:24px;
+    z-index:110;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--ink);
+    border:none;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px rgba(20,32,27,0.18);
+    transition:transform .2s ease;
+  }
+  .menu-btn:hover{transform:scale(1.06);}
+  .menu-btn svg{width:20px;height:20px;}
+  .menu-btn .bar{
+    stroke:#fff;
+    transition:transform .3s ease, opacity .2s ease;
+    transform-box:fill-box;
+    transform-origin:center;
+  }
+  .menu-btn.open .bar1{transform:translateY(6px) rotate(45deg);}
+  .menu-btn.open .bar2{opacity:0;}
+  .menu-btn.open .bar3{transform:translateY(-6px) rotate(-45deg);}
+
+  /* OFF-CANVAS MENU */
+  .menu-panel{
+    position:fixed;
+    inset:0;
+    z-index:105;
+    background:var(--ink);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:32px;
+    transform:translateX(100%);
+    opacity:0;
+    transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+  }
+  .menu-panel.open{transform:translateX(0);opacity:1;}
+  .menu-panel-inner{max-width:1180px;margin:0 auto;width:100%;}
+  .menu-links{display:flex;flex-direction:column;gap:6px;}
+  .menu-links a{
+    font-family:'Fraunces',serif;
+    font-size:clamp(32px,7vw,56px);
+    font-weight:600;
+    padding:10px 0;
+    display:inline-block;
+    color:rgba(255,255,255,0.55);
+    transition:color .25s ease, padding-left .25s ease;
+  }
+  .menu-links a:hover{color:#fff;padding-left:12px;}
+  .menu-links a.active{color:var(--secondary);}
+  .menu-foot{
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    font-size:14px;
+    color:rgba(255,255,255,0.6);
+  }
+
+  .reveal{
+    opacity:0;
+    transform:scale(.97);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible{opacity:1;transform:scale(1);}
+
+  /* PAGE HERO */
+  .page-hero{padding:150px 0 60px;}
+  .eyebrow{
+    color:var(--primary);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+    display:block;
+  }
+  .page-hero h1{
+    font-size:clamp(32px,5vw,50px);
+    font-weight:600;
+    max-width:640px;
+    margin-bottom:16px;
+  }
+  .page-hero p{color:var(--text-sub);font-size:17px;max-width:480px;}
+
+  /* CONTACT SECTION */
+  .contact-section{padding:20px 0 120px;}
+  .contact-wrap{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:0;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(20,32,27,0.08);
+  }
+  .contact-info{
+    background:linear-gradient(160deg, var(--primary), #0C7B71);
+    color:#fff;
+    padding:48px 40px;
+    position:relative;
+  }
+  .contact-info h3{font-size:24px;font-weight:600;margin-bottom:14px;}
+  .contact-info > p{color:rgba(255,255,255,0.8);font-size:14px;line-height:1.7;margin-bottom:32px;}
+  .contact-info-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+    font-size:14px;
+    color:#fff;
+    transition:opacity .2s ease;
+  }
+  .contact-info-item:hover{opacity:0.8;}
+  .contact-info-item .ic{
+    width:38px;height:38px;
+    border-radius:10px;
+    background:rgba(255,255,255,0.16);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-info-item .ic svg{width:18px;height:18px;stroke:#fff;}
+  .contact-form{
+    background:var(--surface);
+    padding:48px 40px;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--text-sub);
+    margin-bottom:8px;
+  }
+  .field input,
+  .field textarea{
+    width:100%;
+    background:var(--bg);
+    border:1px solid rgba(20,32,27,0.12);
+    border-radius:12px;
+    padding:13px 16px;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    transition:border-color .25s ease;
+  }
+  .field input:focus,
+  .field textarea:focus{
+    outline:none;
+    border-color:var(--primary);
+  }
+  .field textarea{resize:vertical;min-height:120px;}
+  .pill-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:var(--primary);
+    color:#fff;
+    padding:16px 30px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15px;
+    box-shadow:0 10px 26px rgba(15,148,136,0.32);
+    transition:transform .25s ease, box-shadow .25s ease;
+    border:none;
+    cursor:pointer;
+    width:100%;
+    font-family:inherit;
+  }
+  .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,148,136,0.4);}
+  .form-note{
+    font-size:12px;
+    color:var(--text-sub);
+    margin-top:14px;
+    text-align:center;
+  }
+  .form-status{
+    font-size:14px;
+    margin-top:16px;
+    text-align:center;
+    display:none;
+  }
+  .form-status.success{color:var(--primary);display:block;}
+  .form-status.error{color:#DC2626;display:block;}
+
+  /* FOOTER */
+  .footer-mini{padding:44px 0;text-align:center;}
+  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;}
+  .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
+  .footer-links-row{font-size:13px;color:var(--text-sub);}
+  .footer-links-row a{font-weight:700;color:var(--ink);}
+  .footer-links-row a:hover{color:var(--primary);}
+  .dot{margin:0 10px;color:var(--text-sub);}
+
+  @media(max-width:900px){
+    .contact-wrap{grid-template-columns:1fr;border-radius:22px;}
+  }
+  @media(max-width:640px){
+    .container{padding:0 20px;}
+    .brand-chip{top:16px;left:16px;padding:8px 16px 8px 10px;font-size:14px;}
+    .brand-chip img{width:auto;height:22px;}
+    .menu-btn{top:16px;right:16px;width:46px;height:46px;}
+    .page-hero{padding:110px 0 40px;}
+    .contact-section{padding:0 0 70px;}
+    .form-row{grid-template-columns:1fr;}
+    .contact-form,.contact-info{padding:30px 22px;}
+    .menu-links a{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="brand-chip">
+  <img src="logo-icon.png" alt="FirVet">
+  FirVet
+</a>
+
+<button class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line class="bar bar1" x1="3" y1="6" x2="21" y2="6"/>
+    <line class="bar bar2" x1="3" y1="12" x2="21" y2="12"/>
+    <line class="bar bar3" x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div class="menu-panel" id="menuPanel">
+  <div class="menu-panel-inner">
+    <nav class="menu-links">
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#casos">Casos de éxito</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="contacto.html" class="active">Contacto</a>
+    </nav>
+    <div class="menu-foot">
+      <span>info@FirVet.com</span>
+      <span>+54 9 11 5555-0123</span>
+      <span>Buenos Aires, Argentina</span>
+    </div>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Contacto</span>
+    <h1>Reservá un turno para tu mascota</h1>
+    <p>Contanos qué necesita y te respondemos a la brevedad.</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <h3>Hablemos</h3>
+        <p>Elegí el medio que prefieras o completá el formulario y nos pondremos en contacto lo antes posible.</p>
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=info@FirVet.com" target="_blank" rel="noopener" class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+          </div>
+          <span>info@FirVet.com</span>
+        </a>
+        <a href="https://wa.me/5491155550123" target="_blank" rel="noopener" class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span>+54 9 11 5555-0123</span>
+        </a>
+        <div class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span>Av. Siempre Viva 123, Buenos Aires</span>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Tu nombre">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="phone">Teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="Tu número de contacto">
+        </div>
+        <div class="field">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" placeholder="Contanos sobre tu mascota y el motivo de la consulta..." required></textarea>
+        </div>
+        <button type="submit" class="pill-btn">
+          Enviar mensaje
+        </button>
+        <p class="form-status" id="formStatus"></p>
+        <p class="form-note">Te respondemos a la brevedad.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-mini">
+  <div class="container">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="68" rx="26" ry="20" fill="#0F9488"/>
+      <circle cx="18" cy="42" r="11" fill="#5EEAD4"/>
+      <circle cx="40" cy="16" r="11" fill="#5EEAD4"/>
+      <circle cx="62" cy="16" r="11" fill="#5EEAD4"/>
+      <circle cx="84" cy="42" r="11" fill="#5EEAD4"/>
+    </svg>
+    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado</p>
+    <div class="footer-links-row">
+      <a href="index.html#servicios">Servicios</a><span class="dot">·</span><a href="index.html#casos">Casos de éxito</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.className = 'form-status success';
+    status.textContent = '¡Mensaje enviado! Te responderemos pronto.';
+    form.reset();
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const menuPanel = document.getElementById('menuPanel');
+
+  function closeMenu(){
+    menuPanel.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = menuPanel.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  menuPanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+
+</body>
+</html>
