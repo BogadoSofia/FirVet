@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0F9488">
+<meta name="theme-color" content="#05A5B5">
 <title>FirVet — Clínica Veterinaria</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,9 @@
     --bg:#FAF8F5;
     --surface:#FFFFFF;
     --ink:#14201B;
-    --primary:#0F9488;
-    --secondary:#14B8A6;
-    --accent:#F5A623;
+    --primary:#05A5B5;
+    --secondary:#2DCFE0;
+    --accent:#F9A225;
     --text-sub:#5B6660;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -119,12 +119,42 @@
   .hero{
     padding:150px 0 90px;
     position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-15%;right:-8%;
+    width:520px;height:520px;
+    background:radial-gradient(circle, rgba(5,165,181,0.16) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:'';
+    position:absolute;
+    bottom:-20%;left:-10%;
+    width:420px;height:420px;
+    background:radial-gradient(circle, rgba(249,162,37,0.14) 0%, transparent 70%);
+    pointer-events:none;
   }
   .hero-grid{
     display:grid;
     grid-template-columns:1.1fr 0.9fr;
     gap:40px;
     align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(24px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero-logo{
+    height:64px;width:auto;
+    margin-bottom:22px;
+    filter:drop-shadow(0 10px 20px rgba(20,32,27,0.18));
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
   }
   .eyebrow{
     color:var(--primary);
@@ -135,11 +165,14 @@
     margin-bottom:18px;
     display:block;
   }
+  .hero .eyebrow{opacity:0;animation:fadeUp .8s ease .1s forwards;}
   .hero h1{
     font-size:clamp(34px,5.2vw,58px);
     font-weight:600;
     line-height:1.15;
     margin-bottom:22px;
+    opacity:0;
+    animation:fadeUp .8s ease .2s forwards;
   }
   .hero h1 em{color:var(--primary);font-style:normal;}
   .hero p{
@@ -148,8 +181,17 @@
     max-width:440px;
     margin-bottom:36px;
     line-height:1.7;
+    opacity:0;
+    animation:fadeUp .8s ease .3s forwards;
   }
-  .hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+  .hero-ctas{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:fadeUp .8s ease .4s forwards;
+  }
   .pill-btn{
     display:inline-flex;
     align-items:center;
@@ -160,21 +202,40 @@
     border-radius:999px;
     font-weight:700;
     font-size:15px;
-    box-shadow:0 10px 26px rgba(15,148,136,0.32);
+    box-shadow:0 10px 26px rgba(5,165,181,0.32);
     transition:transform .25s ease, box-shadow .25s ease;
   }
-  .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,148,136,0.4);}
+  .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(5,165,181,0.4);}
 
-  .hero-visual{position:relative;height:380px;}
+  .hero-visual{
+    position:relative;
+    height:380px;
+    opacity:0;
+    animation:fadeUp .9s ease .25s forwards;
+  }
+  .blob-glow{
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:360px;height:360px;
+    background:radial-gradient(circle, rgba(5,165,181,0.35), rgba(249,162,37,0.18) 55%, transparent 75%);
+    filter:blur(18px);
+    animation:pulseGlow 5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{
+    0%,100%{transform:scale(1);opacity:0.8;}
+    50%{transform:scale(1.08);opacity:1;}
+  }
   .blob{
     position:absolute;
     inset:0;
     margin:auto;
     width:320px;height:320px;
-    background:linear-gradient(135deg, rgba(15,148,136,0.5), rgba(12,123,113,0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
+    background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(12,123,113,0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
     background-size:cover;
     background-position:center;
     border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;
+    box-shadow:0 20px 50px rgba(20,32,27,0.25);
     animation:blobMove 9s ease-in-out infinite;
   }
   @keyframes blobMove{
@@ -189,10 +250,15 @@
     font-size:13px;
     font-weight:700;
     box-shadow:0 8px 22px rgba(20,32,27,0.12);
+    animation:floatChip 4s ease-in-out infinite;
   }
-  .chip-1{top:8%;left:0;}
-  .chip-2{bottom:14%;right:0;color:var(--primary);}
-  .chip-3{top:46%;right:-4%;background:var(--accent);color:#fff;}
+  @keyframes floatChip{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+  }
+  .chip-1{top:8%;left:0;animation-delay:0s;}
+  .chip-2{bottom:14%;right:0;color:var(--primary);animation-delay:.6s;}
+  .chip-3{top:46%;right:-4%;background:var(--accent);color:#fff;animation-delay:1.2s;}
 
   .reveal{
     opacity:0;
@@ -243,7 +309,7 @@
   .bento-icon{
     width:44px;height:44px;
     border-radius:12px;
-    background:rgba(15,148,136,0.12);
+    background:rgba(5,165,181,0.12);
     display:flex;align-items:center;justify-content:center;
     margin-bottom:18px;
   }
@@ -274,7 +340,7 @@
   .case-avatar{
     width:48px;height:48px;
     border-radius:50%;
-    background:rgba(245,166,35,0.16);
+    background:rgba(249,162,37,0.16);
     display:flex;align-items:center;justify-content:center;
     font-size:20px;
   }
@@ -283,45 +349,39 @@
   .case-card p{font-size:14px;color:var(--text-sub);line-height:1.7;}
 
   /* PRODUCTOS */
-  .products-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-  }
-  .product-card{
+  .products-card{
+    max-width:560px;
+    margin:0 auto;
+    text-align:center;
     background:var(--surface);
-    border-radius:22px;
-    padding:28px;
+    border-radius:28px;
+    padding:56px 40px;
     box-shadow:0 4px 18px rgba(20,32,27,0.06);
-    display:flex;
-    flex-direction:column;
   }
-  .product-icon{
-    width:56px;height:56px;
-    border-radius:14px;
-    background:rgba(15,148,136,0.12);
+  .products-card .product-icon{
+    width:64px;height:64px;
+    border-radius:16px;
+    background:rgba(5,165,181,0.12);
     display:flex;align-items:center;justify-content:center;
-    font-size:26px;
-    margin-bottom:18px;
+    font-size:30px;
+    margin:0 auto 22px;
   }
-  .product-card h3{font-size:17px;font-weight:600;margin-bottom:6px;}
-  .product-card p{font-size:14px;color:var(--text-sub);line-height:1.6;margin-bottom:16px;flex:1;}
-  .product-price{font-weight:700;font-size:16px;margin-bottom:16px;}
+  .products-card p{font-size:17px;color:var(--ink);line-height:1.6;max-width:400px;margin:0 auto 28px;}
   .buy-btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     background:var(--primary);
     color:#fff;
-    padding:12px 20px;
+    padding:16px 34px;
     border-radius:999px;
     font-weight:700;
-    font-size:14px;
+    font-size:15px;
     border:none;
     cursor:pointer;
     transition:transform .2s ease, box-shadow .2s ease;
   }
-  .buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,148,136,0.32);}
+  .buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(5,165,181,0.32);}
 
   .toast{
     position:fixed;
@@ -342,6 +402,47 @@
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+  /* UBICACIÓN Y HORARIOS */
+  .visit-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:20px;
+    align-items:stretch;
+  }
+  .map-card{
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+    background:var(--surface);
+    display:flex;
+    flex-direction:column;
+  }
+  .map-card iframe{width:100%;height:280px;border:0;display:block;}
+  .map-card-body{padding:24px 28px;}
+  .map-card-body h3{font-size:18px;font-weight:600;margin-bottom:6px;}
+  .map-card-body p{font-size:14px;color:var(--text-sub);margin-bottom:18px;}
+  .hours-card{
+    border-radius:22px;
+    padding:28px;
+    background:var(--surface);
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+  }
+  .hours-card h3{font-size:18px;font-weight:600;margin-bottom:18px;}
+  .hours-list{display:flex;flex-direction:column;}
+  .hours-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid rgba(20,32,27,0.08);
+    font-size:14px;
+  }
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row .day{font-weight:600;}
+  .hours-row .hours{color:var(--text-sub);}
+  .hours-row.closed .hours{color:var(--accent);font-weight:600;}
+  .hours-row.today .day{color:var(--primary);}
+
   /* STATS BAND */
   .stats-band{background:var(--ink);color:#fff;}
   .stats-row{
@@ -360,7 +461,7 @@
   .contact-band::before{
     content:'';
     position:absolute;inset:0;
-    background:linear-gradient(135deg, var(--primary), #0C7B71);
+    background:linear-gradient(135deg, var(--primary), #03737E);
     clip-path:polygon(0 9%,100% 0,100% 91%,0 100%);
     z-index:0;
   }
@@ -384,7 +485,7 @@
     .bento{grid-template-columns:repeat(2,1fr);}
     .bento-feature{grid-column:span 2;min-height:260px;}
     .bento-item:not(.bento-feature){grid-column:span 1;}
-    .products-grid{grid-template-columns:repeat(2,1fr);}
+    .visit-grid{grid-template-columns:1fr;}
   }
   @media(max-width:640px){
     section{padding:64px 0;}
@@ -393,6 +494,7 @@
     .brand-chip img{width:auto;height:36px;}
     .menu-btn{top:16px;right:16px;width:46px;height:46px;}
     .hero{padding:110px 0 60px;}
+    .hero-logo{height:52px;}
     .hero p{max-width:none;}
     .hero-ctas{width:100%;}
     .pill-btn{width:100%;justify-content:center;}
@@ -400,10 +502,10 @@
     .stats-row{justify-content:flex-start;gap:32px;}
     .stat{min-width:45%;text-align:left;}
     .menu-links a{font-size:32px;}
-    .products-grid{grid-template-columns:1fr;}
     .bento{grid-template-columns:1fr;}
     .bento-feature,
     .bento-item:not(.bento-feature){grid-column:span 1;}
+    .products-card{padding:40px 24px;}
   }
 </style>
 </head>
@@ -428,6 +530,7 @@
       <a href="#casos">Casos de éxito</a>
       <a href="#productos">Productos</a>
       <a href="#nosotros">Nosotros</a>
+      <a href="#ubicacion">Ubicación</a>
       <a href="contacto.html">Contacto</a>
     </nav>
     <div class="menu-foot">
@@ -441,6 +544,7 @@
 <section class="hero">
   <div class="container hero-grid">
     <div>
+      <img src="logo-icon.png" alt="FirVet" class="hero-logo">
       <span class="eyebrow">Clínica veterinaria integral</span>
       <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
       <p>Consultas, cirugías, vacunación y emergencias las 24 horas, con un equipo que trata a cada paciente como familia.</p>
@@ -449,6 +553,7 @@
       </div>
     </div>
     <div class="hero-visual">
+      <div class="blob-glow"></div>
       <div class="blob"></div>
       <span class="chip chip-1">★ 4.9/5 valoración</span>
       <span class="chip chip-2">+500 familias felices</span>
@@ -540,40 +645,10 @@
 
 <section id="productos">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Productos</span>
-      <h2>Todo lo que tu mascota necesita, también para llevar</h2>
-      <p>Alimentos, accesorios y cuidados recomendados por nuestro equipo veterinario.</p>
-    </div>
-    <div class="products-grid">
-      <div class="product-card reveal">
-        <div class="product-icon">🍖</div>
-        <h3>Alimento premium</h3>
-        <p>Nutrición balanceada para perros y gatos de todas las edades.</p>
-        <div class="product-price">$12.000</div>
-        <button class="buy-btn" data-buy>Comprar</button>
-      </div>
-      <div class="product-card reveal">
-        <div class="product-icon">🧴</div>
-        <h3>Kit de higiene</h3>
-        <p>Shampoo, cepillo y toallitas dermatológicas para el cuidado diario.</p>
-        <div class="product-price">$8.500</div>
-        <button class="buy-btn" data-buy>Comprar</button>
-      </div>
-      <div class="product-card reveal">
-        <div class="product-icon">🛏️</div>
-        <h3>Cama ortopédica</h3>
-        <p>Descanso ideal para mascotas grandes o con problemas articulares.</p>
-        <div class="product-price">$21.000</div>
-        <button class="buy-btn" data-buy>Comprar</button>
-      </div>
-      <div class="product-card reveal">
-        <div class="product-icon">🦴</div>
-        <h3>Snacks naturales</h3>
-        <p>Premios saludables, sin conservantes, ideales para el entrenamiento.</p>
-        <div class="product-price">$4.200</div>
-        <button class="buy-btn" data-buy>Comprar</button>
-      </div>
+    <div class="products-card reveal">
+      <div class="product-icon">🐾</div>
+      <p>También vendemos productos para cuidar la felicidad de tu mascota.</p>
+      <button class="buy-btn" data-buy>Comprar</button>
     </div>
   </div>
 </section>
@@ -601,6 +676,38 @@
   </div>
 </section>
 
+<section id="ubicacion">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Visitanos</span>
+      <h2>Ubicación y horarios</h2>
+      <p>Encontranos en Corrientes, Argentina, o coordiná tu visita en el horario que más te convenga.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="map-card reveal">
+        <iframe src="https://www.google.com/maps?q=FIRVET+Veterinaria+Corrientes+Argentina&z=15&output=embed" loading="lazy" allowfullscreen title="Ubicación de FirVet"></iframe>
+        <div class="map-card-body">
+          <h3>FirVet Veterinaria</h3>
+          <p>Corrientes, Argentina</p>
+          <a href="https://maps.app.goo.gl/3P8j12dqUZn7gAE56" target="_blank" rel="noopener" class="pill-btn">Ver en Google Maps →</a>
+        </div>
+      </div>
+      <div class="hours-card reveal">
+        <h3>Horarios de atención</h3>
+        <div class="hours-list">
+          <div class="hours-row"><span class="day">Lunes</span><span class="hours">9 a.m.–7 p.m.</span></div>
+          <div class="hours-row"><span class="day">Martes</span><span class="hours">9 a.m.–7 p.m.</span></div>
+          <div class="hours-row"><span class="day">Miércoles</span><span class="hours">9 a.m.–7 p.m.</span></div>
+          <div class="hours-row"><span class="day">Jueves</span><span class="hours">9 a.m.–7 p.m.</span></div>
+          <div class="hours-row"><span class="day">Viernes</span><span class="hours">9 a.m.–7 p.m.</span></div>
+          <div class="hours-row"><span class="day">Sábado</span><span class="hours">9 a.m.–1 p.m.</span></div>
+          <div class="hours-row closed"><span class="day">Domingo</span><span class="hours">Cerrado</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact-band">
   <div class="container reveal">
     <h2>¿Tu mascota necesita atención?</h2>
@@ -612,15 +719,15 @@
 <footer class="footer-mini">
   <div class="container">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="50" cy="68" rx="26" ry="20" fill="#0F9488"/>
-      <circle cx="18" cy="42" r="11" fill="#5EEAD4"/>
-      <circle cx="40" cy="16" r="11" fill="#5EEAD4"/>
-      <circle cx="62" cy="16" r="11" fill="#5EEAD4"/>
-      <circle cx="84" cy="42" r="11" fill="#5EEAD4"/>
+      <ellipse cx="50" cy="68" rx="26" ry="20" fill="#05A5B5"/>
+      <circle cx="18" cy="42" r="11" fill="#6BD9E3"/>
+      <circle cx="40" cy="16" r="11" fill="#6BD9E3"/>
+      <circle cx="62" cy="16" r="11" fill="#6BD9E3"/>
+      <circle cx="84" cy="42" r="11" fill="#6BD9E3"/>
     </svg>
     <p>&copy; 2026 FirVet — Hecho por Sofia Bogado</p>
     <div class="footer-links-row">
-      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Casos de éxito</a><span class="dot">·</span><a href="#productos">Productos</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Casos de éxito</a><span class="dot">·</span><a href="#productos">Productos</a><span class="dot">·</span><a href="#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
