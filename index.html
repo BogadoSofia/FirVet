@@ -42,15 +42,14 @@
     z-index:110;
     display:flex;
     align-items:center;
-    gap:8px;
     background:var(--surface);
     border-radius:999px;
-    padding:10px 18px 10px 12px;
+    padding:8px 16px;
     box-shadow:0 6px 20px rgba(20,32,27,0.1);
     font-weight:700;
     font-size:16px;
   }
-  .brand-chip img{width:auto;height:26px;}
+  .brand-chip img{width:auto;height:44px;display:block;}
   .menu-btn{
     position:fixed;
     top:24px;right:24px;
@@ -165,14 +164,6 @@
     transition:transform .25s ease, box-shadow .25s ease;
   }
   .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,148,136,0.4);}
-  .link-cta{
-    font-weight:700;
-    font-size:15px;
-    border-bottom:2px solid var(--ink);
-    padding-bottom:3px;
-    transition:border-color .25s ease, color .25s ease;
-  }
-  .link-cta:hover{border-color:var(--primary);color:var(--primary);}
 
   .hero-visual{position:relative;height:380px;}
   .blob{
@@ -291,6 +282,66 @@
   .case-condition{font-size:12px;color:var(--primary);font-weight:700;}
   .case-card p{font-size:14px;color:var(--text-sub);line-height:1.7;}
 
+  /* PRODUCTOS */
+  .products-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .product-card{
+    background:var(--surface);
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+    display:flex;
+    flex-direction:column;
+  }
+  .product-icon{
+    width:56px;height:56px;
+    border-radius:14px;
+    background:rgba(15,148,136,0.12);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;
+    margin-bottom:18px;
+  }
+  .product-card h3{font-size:17px;font-weight:600;margin-bottom:6px;}
+  .product-card p{font-size:14px;color:var(--text-sub);line-height:1.6;margin-bottom:16px;flex:1;}
+  .product-price{font-weight:700;font-size:16px;margin-bottom:16px;}
+  .buy-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:14px;
+    border:none;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,148,136,0.32);}
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:32px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--ink);
+    color:#fff;
+    padding:14px 22px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    z-index:200;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
   /* STATS BAND */
   .stats-band{background:var(--ink);color:#fff;}
   .stats-row{
@@ -333,12 +384,13 @@
     .bento{grid-template-columns:repeat(2,1fr);}
     .bento-feature{grid-column:span 2;min-height:260px;}
     .bento-item:not(.bento-feature){grid-column:span 1;}
+    .products-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media(max-width:640px){
     section{padding:64px 0;}
     .container{padding:0 20px;}
-    .brand-chip{top:16px;left:16px;padding:8px 16px 8px 10px;font-size:14px;}
-    .brand-chip img{width:auto;height:22px;}
+    .brand-chip{top:16px;left:16px;padding:6px 14px;font-size:14px;}
+    .brand-chip img{width:auto;height:36px;}
     .menu-btn{top:16px;right:16px;width:46px;height:46px;}
     .hero{padding:110px 0 60px;}
     .hero p{max-width:none;}
@@ -348,6 +400,10 @@
     .stats-row{justify-content:flex-start;gap:32px;}
     .stat{min-width:45%;text-align:left;}
     .menu-links a{font-size:32px;}
+    .products-grid{grid-template-columns:1fr;}
+    .bento{grid-template-columns:1fr;}
+    .bento-feature,
+    .bento-item:not(.bento-feature){grid-column:span 1;}
   }
 </style>
 </head>
@@ -355,7 +411,6 @@
 
 <a href="index.html" class="brand-chip">
   <img src="logo-icon.png" alt="FirVet">
-  FirVet
 </a>
 
 <button class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
@@ -371,6 +426,7 @@
     <nav class="menu-links">
       <a href="#servicios">Servicios</a>
       <a href="#casos">Casos de éxito</a>
+      <a href="#productos">Productos</a>
       <a href="#nosotros">Nosotros</a>
       <a href="contacto.html">Contacto</a>
     </nav>
@@ -390,7 +446,6 @@
       <p>Consultas, cirugías, vacunación y emergencias las 24 horas, con un equipo que trata a cada paciente como familia.</p>
       <div class="hero-ctas">
         <a href="contacto.html" class="pill-btn">Reservar turno →</a>
-        <a href="#servicios" class="link-cta">Ver servicios</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -483,6 +538,46 @@
   </div>
 </section>
 
+<section id="productos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Productos</span>
+      <h2>Todo lo que tu mascota necesita, también para llevar</h2>
+      <p>Alimentos, accesorios y cuidados recomendados por nuestro equipo veterinario.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-icon">🍖</div>
+        <h3>Alimento premium</h3>
+        <p>Nutrición balanceada para perros y gatos de todas las edades.</p>
+        <div class="product-price">$12.000</div>
+        <button class="buy-btn" data-buy>Comprar</button>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon">🧴</div>
+        <h3>Kit de higiene</h3>
+        <p>Shampoo, cepillo y toallitas dermatológicas para el cuidado diario.</p>
+        <div class="product-price">$8.500</div>
+        <button class="buy-btn" data-buy>Comprar</button>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon">🛏️</div>
+        <h3>Cama ortopédica</h3>
+        <p>Descanso ideal para mascotas grandes o con problemas articulares.</p>
+        <div class="product-price">$21.000</div>
+        <button class="buy-btn" data-buy>Comprar</button>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-icon">🦴</div>
+        <h3>Snacks naturales</h3>
+        <p>Premios saludables, sin conservantes, ideales para el entrenamiento.</p>
+        <div class="product-price">$4.200</div>
+        <button class="buy-btn" data-buy>Comprar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="nosotros" class="stats-band">
   <div class="container">
     <div class="section-head reveal">
@@ -525,10 +620,12 @@
     </svg>
     <p>&copy; 2026 FirVet — Hecho por Sofia Bogado</p>
     <div class="footer-links-row">
-      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Casos de éxito</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Casos de éxito</a><span class="dot">·</span><a href="#productos">Productos</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
+
+<div class="toast" id="buyToast">Solo disponible en la versión completa</div>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
@@ -562,6 +659,17 @@
     if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
       closeMenu();
     }
+  });
+
+  const toast = document.getElementById('buyToast');
+  let toastTimeout;
+
+  document.querySelectorAll('[data-buy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      clearTimeout(toastTimeout);
+      toast.classList.add('show');
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+    });
   });
 </script>
 
