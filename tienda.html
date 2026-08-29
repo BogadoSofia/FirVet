@@ -87,6 +87,7 @@
     flex-direction:column;
     justify-content:center;
     padding:32px;
+    overflow-y:auto;
     transform:translateX(100%);
     opacity:0;
     transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .3s ease;
@@ -279,9 +280,19 @@
     .brand-chip{top:16px;left:16px;padding:6px 14px;font-size:14px;}
     .brand-chip img{width:auto;height:36px;}
     .menu-btn{top:16px;right:16px;width:46px;height:46px;}
+    .menu-panel{justify-content:flex-start;padding:96px 20px 32px;}
     .page-hero{padding:110px 0 40px;}
     .shop-section{padding:0 0 70px;}
-    .shop-grid{grid-template-columns:1fr;}
+    .shop-grid{grid-template-columns:repeat(2, 1fr);gap:14px;}
+    .shop-card{padding:20px 16px;}
+    .shop-icon{width:52px;height:52px;font-size:22px;margin-bottom:14px;}
+    .shop-card h3{font-size:16px;}
+    .shop-card p{font-size:13px;}
+    .shop-price{font-size:17px;margin-bottom:14px;}
+    .stock-badge{top:10px;right:10px;font-size:10px;padding:3px 8px;}
+    .flavor-row{padding:8px 10px;}
+    .flavor-row-name{font-size:12px;}
+    .flavor-add-btn{padding:6px 10px;font-size:11px;}
     .menu-links a{font-size:32px;}
     .cart-fab{bottom:16px;right:16px;padding:12px 18px;font-size:14px;}
   }
@@ -584,6 +595,37 @@
     color:var(--ink);
   }
   .admin-product-fields input:focus{outline:none;border-color:var(--primary);}
+  .admin-flavor-rows{display:flex;flex-direction:column;gap:8px;}
+  .admin-flavor-row{display:flex;align-items:center;gap:6px;}
+  .admin-flavor-name-input{flex:1;min-width:0;}
+  .admin-flavor-stock-toggle{display:flex;gap:4px;flex-shrink:0;}
+  .admin-flavor-stock-toggle .stock-btn{flex:0 0 auto;padding:8px 10px;font-size:11px;}
+  .admin-flavor-remove-btn{
+    background:none;
+    border:none;
+    color:var(--text-sub);
+    font-size:15px;
+    cursor:pointer;
+    padding:4px 6px;
+    line-height:1;
+    font-family:inherit;
+    flex-shrink:0;
+  }
+  .admin-flavor-remove-btn:hover{color:#DC2626;}
+  .admin-add-flavor-btn{
+    align-self:flex-start;
+    background:none;
+    border:1px dashed rgba(20,32,27,0.3);
+    color:var(--primary);
+    border-radius:999px;
+    padding:8px 14px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s ease;
+  }
+  .admin-add-flavor-btn:hover{background:rgba(5,165,181,0.08);}
   .admin-stock-toggle{display:flex;gap:8px;margin-top:2px;}
   .stock-btn{
     flex:1;
@@ -738,7 +780,7 @@
   <div class="menu-panel-inner">
     <nav class="menu-links">
       <a href="index.html#servicios">Servicios</a>
-      <a href="index.html#casos">Casos de éxito</a>
+      <a href="index.html#casos">Historias que nos llenan de orgullo</a>
       <a href="tienda.html" class="active">Productos</a>
       <a href="index.html#nosotros">Nosotros</a>
       <a href="index.html#ubicacion">Ubicación</a>
@@ -778,7 +820,7 @@
     </svg>
     <p>&copy; 2026 FirVet — Hecho por Sofia Bogado</p>
     <div class="footer-links-row">
-      <a href="index.html#servicios">Servicios</a><span class="dot">·</span><a href="index.html#casos">Casos de éxito</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="index.html#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+      <a href="index.html#servicios">Servicios</a><span class="dot">·</span><a href="index.html#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="index.html#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
@@ -966,8 +1008,18 @@
     };
   }
 
-  function getFlavorList(p){
-    return (p.flavors || '').split(',').map(f => f.trim()).filter(Boolean);
+  function getFlavorObjects(p){
+    return (p.flavors || '').split(',').map(f => f.trim()).filter(Boolean).map(token => {
+      const idx = token.lastIndexOf(':');
+      if (idx === -1) return { name: token, inStock: true };
+      const name = token.slice(0, idx).trim();
+      const inStock = token.slice(idx + 1).trim() !== '0';
+      return { name, inStock };
+    }).filter(f => f.name);
+  }
+
+  function flavorObjectsToString(flavorObjs){
+    return flavorObjs.map(f => `${f.name}:${f.inStock ? 1 : 0}`).join(',');
   }
 
   function getCartKey(productId, flavor){
@@ -1010,27 +1062,27 @@
     return `<button type="button" class="pill-btn add-btn" data-id="${p.id}">Agregar</button>`;
   }
 
-  function renderProductFlavorRows(p){
-    return getFlavorList(p).map(f => {
-      const key = getCartKey(p.id, f);
+  function renderProductFlavorRows(p, flavorObjs){
+    return flavorObjs.map(f => {
+      const key = getCartKey(p.id, f.name);
       const qty = (cart[key] && cart[key].qty) || 0;
       let control;
-      if (!p.inStock) {
+      if (!f.inStock) {
         control = `<button type="button" class="flavor-add-btn" disabled>Sin stock</button>`;
       } else if (qty > 0) {
         control = `
-          <div class="qty-stepper small" data-id="${p.id}" data-flavor="${escapeHtml(f)}">
+          <div class="qty-stepper small" data-id="${p.id}" data-flavor="${escapeHtml(f.name)}">
             <button type="button" class="qty-btn" data-action="minus">−</button>
             <span class="qty-value">${qty}</span>
             <button type="button" class="qty-btn" data-action="plus">+</button>
           </div>
         `;
       } else {
-        control = `<button type="button" class="flavor-add-btn add-btn" data-id="${p.id}" data-flavor="${escapeHtml(f)}">Agregar</button>`;
+        control = `<button type="button" class="flavor-add-btn add-btn" data-id="${p.id}" data-flavor="${escapeHtml(f.name)}">Agregar</button>`;
       }
       return `
         <div class="flavor-row">
-          <span class="flavor-row-name">${escapeHtml(f)}</span>
+          <span class="flavor-row-name">${escapeHtml(f.name)}</span>
           ${control}
         </div>
       `;
@@ -1043,15 +1095,17 @@
       return;
     }
     shopGrid.innerHTML = products.map(p => {
-      const hasFlavors = getFlavorList(p).length > 0;
+      const flavorObjs = getFlavorObjects(p);
+      const hasFlavors = flavorObjs.length > 0;
+      const overallInStock = hasFlavors ? flavorObjs.some(f => f.inStock) : p.inStock;
       return `
         <div class="shop-card reveal" data-id="${p.id}">
-          <span class="stock-badge ${p.inStock ? 'in' : 'out'}">${p.inStock ? 'En stock' : 'Agotado'}</span>
+          <span class="stock-badge ${overallInStock ? 'in' : 'out'}">${overallInStock ? 'En stock' : 'Agotado'}</span>
           <div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>
           <h3>${escapeHtml(p.name)}</h3>
           <p>${escapeHtml(p.desc)}</p>
           <div class="shop-price">${formatPrice(p.price)}</div>
-          ${hasFlavors ? `<div class="flavor-rows">${renderProductFlavorRows(p)}</div>` : renderQtyControl(p)}
+          ${hasFlavors ? `<div class="flavor-rows">${renderProductFlavorRows(p, flavorObjs)}</div>` : renderQtyControl(p)}
         </div>
       `;
     }).join('');
@@ -1431,8 +1485,23 @@
     adminHubOverlay.classList.remove('open');
   }
 
+  function adminFlavorRowHtml(name, inStock){
+    return `
+      <div class="admin-flavor-row">
+        <input type="text" class="admin-flavor-name-input" value="${escapeHtml(name)}" placeholder="Sabor">
+        <div class="admin-flavor-stock-toggle">
+          <button type="button" class="stock-btn in-stock ${inStock ? 'active' : ''}" data-flavor-stock="true">Con stock</button>
+          <button type="button" class="stock-btn out-stock ${!inStock ? 'active' : ''}" data-flavor-stock="false">Sin stock</button>
+        </div>
+        <button type="button" class="admin-flavor-remove-btn" aria-label="Quitar sabor">✕</button>
+      </div>
+    `;
+  }
+
   function renderAdminList(){
-    adminProductList.innerHTML = products.map(p => `
+    adminProductList.innerHTML = products.map(p => {
+      const flavorObjs = getFlavorObjects(p);
+      return `
       <div class="admin-product-row" data-id="${p.id}">
         <div class="admin-product-fields">
           <label>Imagen</label>
@@ -1446,8 +1515,10 @@
           <input type="number" class="admin-price-input" value="${p.price}">
           <label>Descripción</label>
           <input type="text" class="admin-desc-input" value="${escapeHtml(p.desc)}">
-          <label>Sabores</label>
-          <input type="text" class="admin-flavors-input" value="${escapeHtml(p.flavors)}">
+          <label>Sabores y stock</label>
+          <div class="admin-flavor-rows">${flavorObjs.map(f => adminFlavorRowHtml(f.name, f.inStock)).join('')}</div>
+          <button type="button" class="admin-add-flavor-btn">+ Agregar sabor</button>
+          <label>Stock general${flavorObjs.length ? ' <span class="field-optional">(si no tiene sabores)</span>' : ''}</label>
           <div class="admin-stock-toggle">
             <button type="button" class="stock-btn in-stock ${p.inStock ? 'active' : ''}" data-stock="true">Con stock</button>
             <button type="button" class="stock-btn out-stock ${!p.inStock ? 'active' : ''}" data-stock="false">Sin stock</button>
@@ -1459,7 +1530,8 @@
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   function openAdminEdit(){
@@ -1586,7 +1658,11 @@
     const name = row.querySelector('.admin-name-input').value.trim();
     const price = Number(row.querySelector('.admin-price-input').value) || 0;
     const desc = row.querySelector('.admin-desc-input').value.trim();
-    const flavors = row.querySelector('.admin-flavors-input').value.trim();
+    const flavorObjs = Array.from(row.querySelectorAll('.admin-flavor-row')).map(flavorRow => ({
+      name: flavorRow.querySelector('.admin-flavor-name-input').value.trim(),
+      inStock: flavorRow.querySelector('.admin-flavor-stock-toggle .stock-btn.in-stock').classList.contains('active'),
+    })).filter(f => f.name);
+    const flavors = flavorObjectsToString(flavorObjs);
     const file = row.querySelector('.admin-image-input').files[0];
 
     if (!name) {
@@ -1697,19 +1773,40 @@
   }
 
   adminProductList.addEventListener('click', async (e) => {
-    const stockBtn = e.target.closest('.stock-btn');
+    const flavorStockBtn = e.target.closest('[data-flavor-stock]');
+    if (flavorStockBtn) {
+      const toggle = flavorStockBtn.closest('.admin-flavor-stock-toggle');
+      toggle.querySelectorAll('.stock-btn').forEach(b => b.classList.remove('active'));
+      flavorStockBtn.classList.add('active');
+      return;
+    }
+
+    const removeFlavorBtn = e.target.closest('.admin-flavor-remove-btn');
+    if (removeFlavorBtn) {
+      removeFlavorBtn.closest('.admin-flavor-row').remove();
+      return;
+    }
+
+    const addFlavorBtn = e.target.closest('.admin-add-flavor-btn');
+    if (addFlavorBtn) {
+      const rowsContainer = addFlavorBtn.closest('.admin-product-fields').querySelector('.admin-flavor-rows');
+      rowsContainer.insertAdjacentHTML('beforeend', adminFlavorRowHtml('', true));
+      return;
+    }
+
+    const stockBtn = e.target.closest('.admin-stock-toggle .stock-btn');
     if (stockBtn) {
       const row = stockBtn.closest('.admin-product-row');
       const id = row.dataset.id;
       const product = products.find(p => String(p.id) === String(id));
       if (!product) return;
       const newStock = stockBtn.dataset.stock === 'true';
-      row.querySelectorAll('.stock-btn').forEach(b => b.classList.remove('active'));
+      row.querySelector('.admin-stock-toggle').querySelectorAll('.stock-btn').forEach(b => b.classList.remove('active'));
       stockBtn.classList.add('active');
       const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Stock: newStock }).eq('id', id);
       if (error) {
         console.error(error);
-        row.querySelectorAll('.stock-btn').forEach(b => b.classList.toggle('active', (b.dataset.stock === 'true') === product.inStock));
+        row.querySelector('.admin-stock-toggle').querySelectorAll('.stock-btn').forEach(b => b.classList.toggle('active', (b.dataset.stock === 'true') === product.inStock));
         return;
       }
       product.inStock = newStock;
