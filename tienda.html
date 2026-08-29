@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#05A5B5">
 <title>Tienda</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FirVet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1834,6 +1839,14 @@
     const preview = e.target.closest('.admin-image-field').querySelector('.admin-image-preview');
     preview.innerHTML = `<img src="${URL.createObjectURL(file)}" alt="">`;
   });
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch((err) => console.error('SW registration failed:', err));
+    });
+  }
 </script>
 
 </body>

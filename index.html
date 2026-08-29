@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#05A5B5">
 <title>FirVet — Clínica Veterinaria</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FirVet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -513,7 +518,7 @@
       <div class="blob"></div>
       <span class="chip chip-1">🐾 Amor por los animales</span>
       <span class="chip chip-2">Atención personalizada</span>
-      <span class="chip chip-3">Clínica nueva</span>
+      <span class="chip chip-3">Equipo profesional</span>
     </div>
   </div>
 </section>
@@ -592,8 +597,8 @@
         <div class="stat-label">Cada paciente recibe tiempo y dedicación, sin apuro.</div>
       </div>
       <div class="stat reveal">
-        <div class="stat-num">Clínica nueva</div>
-        <div class="stat-label">Recién empezamos, con muchas ganas de crecer junto a vos.</div>
+        <div class="stat-num">Equipo profesional</div>
+        <div class="stat-label">Formación y experiencia dedicadas al bienestar de tu mascota.</div>
       </div>
     </div>
   </div>
@@ -693,6 +698,14 @@
 
 <!-- Elfsight Google Reviews | Untitled Google Reviews -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch((err) => console.error('SW registration failed:', err));
+    });
+  }
+</script>
 
 </body>
 </html>
