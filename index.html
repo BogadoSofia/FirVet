@@ -17,6 +17,7 @@
     --secondary:#2DCFE0;
     --accent:#F9A225;
     --text-sub:#5B6660;
+    --menu-dark:#0B2530;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -56,7 +57,7 @@
     z-index:110;
     width:52px;height:52px;
     border-radius:50%;
-    background:var(--ink);
+    background:var(--menu-dark);
     border:none;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;
@@ -80,7 +81,7 @@
     position:fixed;
     inset:0;
     z-index:105;
-    background:var(--ink);
+    background:var(--menu-dark);
     color:#fff;
     display:flex;
     flex-direction:column;
@@ -114,6 +115,8 @@
     font-size:14px;
     color:rgba(255,255,255,0.6);
   }
+  .menu-foot a{transition:color .2s ease;}
+  .menu-foot a:hover{color:#fff;}
 
   /* HERO */
   .hero{
@@ -231,7 +234,7 @@
     inset:0;
     margin:auto;
     width:320px;height:320px;
-    background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(12,123,113,0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
+    background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(17, 175, 162, 0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
     background-size:cover;
     background-position:center;
     border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;
@@ -383,25 +386,6 @@
   }
   .buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(5,165,181,0.32);}
 
-  .toast{
-    position:fixed;
-    left:50%;
-    bottom:32px;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--ink);
-    color:#fff;
-    padding:14px 22px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:600;
-    box-shadow:0 10px 30px rgba(0,0,0,0.25);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .3s ease, transform .3s ease;
-    z-index:200;
-  }
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
   /* UBICACIÓN Y HORARIOS */
   .visit-grid{
     display:grid;
@@ -444,7 +428,7 @@
   .hours-row.today .day{color:var(--primary);}
 
   /* STATS BAND */
-  .stats-band{background:var(--ink);color:#fff;}
+  .stats-band{background:var(--menu-dark);color:#fff;}
   .stats-row{
     display:flex;
     justify-content:space-between;
@@ -452,8 +436,8 @@
     gap:40px;
     text-align:center;
   }
-  .stat{flex:1;min-width:140px;}
-  .stat-num{font-size:clamp(36px,5vw,58px);font-weight:600;color:var(--secondary);}
+  .stat{flex:1;min-width:180px;}
+  .stat-num{font-family:'Fraunces',serif;font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--secondary);}
   .stat-label{font-size:14px;color:rgba(255,255,255,0.65);margin-top:8px;}
 
   /* CONTACT BAND */
@@ -534,9 +518,10 @@
       <a href="contacto.html">Contacto</a>
     </nav>
     <div class="menu-foot">
-      <span>info@FirVet.com</span>
-      <span>+54 9 11 5555-0123</span>
-      <span>Buenos Aires, Argentina</span>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener">firvet.veterinaria@gmail.com</a>
+      <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">+54 9 379 503-3587</a>
+      <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener">@firvet.veterinaria</a>
+      <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener">Catamarca 530, Corrientes</a>
     </div>
   </div>
 </div>
@@ -547,7 +532,7 @@
       <img src="logo-icon.png" alt="FirVet" class="hero-logo">
       <span class="eyebrow">Clínica veterinaria integral</span>
       <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
-      <p>Consultas, cirugías, vacunación y emergencias las 24 horas, con un equipo que trata a cada paciente como familia.</p>
+      <p>Consultas, cirugías y vacunación, con un equipo que trata a cada paciente como familia.</p>
       <div class="hero-ctas">
         <a href="contacto.html" class="pill-btn">Reservar turno →</a>
       </div>
@@ -555,9 +540,9 @@
     <div class="hero-visual">
       <div class="blob-glow"></div>
       <div class="blob"></div>
-      <span class="chip chip-1">★ 4.9/5 valoración</span>
-      <span class="chip chip-2">+500 familias felices</span>
-      <span class="chip chip-3">24/7 emergencias</span>
+      <span class="chip chip-1">🐾 Amor por los animales</span>
+      <span class="chip chip-2">Atención personalizada</span>
+      <span class="chip chip-3">Clínica nueva</span>
     </div>
   </div>
 </section>
@@ -571,9 +556,9 @@
     </div>
     <div class="bento">
       <div class="bento-item bento-feature reveal">
-        <span class="tag">Disponible siempre</span>
-        <h3>Emergencias 24hs</h3>
-        <p>Atención de urgencias todos los días del año, sin excepción, con guardia veterinaria activa.</p>
+        <span class="tag">Recién abierta</span>
+        <h3>Atención cercana y dedicada</h3>
+        <p>Coordinamos tu turno con tiempo, sin apuro, para conocer bien a tu mascota en cada visita.</p>
       </div>
       <div class="bento-item reveal">
         <div class="bento-icon">
@@ -648,7 +633,7 @@
     <div class="products-card reveal">
       <div class="product-icon">🐾</div>
       <p>También vendemos productos para cuidar la felicidad de tu mascota.</p>
-      <button class="buy-btn" data-buy>Comprar</button>
+      <a href="tienda.html" class="buy-btn">Comprar</a>
     </div>
   </div>
 </section>
@@ -661,16 +646,16 @@
     </div>
     <div class="stats-row">
       <div class="stat reveal">
-        <div class="stat-num">15+</div>
-        <div class="stat-label">Años de experiencia</div>
+        <div class="stat-num">Amor por los animales</div>
+        <div class="stat-label">Elegimos esta profesión por pasión a las mascotas.</div>
       </div>
       <div class="stat reveal">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Mascotas atendidas por año</div>
+        <div class="stat-num">Atención personalizada</div>
+        <div class="stat-label">Cada paciente recibe tiempo y dedicación, sin apuro.</div>
       </div>
       <div class="stat reveal">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Disponibilidad ante emergencias</div>
+        <div class="stat-num">Clínica nueva</div>
+        <div class="stat-label">Recién empezamos, con muchas ganas de crecer junto a vos.</div>
       </div>
     </div>
   </div>
@@ -681,15 +666,15 @@
     <div class="section-head reveal">
       <span class="eyebrow">Visitanos</span>
       <h2>Ubicación y horarios</h2>
-      <p>Encontranos en Corrientes, Argentina, o coordiná tu visita en el horario que más te convenga.</p>
+      <p>Encontranos en Catamarca 530, Corrientes Capital, o coordiná tu visita en el horario que más te convenga.</p>
     </div>
     <div class="visit-grid">
       <div class="map-card reveal">
-        <iframe src="https://www.google.com/maps?q=FIRVET+Veterinaria+Corrientes+Argentina&z=15&output=embed" loading="lazy" allowfullscreen title="Ubicación de FirVet"></iframe>
+        <iframe src="https://www.google.com/maps?q=Catamarca+530,+W3400CEE+Corrientes,+Argentina&z=16&output=embed" loading="lazy" allowfullscreen title="Ubicación de FirVet"></iframe>
         <div class="map-card-body">
           <h3>FirVet Veterinaria</h3>
-          <p>Corrientes, Argentina</p>
-          <a href="https://maps.app.goo.gl/3P8j12dqUZn7gAE56" target="_blank" rel="noopener" class="pill-btn">Ver en Google Maps →</a>
+          <p>Catamarca 530, Corrientes Capital (W3400CEE)</p>
+          <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener" class="pill-btn">Ver en Google Maps →</a>
         </div>
       </div>
       <div class="hours-card reveal">
@@ -732,8 +717,6 @@
   </div>
 </footer>
 
-<div class="toast" id="buyToast">Solo disponible en la versión completa</div>
-
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -768,16 +751,6 @@
     }
   });
 
-  const toast = document.getElementById('buyToast');
-  let toastTimeout;
-
-  document.querySelectorAll('[data-buy]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      clearTimeout(toastTimeout);
-      toast.classList.add('show');
-      toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
-    });
-  });
 </script>
 
 </body>

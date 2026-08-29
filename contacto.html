@@ -17,6 +17,7 @@
     --secondary:#2DCFE0;
     --accent:#F9A225;
     --text-sub:#5B6660;
+    --menu-dark:#0B2530;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -56,7 +57,7 @@
     z-index:110;
     width:52px;height:52px;
     border-radius:50%;
-    background:var(--ink);
+    background:var(--menu-dark);
     border:none;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;
@@ -80,7 +81,7 @@
     position:fixed;
     inset:0;
     z-index:105;
-    background:var(--ink);
+    background:var(--menu-dark);
     color:#fff;
     display:flex;
     flex-direction:column;
@@ -114,6 +115,8 @@
     font-size:14px;
     color:rgba(255,255,255,0.6);
   }
+  .menu-foot a{transition:color .2s ease;}
+  .menu-foot a:hover{color:#fff;}
 
   .reveal{
     opacity:0;
@@ -296,9 +299,10 @@
       <a href="contacto.html" class="active">Contacto</a>
     </nav>
     <div class="menu-foot">
-      <span>info@FirVet.com</span>
-      <span>+54 9 11 5555-0123</span>
-      <span>Buenos Aires, Argentina</span>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener">firvet.veterinaria@gmail.com</a>
+      <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">+54 9 379 503-3587</a>
+      <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener">@firvet.veterinaria</a>
+      <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener">Catamarca 530, Corrientes</a>
     </div>
   </div>
 </div>
@@ -317,24 +321,30 @@
       <div class="contact-info">
         <h3>Hablemos</h3>
         <p>Elegí el medio que prefieras o completá el formulario y nos pondremos en contacto lo antes posible.</p>
-        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=info@FirVet.com" target="_blank" rel="noopener" class="contact-info-item">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
           </div>
-          <span>info@FirVet.com</span>
+          <span>firvet.veterinaria@gmail.com</span>
         </a>
-        <a href="https://wa.me/5491155550123" target="_blank" rel="noopener" class="contact-info-item">
+        <a href="https://wa.me/5493795033587" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <span>+54 9 11 5555-0123</span>
+          <span>+54 9 379 503-3587</span>
         </a>
-        <div class="contact-info-item">
+        <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener" class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <span>@firvet.veterinaria</span>
+        </a>
+        <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <span>Av. Siempre Viva 123, Buenos Aires</span>
-        </div>
+          <span>Catamarca 530, Corrientes Capital (W3400CEE)</span>
+        </a>
       </div>
 
       <form class="contact-form" id="contactForm">
