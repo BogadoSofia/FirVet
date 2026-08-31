@@ -291,7 +291,9 @@
     padding:32px;
     background:var(--surface);
     box-shadow:0 4px 18px rgba(20,32,27,0.06);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .3s ease, box-shadow .3s ease;
   }
+  .bento-item:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .bento-feature{
     grid-column:span 2;
     grid-row:span 2;
@@ -328,7 +330,9 @@
     border-radius:28px;
     padding:56px 40px;
     box-shadow:0 4px 18px rgba(20,32,27,0.06);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .3s ease, box-shadow .3s ease;
   }
+  .products-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .products-card .product-icon{
     width:64px;height:64px;
     border-radius:16px;
@@ -368,7 +372,9 @@
     background:var(--surface);
     display:flex;
     flex-direction:column;
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .3s ease, box-shadow .3s ease;
   }
+  .map-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .map-card iframe{width:100%;height:280px;border:0;display:block;}
   .map-card-body{padding:24px 28px;}
   .map-card-body h3{font-size:18px;font-weight:600;margin-bottom:6px;}
@@ -378,7 +384,9 @@
     padding:28px;
     background:var(--surface);
     box-shadow:0 4px 18px rgba(20,32,27,0.06);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .3s ease, box-shadow .3s ease;
   }
+  .hours-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .hours-card h3{font-size:18px;font-weight:600;margin-bottom:18px;}
   .hours-list{display:flex;flex-direction:column;}
   .hours-row{
@@ -429,7 +437,11 @@
 
   /* FOOTER */
   .footer-mini{padding:44px 0;text-align:center;}
-  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;}
+  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;animation:pawBounce 3s ease-in-out infinite;}
+  @keyframes pawBounce{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-5px) rotate(-4deg);}
+  }
   .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
   .footer-links-row{font-size:13px;color:var(--text-sub);}
   .footer-links-row a{font-weight:700;color:var(--ink);}
@@ -696,6 +708,10 @@
     if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
       closeMenu();
     }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuPanel.classList.contains('open')) closeMenu();
   });
 
 </script>

@@ -257,7 +257,11 @@
 
   /* FOOTER */
   .footer-mini{padding:44px 0;text-align:center;}
-  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;}
+  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;animation:pawBounce 3s ease-in-out infinite;}
+  @keyframes pawBounce{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-5px) rotate(-4deg);}
+  }
   .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
   .footer-links-row{font-size:13px;color:var(--text-sub);}
   .footer-links-row a{font-weight:700;color:var(--ink);}
@@ -460,6 +464,10 @@
     if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
       closeMenu();
     }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuPanel.classList.contains('open')) closeMenu();
   });
 </script>
 
