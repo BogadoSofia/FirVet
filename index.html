@@ -130,20 +130,26 @@
     position:relative;
     overflow:hidden;
   }
+  .hero-divider{
+    height:44px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-divider svg{width:100%;height:100%;display:block;}
+  .pulse-glow{
+    filter:drop-shadow(0 0 5px rgba(5,165,181,0.75));
+    animation:pulseTravel 3.6s linear infinite;
+  }
+  @keyframes pulseTravel{
+    0%{stroke-dashoffset:1000;}
+    100%{stroke-dashoffset:-60;}
+  }
   .hero::before{
     content:'';
     position:absolute;
     top:-15%;right:-8%;
     width:520px;height:520px;
     background:radial-gradient(circle, rgba(5,165,181,0.16) 0%, transparent 70%);
-    pointer-events:none;
-  }
-  .hero::after{
-    content:'';
-    position:absolute;
-    bottom:-20%;left:-10%;
-    width:420px;height:420px;
-    background:radial-gradient(circle, rgba(249,162,37,0.14) 0%, transparent 70%);
     pointer-events:none;
   }
   .hero-grid{
@@ -402,6 +408,11 @@
   .hours-row.closed .hours{color:var(--accent);font-weight:600;}
   .hours-row.today .day{color:var(--primary);}
 
+  /* CASOS BAND */
+  #casos{background:var(--menu-dark);color:#fff;}
+  #casos .section-head h2{color:#fff;}
+  #casos .section-head p{color:rgba(255,255,255,0.65);}
+
   /* STATS BAND */
   .stats-band{background:var(--menu-dark);color:#fff;}
   .stats-row{
@@ -522,6 +533,22 @@
     </div>
   </div>
 </section>
+
+<div class="hero-divider" aria-hidden="true">
+  <svg viewBox="0 0 1200 44" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="pulseFade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#05A5B5" stop-opacity="0"/>
+        <stop offset="14%" stop-color="#05A5B5" stop-opacity="0.35"/>
+        <stop offset="50%" stop-color="#F9A225" stop-opacity="0.55"/>
+        <stop offset="86%" stop-color="#05A5B5" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#05A5B5" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,22 H460 L488,22 L506,4 L524,40 L542,22 L570,22 H1200" fill="none" stroke="url(#pulseFade)" stroke-width="2"/>
+    <path class="pulse-glow" pathLength="1000" d="M0,22 H460 L488,22 L506,4 L524,40 L542,22 L570,22 H1200" fill="none" stroke="#05A5B5" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="50 950"/>
+  </svg>
+</div>
 
 <section id="servicios">
   <div class="container">

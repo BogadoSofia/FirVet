@@ -765,6 +765,65 @@
   .cart-shipping-label{display:flex;flex-direction:column;gap:2px;text-align:left;}
   .cart-shipping-label span:first-child{font-weight:700;font-size:14px;color:var(--ink);}
   .cart-shipping-price{font-size:12px;color:var(--text-sub);}
+
+  /* TAG FILTERS (storefront) */
+  .tag-filter-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .tag-filter-btn{
+    background:var(--surface);
+    color:var(--text-sub);
+    border:1.5px solid rgba(20,32,27,0.12);
+    border-radius:999px;
+    padding:9px 18px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:all .2s ease;
+  }
+  .tag-filter-btn:hover{border-color:var(--primary);color:var(--primary);}
+  .tag-filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+  /* TAG CHIPS (admin) */
+  .admin-tag-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag-chip{
+    background:var(--surface);
+    color:var(--text-sub);
+    border:1.5px solid rgba(20,32,27,0.15);
+    border-radius:999px;
+    padding:6px 14px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:all .2s ease;
+  }
+  .tag-chip:hover{border-color:var(--primary);}
+  .tag-chip.active{background:rgba(5,165,181,0.12);border-color:var(--primary);color:var(--primary);}
+  .admin-tag-create-row{display:flex;gap:8px;}
+  .admin-tag-create-row input{flex:1;}
+  .admin-tag-create-btn{
+    flex-shrink:0;
+    background:var(--bg);
+    border:1px dashed rgba(20,32,27,0.3);
+    color:var(--primary);
+    border-radius:999px;
+    padding:9px 16px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s ease;
+  }
+  .admin-tag-create-btn:hover{background:rgba(5,165,181,0.08);}
 </style>
 </head>
 <body>
@@ -810,6 +869,7 @@
 
 <section class="shop-section">
   <div class="container">
+    <div class="tag-filter-bar" id="tagFilterBar"></div>
     <div class="shop-grid" id="shopGrid"></div>
   </div>
 </section>
@@ -932,6 +992,12 @@
       <input type="text" id="addDescInput" placeholder="Descripción breve">
       <label>Sabores <span class="field-optional">(opcional, separados por coma)</span></label>
       <input type="text" id="addFlavorsInput" placeholder="Pollo, Carne, Pescado">
+      <label>Etiquetas <span class="field-optional">(opcional, para filtros)</span></label>
+      <div class="admin-tag-chips" id="addTagChips"></div>
+      <div class="admin-tag-create-row">
+        <input type="text" id="addTagCreateInput" placeholder="Nueva etiqueta">
+        <button type="button" class="admin-tag-create-btn" id="addTagCreateBtn">+ Crear</button>
+      </div>
     </div>
     <p class="edit-error" id="addError"></p>
     <div class="edit-modal-actions">
@@ -1007,10 +1073,29 @@
       price: row.Precio || 0,
       desc: row.Descripcion || '',
       flavors: row.Sabores || '',
+      tags: row.Etiquetas || '',
       inStock: row.Stock !== false,
       image: row.ImagenUrl || null,
       imagePath: row.ImagenPath || null,
     };
+  }
+
+  function getTagsArray(p){
+    return (p.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+  }
+
+  const knownTags = new Set();
+
+  function refreshKnownTags(){
+    products.forEach(p => getTagsArray(p).forEach(t => knownTags.add(t)));
+  }
+
+  function getAllTagsSorted(){
+    return Array.from(knownTags).sort((a, b) => a.localeCompare(b, 'es'));
+  }
+
+  function tagChipsHtml(selectedTags){
+    return getAllTagsSorted().map(tag => `<button type="button" class="tag-chip ${selectedTags.includes(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('');
   }
 
   function getFlavorObjects(p){
@@ -1050,6 +1135,29 @@
   let cart = loadCart();
   let deliveryEnabled = localStorage.getItem(DELIVERY_KEY) === 'true';
   let shippingPrice = 0;
+  let productsLoaded = false;
+  let activeTagFilter = null;
+
+  function renderTagFilterBar(){
+    const tagFilterBar = document.getElementById('tagFilterBar');
+    const usedTags = getAllTagsSorted().filter(tag => products.some(p => getTagsArray(p).includes(tag)));
+    if (!usedTags.length) {
+      tagFilterBar.innerHTML = '';
+      return;
+    }
+    if (activeTagFilter && !usedTags.includes(activeTagFilter)) activeTagFilter = null;
+    const allBtn = `<button type="button" class="tag-filter-btn ${!activeTagFilter ? 'active' : ''}" data-tag="">Todos</button>`;
+    const tagBtns = usedTags.map(tag => `<button type="button" class="tag-filter-btn ${activeTagFilter === tag ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('');
+    tagFilterBar.innerHTML = allBtn + tagBtns;
+  }
+
+  document.getElementById('tagFilterBar').addEventListener('click', (e) => {
+    const btn = e.target.closest('.tag-filter-btn');
+    if (!btn) return;
+    activeTagFilter = btn.dataset.tag || null;
+    renderTagFilterBar();
+    renderShop();
+  });
 
   function renderQtyControl(p){
     if (!p.inStock) return `<button class="pill-btn" disabled>Sin stock</button>`;
@@ -1099,7 +1207,14 @@
       shopGrid.innerHTML = '<p class="shop-loading">Todavía no hay productos cargados.</p>';
       return;
     }
-    shopGrid.innerHTML = products.map(p => {
+    const visibleProducts = activeTagFilter
+      ? products.filter(p => getTagsArray(p).includes(activeTagFilter))
+      : products;
+    if (!visibleProducts.length) {
+      shopGrid.innerHTML = '<p class="shop-loading">No hay productos con esa etiqueta.</p>';
+      return;
+    }
+    shopGrid.innerHTML = visibleProducts.map(p => {
       const flavorObjs = getFlavorObjects(p);
       const hasFlavors = flavorObjs.length > 0;
       const overallInStock = hasFlavors ? flavorObjs.some(f => f.inStock) : p.inStock;
@@ -1139,7 +1254,21 @@
   }
 
   function renderCart(){
-    const entries = Object.entries(cart).filter(([, v]) => v && v.qty > 0);
+    let entries = Object.entries(cart).filter(([, v]) => v && v.qty > 0);
+
+    if (productsLoaded) {
+      let staleFound = false;
+      entries = entries.filter(([key, v]) => {
+        const exists = products.some(prod => String(prod.id) === String(v.productId));
+        if (!exists) {
+          delete cart[key];
+          staleFound = true;
+        }
+        return exists;
+      });
+      if (staleFound) saveCart();
+    }
+
     const cartBadge = document.getElementById('cartBadge');
     const totalCount = entries.reduce((sum, [, v]) => sum + v.qty, 0);
     cartBadge.textContent = totalCount;
@@ -1214,6 +1343,9 @@
       return;
     }
     products = (data || []).map(mapRow);
+    productsLoaded = true;
+    refreshKnownTags();
+    renderTagFilterBar();
     renderShop();
     renderCart();
   }
@@ -1289,21 +1421,23 @@
     const lines = entries.map(([, v]) => {
       const p = products.find(prod => String(prod.id) === String(v.productId));
       if (!p) return null;
-      subtotal += (Number(p.price) || 0) * v.qty;
+      const rowSubtotal = (Number(p.price) || 0) * v.qty;
+      subtotal += rowSubtotal;
       const tipo = v.flavor || 'Sin variante';
-      return `UN ${p.name}, ${tipo}, ${v.qty}`;
+      return `*${p.name}* *${tipo}* x*${v.qty}*\ncant: *${v.qty}* precio: *${formatPrice(p.price)}* subtotal: *${formatPrice(rowSubtotal)}*`;
     }).filter(Boolean);
 
     const shipping = deliveryEnabled ? shippingPrice : 0;
     const total = subtotal + shipping;
 
     const message = [
-      '¡Hola! Quiero hacer este pedido:',
+      '¡Hola!! Vengo de la web y quiero hacer un pedido:',
       '',
-      ...lines,
+      lines.join('\n\n'),
       '',
       `Envío a domicilio: ${deliveryEnabled ? 'Sí' : 'No'}`,
       `Total: ${formatPrice(total)}`,
+      `Por favor confirmar disponibilidad y datos de entrega, Gracias!`
     ].join('\n');
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
@@ -1448,6 +1582,25 @@
   const addFlavorsInput = document.getElementById('addFlavorsInput');
   const addImageInput = document.getElementById('addImageInput');
   const addError = document.getElementById('addError');
+  const addTagChips = document.getElementById('addTagChips');
+  const addTagCreateInput = document.getElementById('addTagCreateInput');
+  const addTagCreateBtn = document.getElementById('addTagCreateBtn');
+
+  addTagChips.addEventListener('click', (e) => {
+    const chip = e.target.closest('.tag-chip');
+    if (!chip) return;
+    chip.classList.toggle('active');
+  });
+
+  addTagCreateBtn.addEventListener('click', () => {
+    const name = addTagCreateInput.value.trim();
+    if (!name) return;
+    const selected = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag);
+    knownTags.add(name);
+    if (!selected.includes(name)) selected.push(name);
+    addTagChips.innerHTML = tagChipsHtml(selected);
+    addTagCreateInput.value = '';
+  });
 
   const shippingPriceInput = document.getElementById('shippingPriceInput');
   const shippingSaveBtn = document.getElementById('shippingSaveBtn');
@@ -1523,6 +1676,12 @@
           <label>Sabores y stock</label>
           <div class="admin-flavor-rows">${flavorObjs.map(f => adminFlavorRowHtml(f.name, f.inStock)).join('')}</div>
           <button type="button" class="admin-add-flavor-btn">+ Agregar sabor</button>
+          <label>Etiquetas</label>
+          <div class="admin-tag-chips">${tagChipsHtml(getTagsArray(p))}</div>
+          <div class="admin-tag-create-row">
+            <input type="text" class="admin-tag-create-input" placeholder="Nueva etiqueta">
+            <button type="button" class="admin-tag-create-btn">+ Crear</button>
+          </div>
           <label>Stock general${flavorObjs.length ? ' <span class="field-optional">(si no tiene sabores)</span>' : ''}</label>
           <div class="admin-stock-toggle">
             <button type="button" class="stock-btn in-stock ${p.inStock ? 'active' : ''}" data-stock="true">Con stock</button>
@@ -1556,6 +1715,8 @@
     addDescInput.value = '';
     addFlavorsInput.value = '';
     addImageInput.value = '';
+    addTagChips.innerHTML = tagChipsHtml([]);
+    addTagCreateInput.value = '';
     addError.classList.remove('show');
     addError.textContent = '';
     adminAddOverlay.classList.add('open');
@@ -1610,6 +1771,7 @@
     const price = Number(addPriceInput.value) || 0;
     const desc = addDescInput.value.trim();
     const flavors = addFlavorsInput.value.trim();
+    const tags = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = addImageInput.files[0];
 
     if (!name) {
@@ -1635,6 +1797,7 @@
         Precio: price,
         Descripcion: desc,
         Sabores: flavors,
+        Etiquetas: tags,
         Stock: true,
         ImagenUrl: imageUrl,
         ImagenPath: imagePath,
@@ -1653,6 +1816,34 @@
     }
   });
 
+  async function saveRowTags(row){
+    const id = row.dataset.id;
+    const product = products.find(p => String(p.id) === String(id));
+    if (!product) return;
+
+    const chipsContainer = row.querySelector('.admin-tag-chips');
+    const tags = Array.from(chipsContainer.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
+    const statusEl = row.querySelector('[data-status]');
+
+    const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Etiquetas: tags }).eq('id', id);
+    if (error) {
+      console.error(error);
+      if (statusEl) {
+        statusEl.textContent = 'No se pudo guardar la etiqueta.';
+        statusEl.classList.add('error');
+      }
+      return;
+    }
+
+    product.tags = tags;
+    if (statusEl) {
+      statusEl.classList.remove('error');
+      statusEl.textContent = 'Etiqueta guardada.';
+    }
+    renderTagFilterBar();
+    renderShop();
+  }
+
   async function handleSaveRow(row){
     const id = row.dataset.id;
     const product = products.find(p => String(p.id) === String(id));
@@ -1668,6 +1859,7 @@
       inStock: flavorRow.querySelector('.admin-flavor-stock-toggle .stock-btn.in-stock').classList.contains('active'),
     })).filter(f => f.name);
     const flavors = flavorObjectsToString(flavorObjs);
+    const tags = Array.from(row.querySelectorAll('.admin-tag-chips .tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = row.querySelector('.admin-image-input').files[0];
 
     if (!name) {
@@ -1681,7 +1873,7 @@
     statusEl.textContent = 'Guardando...';
 
     try {
-      const updates = { Nombre: name, Precio: price, Descripcion: desc, Sabores: flavors };
+      const updates = { Nombre: name, Precio: price, Descripcion: desc, Sabores: flavors, Etiquetas: tags };
       let oldImagePath = null;
 
       if (file) {
@@ -1699,13 +1891,14 @@
       }
 
       Object.assign(product, {
-        name, price, desc, flavors,
+        name, price, desc, flavors, tags,
         image: updates.ImagenUrl || product.image,
         imagePath: updates.ImagenPath || product.imagePath,
       });
 
       row.querySelector('.admin-image-input').value = '';
       statusEl.textContent = 'Guardado.';
+      renderTagFilterBar();
       renderShop();
     } catch (err) {
       console.error(err);
@@ -1763,6 +1956,7 @@
         if (String(cart[key].productId) === String(product.id)) delete cart[key];
       });
       saveCart();
+      renderTagFilterBar();
       renderShop();
       renderAdminList();
       renderCart();
@@ -1789,6 +1983,29 @@
     const removeFlavorBtn = e.target.closest('.admin-flavor-remove-btn');
     if (removeFlavorBtn) {
       removeFlavorBtn.closest('.admin-flavor-row').remove();
+      return;
+    }
+
+    const tagChipBtn = e.target.closest('.admin-tag-chips .tag-chip');
+    if (tagChipBtn) {
+      tagChipBtn.classList.toggle('active');
+      await saveRowTags(tagChipBtn.closest('.admin-product-row'));
+      return;
+    }
+
+    const tagCreateBtn = e.target.closest('.admin-tag-create-btn');
+    if (tagCreateBtn) {
+      const input = tagCreateBtn.closest('.admin-tag-create-row').querySelector('.admin-tag-create-input');
+      const name = input.value.trim();
+      if (!name) return;
+      const row = tagCreateBtn.closest('.admin-product-row');
+      const chipsContainer = row.querySelector('.admin-tag-chips');
+      const selected = Array.from(chipsContainer.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag);
+      knownTags.add(name);
+      if (!selected.includes(name)) selected.push(name);
+      chipsContainer.innerHTML = tagChipsHtml(selected);
+      input.value = '';
+      await saveRowTags(row);
       return;
     }
 
