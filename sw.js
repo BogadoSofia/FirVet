@@ -1,4 +1,4 @@
-const CACHE_NAME = 'firvet-cache-v1';
+const CACHE_NAME = 'firvet-cache-v2';
 
 const CORE_ASSETS = [
   './',
