@@ -732,6 +732,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .admin-shipping-row input:focus{outline:none;border-color:var(--primary);}
   .admin-shipping-row .pill-btn{padding:9px 18px;font-size:13px;box-shadow:none;}
+  .admin-shipping-toggle-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-bottom:14px;
+    margin-bottom:14px;
+    border-bottom:1px solid rgba(20,32,27,0.1);
+  }
+  .admin-shipping-toggle-text{display:flex;flex-direction:column;gap:3px;}
+  .admin-shipping-toggle-text strong{font-size:13px;font-weight:700;color:var(--ink);}
+  .admin-shipping-toggle-text span{font-size:12px;color:var(--text-sub);line-height:1.4;}
+  .admin-shipping-field.no-delivery .admin-shipping-row input{opacity:.45;}
 
   /* SWITCH */
   .switch{
@@ -778,6 +791,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .cart-shipping-label{display:flex;flex-direction:column;gap:2px;text-align:left;}
   .cart-shipping-label span:first-child{font-weight:700;font-size:14px;color:var(--ink);}
   .cart-shipping-price{font-size:12px;color:var(--text-sub);}
+  .cart-shipping-row.unavailable .cart-shipping-label span:first-child{color:var(--text-sub);}
+  .cart-shipping-row.unavailable .cart-shipping-price{color:#c2410c;font-weight:700;}
 
   /* TAG FILTERS (storefront) */
   .tag-filter-bar{
@@ -868,7 +883,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="contacto.html">Contacto</a>
     </nav>
     <div class="menu-foot">
-      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=bogadosofia470@gmail.com" target="_blank" rel="noopener">bogadosofia470@gmail.com</a>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener">firvet.veterinaria@gmail.com</a>
       <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">+54 9 379 503-3587</a>
       <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener">@firvet.veterinaria</a>
       <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener">Catamarca 530, Corrientes</a>
@@ -927,7 +942,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span>Subtotal</span>
         <span id="cartSubtotalValue">$0</span>
       </div>
-      <div class="cart-shipping-row">
+      <div class="cart-shipping-row" id="cartShippingRow">
         <div class="cart-shipping-label">
           <span>Envío a domicilio</span>
           <span class="cart-shipping-price" id="cartShippingPriceLabel">$0</span>
@@ -982,7 +997,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="edit-modal-overlay" id="adminEditOverlay">
   <div class="edit-modal admin-edit-modal">
     <h3>Editar productos</h3>
-    <div class="admin-shipping-field">
+    <div class="admin-shipping-field" id="adminShippingField">
+      <div class="admin-shipping-toggle-row">
+        <div class="admin-shipping-toggle-text">
+          <strong>No hay envío a domicilio por el momento</strong>
+          <span>Si lo activás, los clientes no van a poder elegir envío en el carrito.</span>
+        </div>
+        <button type="button" class="switch" id="noDeliveryToggle" role="switch" aria-checked="false" aria-label="No hay envío a domicilio por el momento">
+          <span class="switch-knob"></span>
+        </button>
+      </div>
       <label>Precio de envío a domicilio</label>
       <div class="admin-shipping-row">
         <input type="number" id="shippingPriceInput" placeholder="0">
@@ -1152,6 +1176,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let cart = loadCart();
   let deliveryEnabled = localStorage.getItem(DELIVERY_KEY) === 'true';
   let shippingPrice = 0;
+  // Lo define la veterinaria desde el panel: si es false, el carrito no ofrece envío.
+  let deliveryAvailable = true;
   let productsLoaded = false;
   let activeTagFilter = null;
 
@@ -1297,12 +1323,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const cartSubtotalValue = document.getElementById('cartSubtotalValue');
     const cartTotalValue = document.getElementById('cartTotalValue');
     const cartShippingPriceLabel = document.getElementById('cartShippingPriceLabel');
+    const cartShippingRow = document.getElementById('cartShippingRow');
     const shippingToggle = document.getElementById('shippingToggle');
     const cartCheckoutBtn = document.getElementById('cartCheckoutBtn');
 
-    shippingToggle.classList.toggle('on', deliveryEnabled);
-    shippingToggle.setAttribute('aria-checked', String(deliveryEnabled));
-    cartShippingPriceLabel.textContent = formatPrice(shippingPrice);
+    const shippingChosen = deliveryAvailable && deliveryEnabled;
+    cartShippingRow.classList.toggle('unavailable', !deliveryAvailable);
+    shippingToggle.classList.toggle('on', shippingChosen);
+    shippingToggle.setAttribute('aria-checked', String(shippingChosen));
+    shippingToggle.disabled = !deliveryAvailable;
+    shippingToggle.style.display = deliveryAvailable ? '' : 'none';
+    cartShippingPriceLabel.textContent = deliveryAvailable
+      ? formatPrice(shippingPrice)
+      : 'No disponible por el momento';
 
     if (!entries.length) {
       cartItems.innerHTML = '';
@@ -1346,7 +1379,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       `;
     }).join('');
 
-    const shipping = deliveryEnabled ? shippingPrice : 0;
+    const shipping = shippingChosen ? shippingPrice : 0;
     cartSubtotalValue.textContent = formatPrice(subtotal);
     cartTotalValue.textContent = formatPrice(subtotal + shipping);
   }
@@ -1374,6 +1407,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return;
     }
     shippingPrice = Number(data && data.PrecioEnvio) || 0;
+    // Si la columna todavía no existe en Supabase, se asume que hay envío.
+    deliveryAvailable = !data || data.EnvioDisponible === undefined || data.EnvioDisponible === null
+      ? true
+      : data.EnvioDisponible === true;
     renderCart();
   }
 
@@ -1423,6 +1460,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 
   shippingToggle.addEventListener('click', () => {
+    if (!deliveryAvailable) return;
     deliveryEnabled = !deliveryEnabled;
     localStorage.setItem(DELIVERY_KEY, String(deliveryEnabled));
     shippingToggle.classList.toggle('on', deliveryEnabled);
@@ -1444,7 +1482,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return `*${p.name}* *${tipo}* x*${v.qty}*\ncant: *${v.qty}* precio: *${formatPrice(p.price)}* subtotal: *${formatPrice(rowSubtotal)}*`;
     }).filter(Boolean);
 
-    const shipping = deliveryEnabled ? shippingPrice : 0;
+    const shippingChosen = deliveryAvailable && deliveryEnabled;
+    const shipping = shippingChosen ? shippingPrice : 0;
     const total = subtotal + shipping;
 
     const message = [
@@ -1452,7 +1491,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       '',
       lines.join('\n\n'),
       '',
-      `Envío a domicilio: ${deliveryEnabled ? 'Sí' : 'No'}`,
+      deliveryAvailable
+        ? `Envío a domicilio: ${shippingChosen ? 'Sí' : 'No'}`
+        : 'Envío a domicilio: no disponible por el momento (retiro en el local)',
       `Total: ${formatPrice(total)}`,
       `Por favor confirmar disponibilidad y datos de entrega, Gracias!`
     ].join('\n');
@@ -1622,31 +1663,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const shippingPriceInput = document.getElementById('shippingPriceInput');
   const shippingSaveBtn = document.getElementById('shippingSaveBtn');
   const shippingStatus = document.getElementById('shippingStatus');
+  const adminShippingField = document.getElementById('adminShippingField');
+  const noDeliveryToggle = document.getElementById('noDeliveryToggle');
+  let adminDeliveryAvailable = true;
+
+  function renderNoDeliveryToggle(){
+    const noDelivery = !adminDeliveryAvailable;
+    noDeliveryToggle.classList.toggle('on', noDelivery);
+    noDeliveryToggle.setAttribute('aria-checked', String(noDelivery));
+    adminShippingField.classList.toggle('no-delivery', noDelivery);
+  }
+
+  noDeliveryToggle.addEventListener('click', () => {
+    adminDeliveryAvailable = !adminDeliveryAvailable;
+    renderNoDeliveryToggle();
+    shippingStatus.classList.remove('error');
+    shippingStatus.textContent = 'Acordate de guardar los cambios.';
+  });
 
   shippingSaveBtn.addEventListener('click', async () => {
     const newPrice = Number(shippingPriceInput.value) || 0;
+    const newAvailable = adminDeliveryAvailable;
     shippingSaveBtn.disabled = true;
     shippingStatus.classList.remove('error');
     shippingStatus.textContent = 'Guardando...';
     try {
       const { data, error } = await supabaseClient
         .from(CONFIG_TABLE)
-        .update({ PrecioEnvio: newPrice })
+        .update({ PrecioEnvio: newPrice, EnvioDisponible: newAvailable })
         .eq('id', 1)
         .select();
       if (error) throw error;
       if (!data || data.length === 0) {
         const { error: insertError } = await supabaseClient
           .from(CONFIG_TABLE)
-          .insert({ id: 1, PrecioEnvio: newPrice });
+          .insert({ id: 1, PrecioEnvio: newPrice, EnvioDisponible: newAvailable });
         if (insertError) throw insertError;
       }
       shippingPrice = newPrice;
-      shippingStatus.textContent = 'Guardado.';
+      deliveryAvailable = newAvailable;
+      shippingStatus.textContent = newAvailable
+        ? 'Guardado. El envío a domicilio está activo.'
+        : 'Guardado. El carrito muestra que no hay envío por el momento.';
       renderCart();
     } catch (err) {
       console.error(err);
-      shippingStatus.textContent = `Error: ${err.message || 'no se pudo guardar.'}`;
+      const msg = String(err.message || '');
+      shippingStatus.textContent = msg.includes('EnvioDisponible')
+        ? 'Falta la columna EnvioDisponible (booleana) en la tabla Config de Supabase.'
+        : `Error: ${msg || 'no se pudo guardar.'}`;
       shippingStatus.classList.add('error');
     } finally {
       shippingSaveBtn.disabled = false;
@@ -1718,6 +1783,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function openAdminEdit(){
     renderAdminList();
     shippingPriceInput.value = shippingPrice;
+    adminDeliveryAvailable = deliveryAvailable;
+    renderNoDeliveryToggle();
     shippingStatus.textContent = '';
     shippingStatus.classList.remove('error');
     adminEditOverlay.classList.add('open');
