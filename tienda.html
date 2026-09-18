@@ -11,7 +11,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05A5B5">
-<title>Tienda</title>
+<title>Tienda — FirVet</title>
+<meta name="description" content="Alimento balanceado, accesorios y productos de farmacia para tu mascota, elegidos por el equipo veterinario de FirVet en Corrientes Capital.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FirVet Veterinaria">
+<meta property="og:title" content="Tienda — FirVet">
+<meta property="og:description" content="Alimento balanceado, accesorios y productos de farmacia para tu mascota, elegidos por el equipo veterinario de FirVet.">
+<meta property="og:image" content="Mejorar%20imagen.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tienda — FirVet">
+<meta name="twitter:description" content="Alimento balanceado, accesorios y productos de farmacia para tu mascota, elegidos por el equipo veterinario de FirVet.">
+<meta name="twitter:image" content="Mejorar%20imagen.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -40,6 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow-x:hidden;
   }
   a{text-decoration:none;color:inherit;}
+  :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px;}
   ul{list-style:none;}
   h1,h2,h3,.serif{font-family:'Fraunces',serif;}
   .container{
@@ -285,6 +296,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     50%{transform:translateY(-5px) rotate(-4deg);}
   }
   .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
+  .vertex-link{color:var(--primary);font-weight:700;transition:color .2s ease;}
+  .vertex-link:hover{color:var(--accent);text-decoration:underline;}
   .footer-links-row{font-size:13px;color:var(--text-sub);}
   .footer-links-row a{font-weight:700;color:var(--ink);}
   .footer-links-row a:hover{color:var(--primary);}
@@ -797,9 +810,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* TAG FILTERS (storefront) */
   .tag-filter-bar{
     display:flex;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     gap:10px;
     margin-bottom:28px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    padding-bottom:6px;
   }
   .tag-filter-btn{
     background:var(--surface);
@@ -812,6 +829,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     cursor:pointer;
     font-family:inherit;
     transition:all .2s ease;
+    flex-shrink:0;
+    white-space:nowrap;
   }
   .tag-filter-btn:hover{border-color:var(--primary);color:var(--primary);}
   .tag-filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
@@ -822,12 +841,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     flex-wrap:wrap;
     gap:8px;
   }
+  .tag-chip-wrap{display:inline-flex;flex-shrink:0;}
   .tag-chip{
     background:var(--surface);
     color:var(--text-sub);
     border:1.5px solid rgba(20,32,27,0.15);
-    border-radius:999px;
-    padding:6px 14px;
+    border-right:none;
+    border-radius:999px 0 0 999px;
+    padding:6px 6px 6px 14px;
     font-size:12px;
     font-weight:700;
     cursor:pointer;
@@ -836,6 +857,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .tag-chip:hover{border-color:var(--primary);}
   .tag-chip.active{background:rgba(5,165,181,0.12);border-color:var(--primary);color:var(--primary);}
+  .tag-chip-del{
+    background:var(--surface);
+    color:var(--text-sub);
+    border:1.5px solid rgba(20,32,27,0.15);
+    border-radius:0 999px 999px 0;
+    padding:5px 11px;
+    font-size:13px;
+    line-height:1;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:all .2s ease;
+  }
+  .tag-chip.active + .tag-chip-del{border-color:var(--primary);}
+  .tag-chip-del:hover{background:#DC2626;border-color:#DC2626;color:#fff;}
   .admin-tag-create-row{display:flex;gap:8px;}
   .admin-tag-create-row input{flex:1;}
   .admin-tag-create-btn{
@@ -876,6 +912,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="menu-panel-inner">
     <nav class="menu-links">
       <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#fisioterapia">Fisioterapia</a>
       <a href="index.html#casos">Historias que nos llenan de orgullo</a>
       <a href="tienda.html" class="active">Productos</a>
       <a href="index.html#nosotros">Nosotros</a>
@@ -915,9 +952,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <circle cx="62" cy="16" r="11" fill="#6BD9E3"/>
       <circle cx="84" cy="42" r="11" fill="#6BD9E3"/>
     </svg>
-    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener">Vertex</a></p>
+    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener" class="vertex-link">Vertex</a></p>
     <div class="footer-links-row">
-      <a href="index.html#servicios">Servicios</a><span class="dot">·</span><a href="index.html#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="index.html#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+      <a href="index.html#servicios">Servicios</a><span class="dot">·</span><a href="index.html#fisioterapia">Fisioterapia</a><span class="dot">·</span><a href="index.html#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="index.html#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
@@ -1050,7 +1087,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="edit-modal-overlay" id="confirmDeleteOverlay">
   <div class="edit-modal">
-    <h3>Eliminar producto</h3>
+    <h3 id="confirmDeleteTitle">Eliminar producto</h3>
     <p class="hint" id="confirmDeleteText">¿Eliminar este producto? Esta acción no se puede deshacer.</p>
     <div class="edit-modal-actions">
       <button type="button" class="edit-cancel-btn" id="confirmDeleteCancelBtn">Cancelar</button>
@@ -1136,7 +1173,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function tagChipsHtml(selectedTags){
-    return getAllTagsSorted().map(tag => `<button type="button" class="tag-chip ${selectedTags.includes(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join('');
+    return getAllTagsSorted().map(tag => `
+      <span class="tag-chip-wrap">
+        <button type="button" class="tag-chip ${selectedTags.includes(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>
+        <button type="button" class="tag-chip-del" data-tag="${escapeHtml(tag)}" aria-label="Borrar etiqueta ${escapeHtml(tag)}" title="Borrar etiqueta">×</button>
+      </span>
+    `).join('');
   }
 
   function getFlavorObjects(p){
@@ -1543,7 +1585,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   });
 
-  const EDIT_PASSWORD = 'FirVet2026';
+  const EDIT_PASSWORD_HASH = '46ae28b5d761b26b72438b1864c40133f428a49e0145f3a3ca1ae4c89f80840e';
+
+  async function sha256Hex(text){
+    const data = new TextEncoder().encode(text);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
   const MAX_ATTEMPTS = 5;
   const LOCK_DURATION_MS = 5 * 60 * 1000;
   const ATTEMPTS_KEY = 'firvetEditAttempts';
@@ -1583,11 +1632,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     editOverlay.classList.remove('open');
   }
 
-  function handleEditSubmit(){
+  async function handleEditSubmit(){
     const remaining = getLockRemainingMs();
     if (remaining > 0) return;
 
-    if (editPasswordInput.value === EDIT_PASSWORD) {
+    const enteredHash = await sha256Hex(editPasswordInput.value);
+
+    if (enteredHash === EDIT_PASSWORD_HASH) {
       localStorage.removeItem(ATTEMPTS_KEY);
       localStorage.removeItem(LOCK_KEY);
       closeEditModal();
@@ -1645,6 +1696,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const addTagCreateBtn = document.getElementById('addTagCreateBtn');
 
   addTagChips.addEventListener('click', (e) => {
+    const delBtn = e.target.closest('.tag-chip-del');
+    if (delBtn) {
+      requestDeleteTag(delBtn.dataset.tag);
+      return;
+    }
     const chip = e.target.closest('.tag-chip');
     if (!chip) return;
     chip.classList.toggle('active');
@@ -1995,23 +2051,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   const confirmDeleteOverlay = document.getElementById('confirmDeleteOverlay');
+  const confirmDeleteTitle = document.getElementById('confirmDeleteTitle');
   const confirmDeleteText = document.getElementById('confirmDeleteText');
   const confirmDeleteCancelBtn = document.getElementById('confirmDeleteCancelBtn');
   const confirmDeleteOkBtn = document.getElementById('confirmDeleteOkBtn');
-  let pendingDeleteRow = null;
+  let pendingConfirmAction = null;
+
+  function openConfirmDelete(title, text, onConfirm){
+    confirmDeleteTitle.textContent = title;
+    confirmDeleteText.textContent = text;
+    pendingConfirmAction = onConfirm;
+    confirmDeleteOverlay.classList.add('open');
+  }
 
   function requestDeleteRow(row){
     const id = row.dataset.id;
     const product = products.find(p => String(p.id) === String(id));
     if (!product) return;
-    pendingDeleteRow = row;
-    confirmDeleteText.textContent = `¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`;
-    confirmDeleteOverlay.classList.add('open');
+    openConfirmDelete('Eliminar producto', `¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`, () => performDeleteRow(row));
+  }
+
+  function requestDeleteTag(tag){
+    openConfirmDelete('Borrar etiqueta', `¿Borrar la etiqueta "${tag}"? Se va a quitar de todos los productos que la tengan.`, () => performDeleteTag(tag));
   }
 
   function closeConfirmDelete(){
     confirmDeleteOverlay.classList.remove('open');
-    pendingDeleteRow = null;
+    pendingConfirmAction = null;
   }
 
   confirmDeleteCancelBtn.addEventListener('click', closeConfirmDelete);
@@ -2019,9 +2085,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (e.target === confirmDeleteOverlay) closeConfirmDelete();
   });
   confirmDeleteOkBtn.addEventListener('click', async () => {
-    const row = pendingDeleteRow;
+    const action = pendingConfirmAction;
     closeConfirmDelete();
-    if (row) await performDeleteRow(row);
+    if (action) await action();
   });
 
   async function performDeleteRow(row){
@@ -2056,6 +2122,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   }
 
+  async function performDeleteTag(tag){
+    const affected = products.filter(p => getTagsArray(p).includes(tag));
+    try {
+      for (const p of affected) {
+        const newTags = getTagsArray(p).filter(t => t !== tag).join(',');
+        const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Etiquetas: newTags }).eq('id', p.id);
+        if (error) throw error;
+        p.tags = newTags;
+      }
+      knownTags.delete(tag);
+      if (activeTagFilter === tag) activeTagFilter = null;
+      renderTagFilterBar();
+      renderShop();
+      renderAdminList();
+      const selected = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).filter(t => t !== tag);
+      addTagChips.innerHTML = tagChipsHtml(selected);
+    } catch (err) {
+      console.error(err);
+      alert('No se pudo borrar la etiqueta. Probá de nuevo.');
+    }
+  }
+
   adminProductList.addEventListener('click', async (e) => {
     const flavorStockBtn = e.target.closest('[data-flavor-stock]');
     if (flavorStockBtn) {
@@ -2068,6 +2156,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const removeFlavorBtn = e.target.closest('.admin-flavor-remove-btn');
     if (removeFlavorBtn) {
       removeFlavorBtn.closest('.admin-flavor-row').remove();
+      return;
+    }
+
+    const tagDelBtn = e.target.closest('.admin-tag-chips .tag-chip-del');
+    if (tagDelBtn) {
+      requestDeleteTag(tagDelBtn.dataset.tag);
       return;
     }
 

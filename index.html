@@ -12,6 +12,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05A5B5">
 <title>FirVet — Clínica Veterinaria</title>
+<meta name="description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FirVet Veterinaria">
+<meta property="og:title" content="FirVet — Clínica Veterinaria">
+<meta property="og:description" content="Consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda de productos para tu mascota en Corrientes Capital.">
+<meta property="og:image" content="Mejorar%20imagen.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FirVet — Clínica Veterinaria">
+<meta name="twitter:description" content="Consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda de productos para tu mascota en Corrientes Capital.">
+<meta name="twitter:image" content="Mejorar%20imagen.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -40,6 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow-x:hidden;
   }
   a{text-decoration:none;color:inherit;}
+  :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px;}
   ul{list-style:none;}
   h1,h2,h3,.serif{font-family:'Fraunces',serif;}
   .container{
@@ -78,6 +89,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .menu-btn:hover{transform:scale(1.06);}
   .menu-btn svg{width:20px;height:20px;}
+
+  /* WHATSAPP FAB */
+  .whatsapp-fab{
+    position:fixed;
+    bottom:24px;right:24px;
+    z-index:110;
+    width:58px;height:58px;
+    border-radius:50%;
+    background:#25D366;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(37,211,102,0.4);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .whatsapp-fab:hover{transform:scale(1.08);box-shadow:0 10px 30px rgba(37,211,102,0.5);}
+  .whatsapp-fab svg{width:28px;height:28px;fill:#fff;}
   .menu-btn .bar{
     stroke:#fff;
     transition:transform .3s ease, opacity .2s ease;
@@ -327,6 +353,77 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .bento-icon svg{width:22px;height:22px;stroke:var(--primary);}
   .bento-item h3{font-size:18px;font-weight:600;margin-bottom:8px;}
   .bento-item p{font-size:14px;color:var(--text-sub);line-height:1.6;}
+  .bento-item.bento-wide{grid-column:span 4;}
+  .bento-item.bento-wide p{max-width:520px;}
+
+  /* FISIOTERAPIA */
+  .fisio-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:40px;
+    align-items:start;
+  }
+  .fisio-steps{display:flex;flex-direction:column;gap:16px;}
+  .fisio-step{display:flex;align-items:center;gap:16px;}
+  .fisio-step-num{
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;
+    font-size:22px;font-weight:700;
+    flex-shrink:0;
+  }
+  .fisio-step-text{
+    flex:1;
+    background:var(--surface);
+    border-radius:16px;
+    padding:18px 24px;
+    font-size:15px;
+    color:var(--ink);
+    line-height:1.5;
+    box-shadow:0 4px 18px rgba(20,32,27,0.06);
+  }
+  .fisio-faq{
+    background:var(--menu-dark);
+    color:#fff;
+    border-radius:24px;
+    padding:40px 34px;
+    position:sticky;
+    top:100px;
+  }
+  .fisio-faq h3{font-size:20px;font-weight:600;margin-bottom:14px;}
+  .fisio-faq .fisio-answer{
+    display:inline-block;
+    color:var(--secondary);
+    font-weight:700;
+    text-transform:uppercase;
+    font-size:13px;
+    letter-spacing:1.5px;
+    margin-bottom:18px;
+  }
+  .fisio-faq p{color:rgba(255,255,255,0.75);font-size:15px;line-height:1.7;}
+  .fisio-tech{margin-top:44px;}
+  .fisio-tech-label{
+    display:block;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .fisio-tech-list{display:flex;flex-wrap:wrap;gap:12px;}
+  .fisio-tech-chip{
+    background:var(--surface);
+    color:var(--ink);
+    font-weight:700;
+    font-size:14px;
+    padding:12px 22px;
+    border-radius:999px;
+    box-shadow:0 4px 16px rgba(20,32,27,0.07);
+  }
 
   /* PRODUCTOS */
   .products-card{
@@ -415,6 +512,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   #casos .section-head h2{color:#fff;}
   #casos .section-head p{color:rgba(255,255,255,0.65);}
 
+  /* SERVICIOS BAND */
+  #servicios{background:var(--menu-dark);color:#fff;}
+  #servicios .eyebrow{color:var(--secondary);}
+  #servicios .section-head h2{color:#fff;}
+  #servicios .section-head p{color:rgba(255,255,255,0.65);}
+  #servicios .bento-item:not(.bento-feature) h3{color:var(--ink);}
+
   /* STATS BAND */
   .stats-band{background:var(--menu-dark);color:#fff;}
   .stats-row{
@@ -450,6 +554,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     50%{transform:translateY(-5px) rotate(-4deg);}
   }
   .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
+  .vertex-link{color:var(--primary);font-weight:700;transition:color .2s ease;}
+  .vertex-link:hover{color:var(--accent);text-decoration:underline;}
   .footer-links-row{font-size:13px;color:var(--text-sub);}
   .footer-links-row a{font-weight:700;color:var(--ink);}
   .footer-links-row a:hover{color:var(--primary);}
@@ -461,6 +567,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento{grid-template-columns:repeat(2,1fr);}
     .bento-feature{grid-column:span 2;min-height:260px;}
     .bento-item:not(.bento-feature){grid-column:span 1;}
+    .bento-item.bento-wide{grid-column:span 2;}
+    .fisio-grid{grid-template-columns:1fr;}
+    .fisio-faq{position:static;}
     .visit-grid{grid-template-columns:1fr;}
   }
   @media(max-width:640px){
@@ -469,6 +578,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .brand-chip{top:16px;left:16px;padding:6px 14px;font-size:14px;}
     .brand-chip img{width:auto;height:36px;}
     .menu-btn{top:16px;right:16px;width:46px;height:46px;}
+    .whatsapp-fab{bottom:16px;right:16px;width:50px;height:50px;}
+    .whatsapp-fab svg{width:24px;height:24px;}
     .menu-panel{justify-content:flex-start;padding:96px 20px 32px;}
     .hero{padding:110px 0 60px;}
     .hero-logo{height:52px;}
@@ -482,6 +593,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento{grid-template-columns:1fr;}
     .bento-feature,
     .bento-item:not(.bento-feature){grid-column:span 1;}
+    .fisio-step{align-items:flex-start;}
+    .fisio-step-num{width:42px;height:42px;font-size:18px;}
+    .fisio-faq{padding:32px 24px;}
     .products-card{padding:40px 24px;}
   }
 </style>
@@ -508,8 +622,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="menu-panel-inner">
     <nav class="menu-links">
       <a href="#servicios">Servicios</a>
+      <a href="#fisioterapia">Fisioterapia</a>
       <a href="#casos">Historias que nos llenan de orgullo</a>
-      <a href="#productos">Productos</a>
+      <a href="tienda.html">Productos</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#ubicacion">Ubicación</a>
       <a href="contacto.html">Contacto</a>
@@ -522,6 +637,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </div>
+
+<a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener" class="whatsapp-fab" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>
+</a>
 
 <section class="hero">
   <div class="container hero-grid">
@@ -560,29 +679,87 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bento">
       <div class="bento-item bento-feature reveal">
         <span class="tag">Atención personalizada</span>
-        <h3>Atención cercana y dedicada</h3>
-        <p>Coordinamos tu turno con tiempo, sin apuro, para conocer bien a tu mascota en cada visita.</p>
-      </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        </div>
-        <h3>Consultas y chequeos</h3>
-        <p>Revisiones periódicas para prevenir enfermedades y mantenerla sana.</p>
-      </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/></svg>
-        </div>
-        <h3>Vacunación</h3>
-        <p>Planes de vacunación y desparasitación al día durante toda su vida.</p>
+        <h3>Atención clínica</h3>
+        <p>Consultas, diagnóstico y seguimiento con un equipo veterinario cercano, que dedica el tiempo que tu mascota necesita.</p>
       </div>
       <div class="bento-item reveal">
         <div class="bento-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.5-1.5 3.5 0 5s3.5 1.5 5 0l9-9c1.5-1.5 1.5-3.5 0-5s-3.5-1.5-5 0l-9 9z"/><path d="M14 8l2 2"/><path d="M8 14l2 2"/></svg>
         </div>
-        <h3>Fisioterapia</h3>
-        <p>Rehabilitación y terapias de recuperación para mejorar su movilidad y bienestar.</p>
+        <h3>Fisioterapia y rehabilitación</h3>
+        <p>Terapias de recuperación para mejorar su movilidad y bienestar.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </div>
+        <h3>Métodos complementarios</h3>
+        <p>Terapias alternativas que acompañan el tratamiento convencional de tu mascota.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+        </div>
+        <h3>Farmacia</h3>
+        <p>Medicamentos y productos para el cuidado y la salud de tu mascota.</p>
+      </div>
+      <div class="bento-item reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h3>Petshop</h3>
+        <p>Accesorios y artículos pensados para el día a día de tu mascota.</p>
+      </div>
+      <div class="bento-item bento-wide reveal">
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M4 11a8 8 0 0 0 16 0"/><path d="M12 3v4"/></svg>
+        </div>
+        <h3>Alimentos balanceados</h3>
+        <p>Nutrición balanceada según la etapa y las necesidades de tu mascota.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fisioterapia">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Fisioterapia</span>
+      <h2>Así es una sesión de rehabilitación</h2>
+      <p>Un proceso pensado para que tu mascota recupere movilidad sin estrés, paso a paso.</p>
+    </div>
+    <div class="fisio-grid">
+      <div class="fisio-steps">
+        <div class="fisio-step reveal">
+          <div class="fisio-step-num">1</div>
+          <div class="fisio-step-text">Evaluamos su condición.</div>
+        </div>
+        <div class="fisio-step reveal">
+          <div class="fisio-step-num">2</div>
+          <div class="fisio-step-text">Armamos un plan a medida.</div>
+        </div>
+        <div class="fisio-step reveal">
+          <div class="fisio-step-num">3</div>
+          <div class="fisio-step-text">Hacemos ejercicios, masajes, ayudamos con tecnologías.</div>
+        </div>
+        <div class="fisio-step reveal">
+          <div class="fisio-step-num">4</div>
+          <div class="fisio-step-text">Usamos refuerzos positivos, entonces tu mascota termina feliz.</div>
+        </div>
+      </div>
+      <div class="fisio-faq reveal">
+        <h3>¿Cuántas sesiones necesita?</h3>
+        <span class="fisio-answer">Depende de la enfermedad</span>
+        <p>Se le entrega al tutor una ficha explicativa del tratamiento con sus objetivos y pronóstico.</p>
+      </div>
+    </div>
+    <div class="fisio-tech reveal">
+      <span class="fisio-tech-label">Tecnologías que usamos</span>
+      <div class="fisio-tech-list">
+        <span class="fisio-tech-chip">Ultrasonido</span>
+        <span class="fisio-tech-chip">Magnetoterapia</span>
+        <span class="fisio-tech-chip">Electroestimulación</span>
+        <span class="fisio-tech-chip">Fototerapia</span>
       </div>
     </div>
   </div>
@@ -680,9 +857,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <circle cx="62" cy="16" r="11" fill="#6BD9E3"/>
       <circle cx="84" cy="42" r="11" fill="#6BD9E3"/>
     </svg>
-    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener">Vertex</a></p>
+    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener" class="vertex-link">Vertex</a></p>
     <div class="footer-links-row">
-      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="#productos">Productos</a><span class="dot">·</span><a href="#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#fisioterapia">Fisioterapia</a><span class="dot">·</span><a href="#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
@@ -694,6 +871,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const navLinks = document.querySelectorAll('.menu-links a[href^="#"]');
+  const navSections = Array.from(navLinks)
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  navSections.forEach(section => spyObserver.observe(section));
 
   const menuToggle = document.getElementById('menuToggle');
   const menuPanel = document.getElementById('menuPanel');
