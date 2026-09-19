@@ -209,14 +209,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .flavor-rows{display:flex;flex-direction:column;gap:10px;text-align:left;}
   .flavor-row{
     display:flex;
+    flex-wrap:wrap;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
+    gap:8px 12px;
     background:var(--bg);
     border-radius:12px;
     padding:10px 14px;
   }
-  .flavor-row-name{font-size:13px;font-weight:700;color:var(--ink);min-width:0;overflow-wrap:break-word;}
+  .flavor-row-name{font-size:13px;font-weight:700;color:var(--ink);}
   .flavor-add-btn{
     background:var(--primary);
     color:#fff;
@@ -264,6 +265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .qty-stepper{
     display:inline-flex;
+    flex-shrink:0;
     align-items:center;
     justify-content:center;
     gap:18px;
