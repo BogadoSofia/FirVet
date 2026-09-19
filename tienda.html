@@ -42,7 +42,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     --menu-dark:#0B2530;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;}
   body{
     background:var(--bg);
     color:var(--ink);
@@ -184,6 +184,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .shop-card{
     position:relative;
+    min-width:0;
     background:var(--surface);
     border-radius:22px;
     padding:32px 26px;
@@ -215,7 +216,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius:12px;
     padding:10px 14px;
   }
-  .flavor-row-name{font-size:13px;font-weight:700;color:var(--ink);}
+  .flavor-row-name{font-size:13px;font-weight:700;color:var(--ink);min-width:0;overflow-wrap:break-word;}
   .flavor-add-btn{
     background:var(--primary);
     color:#fff;
