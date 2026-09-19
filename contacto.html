@@ -156,6 +156,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .menu-foot a{transition:color .2s ease;}
   .menu-foot a:hover{color:#fff;}
+  .install-app-btn{margin-top:28px;}
 
   .reveal{
     opacity:0;
@@ -357,6 +358,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener">@firvet.veterinaria</a>
       <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener">Catamarca 530, Corrientes</a>
     </div>
+    <button type="button" class="pill-btn install-app-btn" id="installAppBtn" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+      Descargar app
+    </button>
   </div>
 </div>
 
@@ -521,6 +526,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('sw.js').catch((err) => console.error('SW registration failed:', err));
+    });
+  }
+
+  const installAppBtn = document.getElementById('installAppBtn');
+  const isStandaloneApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  let deferredInstallPrompt = null;
+
+  if (!isStandaloneApp) {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      installAppBtn.hidden = false;
+    });
+
+    installAppBtn.addEventListener('click', async () => {
+      if (!deferredInstallPrompt) return;
+      if (typeof closeMenu === 'function') closeMenu();
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      installAppBtn.hidden = true;
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installAppBtn.hidden = true;
+      deferredInstallPrompt = null;
     });
   }
 </script>
