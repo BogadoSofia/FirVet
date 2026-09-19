@@ -203,50 +203,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow:hidden;
   }
   .shop-icon img{width:100%;height:100%;object-fit:cover;}
-  .flavor-back-btn{
-    display:inline-flex;
-    align-items:center;
-    background:none;
-    border:none;
-    color:var(--primary);
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    padding:0;
-    margin-bottom:20px;
-  }
-  .flavor-back-btn:hover{opacity:0.7;}
   .shop-card h3{font-size:18px;font-weight:600;margin-bottom:8px;}
   .shop-card p{font-size:14px;color:var(--text-sub);line-height:1.6;margin-bottom:18px;}
   .shop-price{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--primary);margin-bottom:18px;}
-  .flavor-rows{display:flex;flex-direction:column;gap:10px;text-align:left;}
-  .flavor-row{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px 12px;
-    background:var(--bg);
-    border-radius:12px;
-    padding:10px 14px;
-  }
-  .flavor-row-name{font-size:13px;font-weight:700;color:var(--ink);}
-  .flavor-add-btn{
-    background:var(--primary);
-    color:#fff;
-    border:none;
-    border-radius:999px;
-    padding:7px 16px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:transform .2s ease;
-    flex-shrink:0;
-  }
-  .flavor-add-btn:hover{transform:translateY(-1px);}
-  .flavor-add-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
   .stock-badge{
     position:absolute;
     top:16px;right:16px;
@@ -339,9 +298,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .shop-card p{font-size:13px;}
     .shop-price{font-size:17px;margin-bottom:14px;}
     .stock-badge{top:10px;right:10px;font-size:10px;padding:3px 8px;}
-    .flavor-row{padding:8px 10px;}
-    .flavor-row-name{font-size:12px;}
-    .flavor-add-btn{padding:6px 10px;font-size:11px;}
     .menu-links a{font-size:32px;}
     .cart-fab{bottom:16px;right:16px;padding:12px 18px;font-size:14px;}
   }
@@ -421,16 +377,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .cart-item-info{flex:1;min-width:0;text-align:left;}
   .cart-item-name{font-size:15px;font-weight:700;color:var(--ink);}
   .cart-item-price{font-size:12px;color:var(--text-sub);margin-top:2px;}
-  .cart-item-flavor{
-    display:inline-block;
-    font-size:11px;
-    font-weight:700;
-    color:var(--primary);
-    background:rgba(5,165,181,0.1);
-    border-radius:999px;
-    padding:2px 10px;
-    margin-top:4px;
-  }
   .cart-item-bottom{
     display:flex;
     align-items:center;
@@ -644,37 +590,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color:var(--ink);
   }
   .admin-product-fields input:focus{outline:none;border-color:var(--primary);}
-  .admin-flavor-rows{display:flex;flex-direction:column;gap:8px;}
-  .admin-flavor-row{display:flex;align-items:center;gap:6px;}
-  .admin-flavor-name-input{flex:1;min-width:0;}
-  .admin-flavor-stock-toggle{display:flex;gap:4px;flex-shrink:0;}
-  .admin-flavor-stock-toggle .stock-btn{flex:0 0 auto;padding:8px 10px;font-size:11px;}
-  .admin-flavor-remove-btn{
-    background:none;
-    border:none;
-    color:var(--text-sub);
-    font-size:15px;
-    cursor:pointer;
-    padding:4px 6px;
-    line-height:1;
-    font-family:inherit;
-    flex-shrink:0;
-  }
-  .admin-flavor-remove-btn:hover{color:#DC2626;}
-  .admin-add-flavor-btn{
-    align-self:flex-start;
-    background:none;
-    border:1px dashed rgba(20,32,27,0.3);
-    color:var(--primary);
-    border-radius:999px;
-    padding:8px 14px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:background .2s ease;
-  }
-  .admin-add-flavor-btn:hover{background:rgba(5,165,181,0.08);}
   .admin-stock-toggle{display:flex;gap:8px;margin-top:2px;}
   .stock-btn{
     flex:1;
@@ -1090,8 +1005,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <input type="number" id="addPriceInput" placeholder="0">
       <label>Descripción</label>
       <input type="text" id="addDescInput" placeholder="Descripción breve">
-      <label>Sabores <span class="field-optional">(opcional, separados por coma)</span></label>
-      <input type="text" id="addFlavorsInput" placeholder="Pollo, Carne, Pescado">
       <label>Etiquetas <span class="field-optional">(opcional, para filtros)</span></label>
       <div class="admin-tag-chips" id="addTagChips"></div>
       <div class="admin-tag-create-row">
@@ -1172,7 +1085,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       name: row.Nombre || '',
       price: row.Precio || 0,
       desc: row.Descripcion || '',
-      flavors: row.Sabores || '',
       tags: row.Etiquetas || '',
       inStock: row.Stock !== false,
       image: row.ImagenUrl || null,
@@ -1203,22 +1115,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     `).join('');
   }
 
-  function getFlavorObjects(p){
-    return (p.flavors || '').split(',').map(f => f.trim()).filter(Boolean).map(token => {
-      const idx = token.lastIndexOf(':');
-      if (idx === -1) return { name: token, inStock: true };
-      const name = token.slice(0, idx).trim();
-      const inStock = token.slice(idx + 1).trim() !== '0';
-      return { name, inStock };
-    }).filter(f => f.name);
-  }
-
-  function flavorObjectsToString(flavorObjs){
-    return flavorObjs.map(f => `${f.name}:${f.inStock ? 1 : 0}`).join(',');
-  }
-
-  function getCartKey(productId, flavor){
-    return flavor ? `${productId}::${flavor}` : String(productId);
+  function getCartKey(productId){
+    return String(productId);
   }
 
   const CART_KEY = 'firvetCart';
@@ -1244,7 +1142,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let deliveryAvailable = true;
   let productsLoaded = false;
   let activeTagFilter = null;
-  const expandedFlavorCards = new Set();
 
   function renderTagFilterBar(){
     const tagFilterBar = document.getElementById('tagFilterBar');
@@ -1269,11 +1166,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function renderQtyControl(p){
     if (!p.inStock) return `<button class="pill-btn" disabled>Sin stock</button>`;
-    const key = getCartKey(p.id, null);
+    const key = getCartKey(p.id);
     const qty = (cart[key] && cart[key].qty) || 0;
     if (qty > 0) {
       return `
-        <div class="qty-stepper" data-id="${p.id}" data-flavor="">
+        <div class="qty-stepper" data-id="${p.id}">
           <button type="button" class="qty-btn" data-action="minus">−</button>
           <span class="qty-value">${qty}</span>
           <button type="button" class="qty-btn" data-action="plus">+</button>
@@ -1281,33 +1178,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       `;
     }
     return `<button type="button" class="pill-btn add-btn" data-id="${p.id}">Agregar</button>`;
-  }
-
-  function renderProductFlavorRows(p, flavorObjs){
-    return flavorObjs.map(f => {
-      const key = getCartKey(p.id, f.name);
-      const qty = (cart[key] && cart[key].qty) || 0;
-      let control;
-      if (!f.inStock) {
-        control = `<button type="button" class="flavor-add-btn" disabled>Sin stock</button>`;
-      } else if (qty > 0) {
-        control = `
-          <div class="qty-stepper small" data-id="${p.id}" data-flavor="${escapeHtml(f.name)}">
-            <button type="button" class="qty-btn" data-action="minus">−</button>
-            <span class="qty-value">${qty}</span>
-            <button type="button" class="qty-btn" data-action="plus">+</button>
-          </div>
-        `;
-      } else {
-        control = `<button type="button" class="flavor-add-btn add-btn" data-id="${p.id}" data-flavor="${escapeHtml(f.name)}">Agregar</button>`;
-      }
-      return `
-        <div class="flavor-row">
-          <span class="flavor-row-name">${escapeHtml(f.name)}</span>
-          ${control}
-        </div>
-      `;
-    }).join('');
   }
 
   function renderShop(){
@@ -1322,47 +1192,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       shopGrid.innerHTML = '<p class="shop-loading">No hay productos con esa etiqueta.</p>';
       return;
     }
-    shopGrid.innerHTML = visibleProducts.map(p => {
-      const flavorObjs = getFlavorObjects(p);
-      const hasFlavors = flavorObjs.length > 0;
-      const overallInStock = hasFlavors ? flavorObjs.some(f => f.inStock) : p.inStock;
-      const isExpanded = hasFlavors && expandedFlavorCards.has(String(p.id));
-      return `
+    shopGrid.innerHTML = visibleProducts.map(p => `
         <div class="shop-card reveal" data-id="${p.id}">
-          <span class="stock-badge ${overallInStock ? 'in' : 'out'}">${overallInStock ? 'En stock' : 'Agotado'}</span>
-          ${isExpanded
-            ? `<button type="button" class="flavor-back-btn" data-id="${p.id}">‹ Volver</button>`
-            : `<div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>`}
+          <span class="stock-badge ${p.inStock ? 'in' : 'out'}">${p.inStock ? 'En stock' : 'Agotado'}</span>
+          <div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>
           <h3>${escapeHtml(p.name)}</h3>
           <p>${escapeHtml(p.desc)}</p>
           <div class="shop-price">${formatPrice(p.price)}</div>
-          ${hasFlavors
-            ? (isExpanded
-                ? `<div class="flavor-rows">${renderProductFlavorRows(p, flavorObjs)}</div>`
-                : `<button type="button" class="pill-btn buy-btn" data-id="${p.id}" ${overallInStock ? '' : 'disabled'}>${overallInStock ? 'Comprar' : 'Sin stock'}</button>`)
-            : renderQtyControl(p)}
+          ${renderQtyControl(p)}
         </div>
-      `;
-    }).join('');
+      `).join('');
     shopGrid.querySelectorAll('.shop-card').forEach(el => observer.observe(el));
   }
 
-  function changeQty(productId, flavor, delta){
-    const key = getCartKey(productId, flavor);
+  function changeQty(productId, delta){
+    const key = getCartKey(productId);
     const current = (cart[key] && cart[key].qty) || 0;
     const next = current + delta;
     if (next <= 0) {
       delete cart[key];
     } else {
-      cart[key] = { productId, flavor: flavor || null, qty: next };
+      cart[key] = { productId, qty: next };
     }
     saveCart();
     renderShop();
     renderCart();
   }
 
-  function removeFromCart(productId, flavor){
-    delete cart[getCartKey(productId, flavor)];
+  function removeFromCart(productId){
+    delete cart[getCartKey(productId)];
     saveCart();
     renderShop();
     renderCart();
@@ -1427,7 +1285,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (!p) return '';
       const rowSubtotal = (Number(p.price) || 0) * v.qty;
       subtotal += rowSubtotal;
-      const flavorAttr = escapeHtml(v.flavor || '');
       return `
         <div class="cart-item-row" data-key="${key}">
           <div class="cart-item-top">
@@ -1435,12 +1292,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="cart-item-info">
               <div class="cart-item-name">${escapeHtml(p.name)}</div>
               <div class="cart-item-price">${formatPrice(p.price)} c/u</div>
-              ${v.flavor ? `<span class="cart-item-flavor">${escapeHtml(v.flavor)}</span>` : ''}
             </div>
-            <button type="button" class="cart-remove-btn" data-id="${v.productId}" data-flavor="${flavorAttr}" aria-label="Quitar">✕</button>
+            <button type="button" class="cart-remove-btn" data-id="${v.productId}" aria-label="Quitar">✕</button>
           </div>
           <div class="cart-item-bottom">
-            <div class="qty-stepper small" data-id="${v.productId}" data-flavor="${flavorAttr}">
+            <div class="qty-stepper small" data-id="${v.productId}">
               <button type="button" class="qty-btn" data-action="minus">−</button>
               <span class="qty-value">${v.qty}</span>
               <button type="button" class="qty-btn" data-action="plus">+</button>
@@ -1491,34 +1347,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   renderCart();
 
   shopGrid.addEventListener('click', (e) => {
-    const buyBtn = e.target.closest('.buy-btn');
-    if (buyBtn) {
-      expandedFlavorCards.add(String(buyBtn.dataset.id));
-      renderShop();
-      return;
-    }
-
-    const backBtn = e.target.closest('.flavor-back-btn');
-    if (backBtn) {
-      expandedFlavorCards.delete(String(backBtn.dataset.id));
-      renderShop();
-      return;
-    }
-
     const addBtn = e.target.closest('.add-btn');
     if (addBtn) {
-      const id = addBtn.dataset.id;
-      const flavor = addBtn.dataset.flavor || null;
-      changeQty(id, flavor, 1);
+      changeQty(addBtn.dataset.id, 1);
       return;
     }
 
     const qtyBtn = e.target.closest('.qty-btn');
     if (qtyBtn) {
       const stepper = qtyBtn.closest('.qty-stepper');
-      const id = stepper.dataset.id;
-      const flavor = stepper.dataset.flavor || null;
-      changeQty(id, flavor, qtyBtn.dataset.action === 'plus' ? 1 : -1);
+      changeQty(stepper.dataset.id, qtyBtn.dataset.action === 'plus' ? 1 : -1);
       return;
     }
   });
@@ -1564,8 +1402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (!p) return null;
       const rowSubtotal = (Number(p.price) || 0) * v.qty;
       subtotal += rowSubtotal;
-      const tipo = v.flavor || 'Sin variante';
-      return `*${p.name}* *${tipo}* x*${v.qty}*\ncant: *${v.qty}* precio: *${formatPrice(p.price)}* subtotal: *${formatPrice(rowSubtotal)}*`;
+      return `*${p.name}* x*${v.qty}*\ncant: *${v.qty}* precio: *${formatPrice(p.price)}* subtotal: *${formatPrice(rowSubtotal)}*`;
     }).filter(Boolean);
 
     const shippingChosen = deliveryAvailable && deliveryEnabled;
@@ -1591,14 +1428,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const qtyBtn = e.target.closest('.qty-btn');
     if (qtyBtn) {
       const stepper = qtyBtn.closest('.qty-stepper');
-      const id = stepper.dataset.id;
-      const flavor = stepper.dataset.flavor || null;
-      changeQty(id, flavor, qtyBtn.dataset.action === 'plus' ? 1 : -1);
+      changeQty(stepper.dataset.id, qtyBtn.dataset.action === 'plus' ? 1 : -1);
       return;
     }
     const removeBtn = e.target.closest('.cart-remove-btn');
     if (removeBtn) {
-      removeFromCart(removeBtn.dataset.id, removeBtn.dataset.flavor || null);
+      removeFromCart(removeBtn.dataset.id);
       return;
     }
   });
@@ -1732,7 +1567,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const addNameInput = document.getElementById('addNameInput');
   const addPriceInput = document.getElementById('addPriceInput');
   const addDescInput = document.getElementById('addDescInput');
-  const addFlavorsInput = document.getElementById('addFlavorsInput');
   const addImageInput = document.getElementById('addImageInput');
   const addError = document.getElementById('addError');
   const addTagChips = document.getElementById('addTagChips');
@@ -1825,23 +1659,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     adminHubOverlay.classList.remove('open');
   }
 
-  function adminFlavorRowHtml(name, inStock){
-    return `
-      <div class="admin-flavor-row">
-        <input type="text" class="admin-flavor-name-input" value="${escapeHtml(name)}" placeholder="Sabor">
-        <div class="admin-flavor-stock-toggle">
-          <button type="button" class="stock-btn in-stock ${inStock ? 'active' : ''}" data-flavor-stock="true">Con stock</button>
-          <button type="button" class="stock-btn out-stock ${!inStock ? 'active' : ''}" data-flavor-stock="false">Sin stock</button>
-        </div>
-        <button type="button" class="admin-flavor-remove-btn" aria-label="Quitar sabor">✕</button>
-      </div>
-    `;
-  }
-
   function renderAdminList(){
-    adminProductList.innerHTML = products.map(p => {
-      const flavorObjs = getFlavorObjects(p);
-      return `
+    adminProductList.innerHTML = products.map(p => `
       <div class="admin-product-row" data-id="${p.id}">
         <div class="admin-product-fields">
           <label>Imagen</label>
@@ -1855,16 +1674,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="number" class="admin-price-input" value="${p.price}">
           <label>Descripción</label>
           <input type="text" class="admin-desc-input" value="${escapeHtml(p.desc)}">
-          <label>Sabores y stock</label>
-          <div class="admin-flavor-rows">${flavorObjs.map(f => adminFlavorRowHtml(f.name, f.inStock)).join('')}</div>
-          <button type="button" class="admin-add-flavor-btn">+ Agregar sabor</button>
           <label>Etiquetas</label>
           <div class="admin-tag-chips">${tagChipsHtml(getTagsArray(p))}</div>
           <div class="admin-tag-create-row">
             <input type="text" class="admin-tag-create-input" placeholder="Nueva etiqueta">
             <button type="button" class="admin-tag-create-btn">+ Crear</button>
           </div>
-          <label>Stock general${flavorObjs.length ? ' <span class="field-optional">(si no tiene sabores)</span>' : ''}</label>
+          <label>Stock</label>
           <div class="admin-stock-toggle">
             <button type="button" class="stock-btn in-stock ${p.inStock ? 'active' : ''}" data-stock="true">Con stock</button>
             <button type="button" class="stock-btn out-stock ${!p.inStock ? 'active' : ''}" data-stock="false">Sin stock</button>
@@ -1876,8 +1692,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
       </div>
-    `;
-    }).join('');
+    `).join('');
   }
 
   function openAdminEdit(){
@@ -1897,7 +1712,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     addNameInput.value = '';
     addPriceInput.value = '';
     addDescInput.value = '';
-    addFlavorsInput.value = '';
     addImageInput.value = '';
     addTagChips.innerHTML = tagChipsHtml([]);
     addTagCreateInput.value = '';
@@ -1955,7 +1769,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const name = addNameInput.value.trim();
     const price = Number(addPriceInput.value) || 0;
     const desc = addDescInput.value.trim();
-    const flavors = addFlavorsInput.value.trim();
     const tags = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = addImageInput.files[0];
 
@@ -1981,7 +1794,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Nombre: name,
         Precio: price,
         Descripcion: desc,
-        Sabores: flavors,
         Etiquetas: tags,
         Stock: true,
         ImagenUrl: imageUrl,
@@ -2039,11 +1851,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const name = row.querySelector('.admin-name-input').value.trim();
     const price = Number(row.querySelector('.admin-price-input').value) || 0;
     const desc = row.querySelector('.admin-desc-input').value.trim();
-    const flavorObjs = Array.from(row.querySelectorAll('.admin-flavor-row')).map(flavorRow => ({
-      name: flavorRow.querySelector('.admin-flavor-name-input').value.trim(),
-      inStock: flavorRow.querySelector('.admin-flavor-stock-toggle .stock-btn.in-stock').classList.contains('active'),
-    })).filter(f => f.name);
-    const flavors = flavorObjectsToString(flavorObjs);
     const tags = Array.from(row.querySelectorAll('.admin-tag-chips .tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = row.querySelector('.admin-image-input').files[0];
 
@@ -2058,7 +1865,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     statusEl.textContent = 'Guardando...';
 
     try {
-      const updates = { Nombre: name, Precio: price, Descripcion: desc, Sabores: flavors, Etiquetas: tags };
+      const updates = { Nombre: name, Precio: price, Descripcion: desc, Etiquetas: tags };
       let oldImagePath = null;
 
       if (file) {
@@ -2076,7 +1883,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
 
       Object.assign(product, {
-        name, price, desc, flavors, tags,
+        name, price, desc, tags,
         image: updates.ImagenUrl || product.image,
         imagePath: updates.ImagenPath || product.imagePath,
       });
@@ -2189,20 +1996,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   adminProductList.addEventListener('click', async (e) => {
-    const flavorStockBtn = e.target.closest('[data-flavor-stock]');
-    if (flavorStockBtn) {
-      const toggle = flavorStockBtn.closest('.admin-flavor-stock-toggle');
-      toggle.querySelectorAll('.stock-btn').forEach(b => b.classList.remove('active'));
-      flavorStockBtn.classList.add('active');
-      return;
-    }
-
-    const removeFlavorBtn = e.target.closest('.admin-flavor-remove-btn');
-    if (removeFlavorBtn) {
-      removeFlavorBtn.closest('.admin-flavor-row').remove();
-      return;
-    }
-
     const tagDelBtn = e.target.closest('.admin-tag-chips .tag-chip-del');
     if (tagDelBtn) {
       requestDeleteTag(tagDelBtn.dataset.tag);
@@ -2229,13 +2022,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       chipsContainer.innerHTML = tagChipsHtml(selected);
       input.value = '';
       await saveRowTags(row);
-      return;
-    }
-
-    const addFlavorBtn = e.target.closest('.admin-add-flavor-btn');
-    if (addFlavorBtn) {
-      const rowsContainer = addFlavorBtn.closest('.admin-product-fields').querySelector('.admin-flavor-rows');
-      rowsContainer.insertAdjacentHTML('beforeend', adminFlavorRowHtml('', true));
       return;
     }
 
