@@ -235,6 +235,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(5,165,181,0.4);}
   .pill-btn:disabled{opacity:0.45;cursor:not-allowed;box-shadow:none;transform:none;}
+  .whatsapp-consult-btn{max-width:100%;text-align:center;}
 
   .qty-stepper{
     display:inline-flex;
@@ -591,6 +592,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .admin-product-fields input:focus{outline:none;border-color:var(--primary);}
   .admin-stock-toggle{display:flex;gap:8px;margin-top:2px;}
+  .admin-price-request-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--text-sub);
+  }
   .stock-btn{
     flex:1;
     border:1px solid rgba(20,32,27,0.15);
@@ -1003,6 +1013,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <input type="text" id="addNameInput" placeholder="Nombre del producto">
       <label>Precio</label>
       <input type="number" id="addPriceInput" placeholder="0">
+      <div class="admin-price-request-row">
+        <span>Consultar por WhatsApp (ocultar precio)</span>
+        <button type="button" class="switch" id="addPriceRequestToggle" role="switch" aria-checked="false" aria-label="Consultar por WhatsApp en vez de precio">
+          <span class="switch-knob"></span>
+        </button>
+      </div>
       <label>Descripción</label>
       <input type="text" id="addDescInput" placeholder="Descripción breve">
       <label>Etiquetas <span class="field-optional">(opcional, para filtros)</span></label>
@@ -1086,6 +1102,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       price: row.Precio || 0,
       desc: row.Descripcion || '',
       tags: row.Etiquetas || '',
+      priceOnRequest: row.ConsultarPrecio === true,
       inStock: row.Stock !== false,
       image: row.ImagenUrl || null,
       imagePath: row.ImagenPath || null,
@@ -1198,8 +1215,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>
           <h3>${escapeHtml(p.name)}</h3>
           <p>${escapeHtml(p.desc)}</p>
-          <div class="shop-price">${formatPrice(p.price)}</div>
-          ${renderQtyControl(p)}
+          ${p.priceOnRequest
+            ? `<a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('¡Hola! Quiero consultar el precio de: ' + p.name)}" target="_blank" rel="noopener" class="pill-btn whatsapp-consult-btn">Consultar por WhatsApp</a>`
+            : `<div class="shop-price">${formatPrice(p.price)}</div>${renderQtyControl(p)}`}
         </div>
       `).join('');
     shopGrid.querySelectorAll('.shop-card').forEach(el => observer.observe(el));
@@ -1566,6 +1584,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const addSubmitBtn = document.getElementById('addSubmitBtn');
   const addNameInput = document.getElementById('addNameInput');
   const addPriceInput = document.getElementById('addPriceInput');
+  const addPriceRequestToggle = document.getElementById('addPriceRequestToggle');
   const addDescInput = document.getElementById('addDescInput');
   const addImageInput = document.getElementById('addImageInput');
   const addError = document.getElementById('addError');
@@ -1672,6 +1691,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="text" class="admin-name-input" value="${escapeHtml(p.name)}">
           <label>Precio</label>
           <input type="number" class="admin-price-input" value="${p.price}">
+          <div class="admin-price-request-row">
+            <span>Consultar por WhatsApp (ocultar precio)</span>
+            <button type="button" class="switch ${p.priceOnRequest ? 'on' : ''}" data-price-request-toggle role="switch" aria-checked="${p.priceOnRequest}" aria-label="Consultar por WhatsApp en vez de precio">
+              <span class="switch-knob"></span>
+            </button>
+          </div>
           <label>Descripción</label>
           <input type="text" class="admin-desc-input" value="${escapeHtml(p.desc)}">
           <label>Etiquetas</label>
@@ -1711,6 +1736,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function openAdminAdd(){
     addNameInput.value = '';
     addPriceInput.value = '';
+    addPriceRequestToggle.classList.remove('on');
+    addPriceRequestToggle.setAttribute('aria-checked', 'false');
     addDescInput.value = '';
     addImageInput.value = '';
     addTagChips.innerHTML = tagChipsHtml([]);
@@ -1722,6 +1749,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function closeAdminAdd(){
     adminAddOverlay.classList.remove('open');
   }
+
+  addPriceRequestToggle.addEventListener('click', () => {
+    const isOn = addPriceRequestToggle.classList.toggle('on');
+    addPriceRequestToggle.setAttribute('aria-checked', String(isOn));
+  });
 
   editProductsBtn.addEventListener('click', () => {
     closeAdminHub();
@@ -1768,6 +1800,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   addSubmitBtn.addEventListener('click', async () => {
     const name = addNameInput.value.trim();
     const price = Number(addPriceInput.value) || 0;
+    const priceOnRequest = addPriceRequestToggle.classList.contains('on');
     const desc = addDescInput.value.trim();
     const tags = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = addImageInput.files[0];
@@ -1794,6 +1827,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Nombre: name,
         Precio: price,
         Descripcion: desc,
+        ConsultarPrecio: priceOnRequest,
         Etiquetas: tags,
         Stock: true,
         ImagenUrl: imageUrl,
@@ -1851,6 +1885,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const name = row.querySelector('.admin-name-input').value.trim();
     const price = Number(row.querySelector('.admin-price-input').value) || 0;
     const desc = row.querySelector('.admin-desc-input').value.trim();
+    const priceOnRequest = row.querySelector('[data-price-request-toggle]').classList.contains('on');
     const tags = Array.from(row.querySelectorAll('.admin-tag-chips .tag-chip.active')).map(b => b.dataset.tag).join(',');
     const file = row.querySelector('.admin-image-input').files[0];
 
@@ -1865,7 +1900,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     statusEl.textContent = 'Guardando...';
 
     try {
-      const updates = { Nombre: name, Precio: price, Descripcion: desc, Etiquetas: tags };
+      const updates = { Nombre: name, Precio: price, Descripcion: desc, ConsultarPrecio: priceOnRequest, Etiquetas: tags };
       let oldImagePath = null;
 
       if (file) {
@@ -1883,7 +1918,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
 
       Object.assign(product, {
-        name, price, desc, tags,
+        name, price, desc, priceOnRequest, tags,
         image: updates.ImagenUrl || product.image,
         imagePath: updates.ImagenPath || product.imagePath,
       });
@@ -1996,6 +2031,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   adminProductList.addEventListener('click', async (e) => {
+    const priceRequestToggle = e.target.closest('[data-price-request-toggle]');
+    if (priceRequestToggle) {
+      const isOn = priceRequestToggle.classList.toggle('on');
+      priceRequestToggle.setAttribute('aria-checked', String(isOn));
+      return;
+    }
+
     const tagDelBtn = e.target.closest('.admin-tag-chips .tag-chip-del');
     if (tagDelBtn) {
       requestDeleteTag(tagDelBtn.dataset.tag);
