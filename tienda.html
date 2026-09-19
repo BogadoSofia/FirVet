@@ -203,6 +203,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow:hidden;
   }
   .shop-icon img{width:100%;height:100%;object-fit:cover;}
+  .flavor-back-btn{
+    display:inline-flex;
+    align-items:center;
+    background:none;
+    border:none;
+    color:var(--primary);
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    padding:0;
+    margin-bottom:20px;
+  }
+  .flavor-back-btn:hover{opacity:0.7;}
   .shop-card h3{font-size:18px;font-weight:600;margin-bottom:8px;}
   .shop-card p{font-size:14px;color:var(--text-sub);line-height:1.6;margin-bottom:18px;}
   .shop-price{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--primary);margin-bottom:18px;}
@@ -1230,6 +1244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let deliveryAvailable = true;
   let productsLoaded = false;
   let activeTagFilter = null;
+  const expandedFlavorCards = new Set();
 
   function renderTagFilterBar(){
     const tagFilterBar = document.getElementById('tagFilterBar');
@@ -1311,14 +1326,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const flavorObjs = getFlavorObjects(p);
       const hasFlavors = flavorObjs.length > 0;
       const overallInStock = hasFlavors ? flavorObjs.some(f => f.inStock) : p.inStock;
+      const isExpanded = hasFlavors && expandedFlavorCards.has(String(p.id));
       return `
         <div class="shop-card reveal" data-id="${p.id}">
           <span class="stock-badge ${overallInStock ? 'in' : 'out'}">${overallInStock ? 'En stock' : 'Agotado'}</span>
-          <div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>
+          ${isExpanded
+            ? `<button type="button" class="flavor-back-btn" data-id="${p.id}">‹ Volver</button>`
+            : `<div class="shop-icon">${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}">` : '🐾'}</div>`}
           <h3>${escapeHtml(p.name)}</h3>
           <p>${escapeHtml(p.desc)}</p>
           <div class="shop-price">${formatPrice(p.price)}</div>
-          ${hasFlavors ? `<div class="flavor-rows">${renderProductFlavorRows(p, flavorObjs)}</div>` : renderQtyControl(p)}
+          ${hasFlavors
+            ? (isExpanded
+                ? `<div class="flavor-rows">${renderProductFlavorRows(p, flavorObjs)}</div>`
+                : `<button type="button" class="pill-btn buy-btn" data-id="${p.id}" ${overallInStock ? '' : 'disabled'}>${overallInStock ? 'Comprar' : 'Sin stock'}</button>`)
+            : renderQtyControl(p)}
         </div>
       `;
     }).join('');
@@ -1469,6 +1491,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   renderCart();
 
   shopGrid.addEventListener('click', (e) => {
+    const buyBtn = e.target.closest('.buy-btn');
+    if (buyBtn) {
+      expandedFlavorCards.add(String(buyBtn.dataset.id));
+      renderShop();
+      return;
+    }
+
+    const backBtn = e.target.closest('.flavor-back-btn');
+    if (backBtn) {
+      expandedFlavorCards.delete(String(backBtn.dataset.id));
+      renderShop();
+      return;
+    }
+
     const addBtn = e.target.closest('.add-btn');
     if (addBtn) {
       const id = addBtn.dataset.id;
