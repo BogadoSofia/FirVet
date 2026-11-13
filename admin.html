@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de administración — FirVet</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F5;--surface:#FFFFFF;--ink:#14201B;--primary:#05A5B5;--primary-dark:#037682;
+    --text-sub:#4F5A54;--menu-dark:#0B2530;--danger:#B91C1C;--line:rgba(20,32,27,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;}
+  :focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:6px;}
+  [hidden]{display:none !important;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 80px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap;}
+  .topbar img{height:44px;width:auto;}
+  .topbar-right{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text-sub);}
+  .card{background:var(--surface);border-radius:20px;padding:28px;box-shadow:0 4px 18px rgba(20,32,27,0.07);margin-bottom:20px;}
+  .card h2{font-size:22px;margin-bottom:6px;}
+  .card > p.sub{color:var(--text-sub);font-size:14px;margin-bottom:20px;}
+  label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px;}
+  label .opt{font-weight:400;color:var(--text-sub);}
+  input[type=text],input[type=email],input[type=password],input[type=number],textarea{
+    width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;
+    padding:11px 14px;font:inherit;color:var(--ink);min-height:44px;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--primary);}
+  textarea{resize:vertical;min-height:70px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 22px;border-radius:999px;border:none;font:inherit;font-weight:700;cursor:pointer;background:var(--primary-dark);color:#fff;}
+  .btn:hover{background:var(--primary);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btn.ghost{background:transparent;color:var(--primary-dark);border:1.5px solid var(--primary-dark);}
+  .btn.ghost:hover{background:rgba(5,165,181,0.08);}
+  .btn.danger{background:#FBE1E1;color:var(--danger);}
+  .btn.danger:hover{background:#F8CACA;}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+  .status{font-size:13px;min-height:20px;margin-top:10px;color:var(--primary-dark);}
+  .status.error{color:var(--danger);}
+  .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .tab{min-height:44px;padding:10px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-weight:700;color:var(--text-sub);cursor:pointer;}
+  .tab[aria-selected=true]{background:var(--menu-dark);color:#fff;border-color:var(--menu-dark);}
+  .switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-size:14px;font-weight:600;}
+  .switch{position:relative;width:50px;height:30px;border-radius:999px;background:rgba(20,32,27,0.2);border:none;cursor:pointer;flex-shrink:0;}
+  .switch[aria-checked=true]{background:var(--primary-dark);}
+  .switch::after{content:'';position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:transform .2s;}
+  .switch[aria-checked=true]::after{transform:translateX(20px);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{min-height:36px;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-size:13px;font-weight:700;color:var(--text-sub);cursor:pointer;}
+  .chip[aria-pressed=true]{background:rgba(5,165,181,0.12);border-color:var(--primary-dark);color:var(--primary-dark);}
+  .product{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line);}
+  .product:first-child{border-top:none;padding-top:0;}
+  .thumb{width:120px;height:120px;border-radius:14px;background:var(--bg);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;}
+  .thumb img{width:100%;height:100%;object-fit:contain;}
+  .stock-toggle{display:flex;gap:8px;}
+  .stock-toggle .chip[aria-pressed=true][data-stock=false]{background:#FBE1E1;border-color:var(--danger);color:var(--danger);}
+  .notice{background:#FFF6E5;border:1px solid #F3C77A;color:#6B4600;border-radius:12px;padding:12px 16px;font-size:13px;margin-bottom:16px;}
+  .login{max-width:400px;margin:8vh auto 0;}
+  @media(max-width:640px){
+    .grid2{grid-template-columns:1fr;}
+    .product{grid-template-columns:1fr;}
+    .card{padding:22px 18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html"><img src="logo-icon.png" alt="FirVet — volver al sitio" width="44" height="44"></a>
+    <div class="topbar-right" id="sessionBar" hidden>
+      <span id="sessionEmail"></span>
+      <button type="button" class="btn ghost" id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <section class="card login" id="loginView" hidden>
+    <h2>Panel de administración</h2>
+    <p class="sub">Ingresá con tu cuenta para editar los productos de la tienda.</p>
+    <form id="loginForm" novalidate>
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" autocomplete="username" required>
+      <label for="loginPassword">Contraseña</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" required>
+      <div class="row" style="margin-top:20px;">
+        <button type="submit" class="btn" id="loginBtn">Ingresar</button>
+        <button type="button" class="btn ghost" id="magicBtn">Enviarme un link por email</button>
+      </div>
+      <p class="status" id="loginStatus" role="status"></p>
+    </form>
+  </section>
+
+  <!-- PANEL -->
+  <div id="panelView" hidden>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" role="tab" aria-selected="true" aria-controls="tabProducts" id="tabBtnProducts">Productos</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="tabAdd" id="tabBtnAdd">Añadir producto</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="tabShipping" id="tabBtnShipping">Envío</button>
+    </div>
+
+    <section class="card" id="tabProducts" role="tabpanel" aria-labelledby="tabBtnProducts">
+      <h2>Productos</h2>
+      <p class="sub">Editá y guardá cada producto por separado.</p>
+      <div class="notice" id="presentacionNotice" hidden>Para cargar talle o peso, primero hay que crear la columna <code>Presentacion</code> en Supabase (paso 5 de <code>SUPABASE-RLS.md</code>).</div>
+      <div id="productList"><p>Cargando…</p></div>
+    </section>
+
+    <section class="card" id="tabAdd" role="tabpanel" aria-labelledby="tabBtnAdd" hidden>
+      <h2>Añadir producto</h2>
+      <p class="sub">El nombre es obligatorio. Lo demás podés completarlo después.</p>
+      <form id="addForm" novalidate></form>
+    </section>
+
+    <section class="card" id="tabShipping" role="tabpanel" aria-labelledby="tabBtnShipping" hidden>
+      <h2>Envío a domicilio</h2>
+      <div class="switch-row">
+        <span id="deliveryLabel">Ofrecer envío a domicilio en el carrito</span>
+        <button type="button" class="switch" role="switch" aria-checked="true" aria-labelledby="deliveryLabel" id="deliveryToggle"></button>
+      </div>
+      <label for="shippingPrice">Precio del envío ($)</label>
+      <input type="number" id="shippingPrice" min="0" inputmode="numeric">
+      <div class="row" style="margin-top:16px;"><button type="button" class="btn" id="shippingSave">Guardar</button></div>
+      <p class="status" id="shippingStatus" role="status"></p>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://lkoqygvxvyvyvmfoqaje.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxrb3F5Z3Z4dnl2eXZtZm9xYWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTExNzEsImV4cCI6MjEwMzU2NzE3MX0.MTg9eEPg4w1DIxcTVYit6dwfjFyXoowwm79eRP5Wt2Y';
+  const PRODUCTS_TABLE = 'Productos';
+  const CONFIG_TABLE = 'Config';
+  const STORAGE_BUCKET = 'productos';
+  // La seguridad real la dan las políticas RLS de Supabase (ver SUPABASE-RLS.md).
+  // Esta página solo muestra el panel a quien tenga sesión iniciada.
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const tagsOf = (s) => String(s || '').split(',').map(t => t.trim()).filter(Boolean);
+
+  let products = [];
+  let hasPresentacion = false;
+  const knownTags = new Set();
+
+  /* ---------- AUTH ---------- */
+  async function refreshSession(){
+    const { data: { session } } = await sb.auth.getSession();
+    const logged = !!session;
+    $('loginView').hidden = logged;
+    $('panelView').hidden = !logged;
+    $('sessionBar').hidden = !logged;
+    if (logged) {
+      $('sessionEmail').textContent = session.user.email;
+      loadProducts();
+      loadConfig();
+    }
+  }
+
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = $('loginStatus');
+    const email = $('loginEmail').value.trim();
+    const password = $('loginPassword').value;
+    if (!email || !password) { status.className = 'status error'; status.textContent = 'Completá email y contraseña.'; return; }
+    $('loginBtn').disabled = true;
+    status.className = 'status'; status.textContent = 'Ingresando…';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    $('loginBtn').disabled = false;
+    if (error) { status.className = 'status error'; status.textContent = 'Email o contraseña incorrectos.'; return; }
+    status.textContent = '';
+    refreshSession();
+  });
+
+  $('magicBtn').addEventListener('click', async () => {
+    const status = $('loginStatus');
+    const email = $('loginEmail').value.trim();
+    if (!email) { status.className = 'status error'; status.textContent = 'Escribí tu email primero.'; return; }
+    const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false, emailRedirectTo: location.href.split('#')[0] } });
+    status.className = error ? 'status error' : 'status';
+    status.textContent = error ? 'No se pudo enviar el link. ¿El email está dado de alta?' : 'Te mandamos un link de acceso. Revisá tu correo.';
+  });
+
+  $('logoutBtn').addEventListener('click', async () => { await sb.auth.signOut(); refreshSession(); });
+  sb.auth.onAuthStateChange((evt) => { if (evt === 'SIGNED_IN' || evt === 'SIGNED_OUT') refreshSession(); });
+
+  /* ---------- TABS ---------- */
+  const tabs = [['tabBtnProducts','tabProducts'],['tabBtnAdd','tabAdd'],['tabBtnShipping','tabShipping']];
+  tabs.forEach(([btn, panel]) => $(btn).addEventListener('click', () => {
+    tabs.forEach(([b, p]) => { $(b).setAttribute('aria-selected', String(b === btn)); $(p).hidden = p !== panel; });
+    if (panel === 'tabAdd') renderAddForm();
+  }));
+
+  /* ---------- FORM FIELDS ---------- */
+  function chipsHtml(selected){
+    return [...knownTags].sort((a,b) => a.localeCompare(b,'es')).map(t =>
+      `<button type="button" class="chip" data-tag="${esc(t)}" aria-pressed="${selected.includes(t)}">${esc(t)}</button>`).join('');
+  }
+
+  function fieldsHtml(p, prefix){
+    const v = p || { name:'', price:'', desc:'', presentacion:'', tags:'', priceOnRequest:false, inStock:true };
+    return `
+      <label for="${prefix}-img">Imagen <span class="opt">(cuadrada, ideal 800×800)</span></label>
+      <input type="file" accept="image/*" id="${prefix}-img" data-f="img">
+      <label for="${prefix}-name">Nombre</label>
+      <input type="text" id="${prefix}-name" data-f="name" value="${esc(v.name)}" required>
+      <div class="grid2">
+        <div><label for="${prefix}-price">Precio ($)</label>
+        <input type="number" id="${prefix}-price" data-f="price" min="0" inputmode="numeric" value="${esc(v.price)}"></div>
+        ${hasPresentacion ? `<div><label for="${prefix}-pres">Talle / peso <span class="opt">(opcional)</span></label>
+        <input type="text" id="${prefix}-pres" data-f="presentacion" placeholder="Ej: 15 kg, Talle M" value="${esc(v.presentacion)}"></div>` : ''}
+      </div>
+      <div class="switch-row">
+        <span id="${prefix}-porl">Ocultar precio y mostrar "Consultar por WhatsApp"</span>
+        <button type="button" class="switch" role="switch" data-f="priceOnRequest" aria-checked="${v.priceOnRequest}" aria-labelledby="${prefix}-porl"></button>
+      </div>
+      <label for="${prefix}-desc">Descripción <span class="opt">(opcional)</span></label>
+      <textarea id="${prefix}-desc" data-f="desc" rows="2">${esc(v.desc)}</textarea>
+      <label>Categorías <span class="opt">(se usan como filtros en la tienda)</span></label>
+      <div class="chips" data-f="tags">${chipsHtml(tagsOf(v.tags))}</div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" placeholder="Nueva categoría" data-f="newTag" aria-label="Nueva categoría" style="flex:1;min-width:160px;">
+        <button type="button" class="btn ghost" data-act="addTag">+ Crear</button>
+      </div>
+      <label>Stock</label>
+      <div class="stock-toggle" data-f="stock">
+        <button type="button" class="chip" data-stock="true" aria-pressed="${v.inStock}">Con stock</button>
+        <button type="button" class="chip" data-stock="false" aria-pressed="${!v.inStock}">Sin stock</button>
+      </div>`;
+  }
+
+  function readFields(root){
+    const get = (f) => root.querySelector(`[data-f="${f}"]`);
+    const out = {
+      Nombre: get('name').value.trim(),
+      Precio: Number(get('price').value) || 0,
+      Descripcion: get('desc').value.trim(),
+      ConsultarPrecio: get('priceOnRequest').getAttribute('aria-checked') === 'true',
+      Etiquetas: [...get('tags').querySelectorAll('[aria-pressed=true]')].map(b => b.dataset.tag).join(','),
+      Stock: get('stock').querySelector('[data-stock=true]').getAttribute('aria-pressed') === 'true',
+    };
+    if (hasPresentacion) out.Presentacion = get('presentacion').value.trim() || null;
+    return { values: out, file: get('img').files[0] };
+  }
+
+  // Delegated interactions shared by edit rows and add form
+  document.addEventListener('click', (e) => {
+    const sw = e.target.closest('.switch[data-f]');
+    if (sw) { sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true')); return; }
+    const stock = e.target.closest('.stock-toggle .chip');
+    if (stock) { stock.parentElement.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === stock))); return; }
+    const chip = e.target.closest('.chips .chip');
+    if (chip) { chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true')); return; }
+    const addTag = e.target.closest('[data-act=addTag]');
+    if (addTag) {
+      const root = addTag.closest('[data-root]');
+      const input = root.querySelector('[data-f=newTag]');
+      const name = input.value.trim();
+      if (!name) return;
+      knownTags.add(name);
+      const box = root.querySelector('[data-f=tags]');
+      const selected = [...box.querySelectorAll('[aria-pressed=true]')].map(b => b.dataset.tag).concat(name);
+      box.innerHTML = chipsHtml(selected);
+      input.value = '';
+    }
+  });
+
+  /* ---------- STORAGE ---------- */
+  async function uploadImage(file){
+    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`;
+    const { error } = await sb.storage.from(STORAGE_BUCKET).upload(path, file);
+    if (error) throw error;
+    return { url: sb.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl, path };
+  }
+  async function removeImage(path){
+    if (!path) return;
+    const { error } = await sb.storage.from(STORAGE_BUCKET).remove([path]);
+    if (error) console.error('No se pudo borrar la imagen anterior:', error);
+  }
+
+  /* ---------- PRODUCTS ---------- */
+  async function loadProducts(){
+    const { data, error } = await sb.from(PRODUCTS_TABLE).select('*').order('id', { ascending: true });
+    if (error) { $('productList').innerHTML = `<p class="status error">No se pudieron cargar los productos: ${esc(error.message)}</p>`; return; }
+    hasPresentacion = !!(data && data.length && Object.prototype.hasOwnProperty.call(data[0], 'Presentacion'));
+    $('presentacionNotice').hidden = hasPresentacion || !data || !data.length;
+    products = (data || []).map(r => ({
+      id: r.id, name: r.Nombre || '', price: r.Precio ?? '', desc: r.Descripcion || '',
+      presentacion: r.Presentacion || '', tags: r.Etiquetas || '', priceOnRequest: r.ConsultarPrecio === true,
+      inStock: r.Stock !== false, image: r.ImagenUrl || null, imagePath: r.ImagenPath || null,
+    }));
+    products.forEach(p => tagsOf(p.tags).forEach(t => knownTags.add(t)));
+    renderProducts();
+  }
+
+  function renderProducts(){
+    if (!products.length) { $('productList').innerHTML = '<p>Todavía no hay productos.</p>'; return; }
+    $('productList').innerHTML = products.map(p => `
+      <div class="product" data-root data-id="${p.id}">
+        <div class="thumb">${p.image ? `<img src="${esc(p.image)}" alt="">` : '🐾'}</div>
+        <div>
+          ${fieldsHtml(p, 'p' + p.id)}
+          <div class="row" style="margin-top:18px;">
+            <button type="button" class="btn" data-act="save">Guardar cambios</button>
+            <button type="button" class="btn danger" data-act="delete">Eliminar</button>
+          </div>
+          <p class="status" data-status role="status"></p>
+        </div>
+      </div>`).join('');
+  }
+
+  $('productList').addEventListener('change', (e) => {
+    if (e.target.dataset.f !== 'img' || !e.target.files[0]) return;
+    e.target.closest('.product').querySelector('.thumb').innerHTML = `<img src="${URL.createObjectURL(e.target.files[0])}" alt="">`;
+  });
+
+  $('productList').addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-act=save],[data-act=delete]');
+    if (!btn) return;
+    const row = btn.closest('.product');
+    const product = products.find(p => String(p.id) === row.dataset.id);
+    const status = row.querySelector('[data-status]');
+    const setStatus = (msg, err) => { status.className = err ? 'status error' : 'status'; status.textContent = msg; };
+
+    if (btn.dataset.act === 'delete') {
+      if (!confirm(`¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`)) return;
+      btn.disabled = true;
+      const { error } = await sb.from(PRODUCTS_TABLE).delete().eq('id', product.id);
+      if (error) { setStatus('No se pudo eliminar: ' + error.message, true); btn.disabled = false; return; }
+      await removeImage(product.imagePath);
+      products = products.filter(p => p !== product);
+      renderProducts();
+      return;
+    }
+
+    const { values, file } = readFields(row);
+    if (!values.Nombre) { setStatus('El nombre es obligatorio.', true); return; }
+    btn.disabled = true; setStatus('Guardando…');
+    try {
+      let oldPath = null;
+      if (file) {
+        const up = await uploadImage(file);
+        values.ImagenUrl = up.url; values.ImagenPath = up.path; oldPath = product.imagePath;
+      }
+      const { data, error } = await sb.from(PRODUCTS_TABLE).update(values).eq('id', product.id).select();
+      if (error) throw error;
+      if (!data || !data.length) throw new Error('Sin permiso para editar (revisá las políticas RLS).');
+      if (oldPath) await removeImage(oldPath);
+      setStatus('Guardado.');
+      await loadProducts();
+    } catch (err) {
+      console.error(err); setStatus('Error al guardar: ' + (err.message || ''), true);
+    } finally { btn.disabled = false; }
+  });
+
+  function renderAddForm(){
+    $('addForm').innerHTML = `<div data-root>${fieldsHtml(null, 'add')}</div>
+      <div class="row" style="margin-top:20px;"><button type="submit" class="btn">Agregar producto</button></div>
+      <p class="status" id="addStatus" role="status"></p>`;
+  }
+
+  $('addForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = $('addStatus');
+    const btn = $('addForm').querySelector('[type=submit]');
+    const { values, file } = readFields($('addForm'));
+    if (!values.Nombre) { status.className = 'status error'; status.textContent = 'El nombre es obligatorio.'; return; }
+    btn.disabled = true; status.className = 'status'; status.textContent = 'Guardando…';
+    try {
+      if (file) { const up = await uploadImage(file); values.ImagenUrl = up.url; values.ImagenPath = up.path; }
+      const { error } = await sb.from(PRODUCTS_TABLE).insert(values);
+      if (error) throw error;
+      await loadProducts();
+      renderAddForm();
+      $('addStatus').textContent = 'Producto agregado.';
+    } catch (err) {
+      console.error(err); status.className = 'status error'; status.textContent = 'No se pudo agregar: ' + (err.message || '');
+    } finally { btn.disabled = false; }
+  });
+
+  /* ---------- CONFIG ---------- */
+  async function loadConfig(){
+    const { data } = await sb.from(CONFIG_TABLE).select('*').eq('id', 1).maybeSingle();
+    $('shippingPrice').value = Number(data && data.PrecioEnvio) || 0;
+    const available = !data || data.EnvioDisponible == null ? true : data.EnvioDisponible === true;
+    $('deliveryToggle').setAttribute('aria-checked', String(available));
+  }
+  $('deliveryToggle').addEventListener('click', (e) => {
+    const t = e.currentTarget; t.setAttribute('aria-checked', String(t.getAttribute('aria-checked') !== 'true'));
+  });
+  $('shippingSave').addEventListener('click', async () => {
+    const status = $('shippingStatus');
+    const row = { id: 1, PrecioEnvio: Number($('shippingPrice').value) || 0, EnvioDisponible: $('deliveryToggle').getAttribute('aria-checked') === 'true' };
+    $('shippingSave').disabled = true; status.className = 'status'; status.textContent = 'Guardando…';
+    const { error } = await sb.from(CONFIG_TABLE).upsert(row);
+    $('shippingSave').disabled = false;
+    status.className = error ? 'status error' : 'status';
+    status.textContent = error ? 'Error: ' + error.message : 'Guardado.';
+  });
+
+  refreshSession();
+</script>
+</body>
+</html>

@@ -342,7 +342,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .cart-badge.hidden{display:none;}
 
-  .edit-modal.cart-modal{max-width:560px;padding:36px;}
+  .modal.cart-modal{max-width:560px;padding:36px;}
   .cart-items{
     max-height:54vh;
     overflow-y:auto;
@@ -426,28 +426,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size:20px;
   }
   @media(max-width:640px){
-    .edit-modal.cart-modal{max-width:400px;padding:26px;}
+    .modal.cart-modal{max-width:400px;padding:26px;}
   }
 
-  /* EDIT ACCESS (hidden) */
-  .edit-fab{
-    position:fixed;
-    bottom:14px;
-    left:14px;
-    z-index:90;
-    width:30px;height:30px;
-    border-radius:50%;
-    background:rgba(20,32,27,0.06);
-    border:none;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    opacity:0.28;
-    transition:opacity .2s ease, background .2s ease;
-  }
-  .edit-fab:hover{opacity:1;background:rgba(20,32,27,0.12);}
-  .edit-fab svg{width:14px;height:14px;stroke:var(--ink);}
-
-  .edit-modal-overlay{
+  .modal-overlay{
     position:fixed;
     inset:0;
     z-index:200;
@@ -457,8 +439,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content:center;
     padding:20px;
   }
-  .edit-modal-overlay.open{display:flex;}
-  .edit-modal{
+  .modal-overlay.open{display:flex;}
+  .modal{
     background:var(--surface);
     border-radius:20px;
     padding:32px;
@@ -466,29 +448,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     max-width:340px;
     box-shadow:0 20px 50px rgba(0,0,0,0.3);
   }
-  .edit-modal h3{font-size:19px;font-weight:600;margin-bottom:6px;}
-  .edit-modal p.hint{font-size:13px;color:var(--text-sub);margin-bottom:18px;}
-  .edit-modal input{
-    width:100%;
-    background:var(--bg);
-    border:1px solid rgba(20,32,27,0.12);
-    border-radius:12px;
-    padding:12px 14px;
-    color:var(--ink);
-    font-family:inherit;
-    font-size:14px;
-    margin-bottom:12px;
-  }
-  .edit-modal input:focus{outline:none;border-color:var(--primary);}
-  .edit-error{
-    font-size:13px;
-    color:#DC2626;
-    margin-bottom:12px;
-    display:none;
-  }
-  .edit-error.show{display:block;}
-  .edit-modal-actions{display:flex;gap:10px;}
-  .edit-modal-actions button{
+  .modal h3{font-size:19px;font-weight:600;margin-bottom:6px;}
+  .modal p.hint{font-size:13px;color:var(--text-sub);margin-bottom:18px;}
+  .modal-actions{display:flex;gap:10px;}
+  .modal-actions button{
     flex:1;
     padding:12px 0;
     font-weight:700;
@@ -496,7 +459,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     cursor:pointer;
     font-family:inherit;
   }
-  .edit-cancel-btn{
+  .btn-secondary{
     background:var(--surface);
     color:var(--primary);
     border:1.5px solid var(--primary);
@@ -508,201 +471,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-family:inherit;
     transition:background .2s ease;
   }
-  .edit-cancel-btn:hover{background:rgba(5,165,181,0.08);}
-  .edit-submit-btn{background:var(--primary);color:#fff;border:none;border-radius:999px;}
-  .edit-submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
-  .admin-delete-confirm-btn{background:#DC2626;}
-
-  /* ADMIN PANEL */
-  .admin-hub-modal{max-width:340px;text-align:center;}
-  .admin-hub-actions{display:flex;flex-direction:column;gap:12px;margin:18px 0;}
-  .admin-secondary-btn{background:var(--bg);color:var(--ink);box-shadow:none;}
-  .admin-close-btn{width:100%;}
-
-  .admin-edit-modal{max-width:480px;}
-  .admin-product-list{
-    max-height:56vh;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    margin-bottom:16px;
-    padding-right:4px;
-  }
-  .admin-product-row{
-    display:flex;
-    gap:14px;
-    background:var(--bg);
-    border-radius:14px;
-    padding:16px;
-    text-align:left;
-  }
-  .admin-product-fields{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0;}
-  .admin-image-field{display:flex;align-items:center;gap:10px;}
-  .admin-image-preview{
-    width:40px;height:40px;
-    border-radius:10px;
-    overflow:hidden;
-    background:var(--surface);
-    border:1px solid rgba(20,32,27,0.12);
-    display:flex;align-items:center;justify-content:center;
-    font-size:18px;
-    flex-shrink:0;
-  }
-  .admin-image-preview img{width:100%;height:100%;object-fit:cover;}
-  .admin-image-input{
-    flex:1;
-    font-size:12px;
-    color:var(--text-sub);
-    min-width:0;
-  }
-  input[type="file"]::file-selector-button,
-  input[type="file"]::-webkit-file-upload-button{
-    font-family:inherit;
-    font-weight:700;
-    font-size:12px;
-    color:#fff;
-    background:var(--primary);
-    border:none;
-    border-radius:999px;
-    padding:8px 14px;
-    margin-right:10px;
-    cursor:pointer;
-    transition:background .2s ease;
-  }
-  input[type="file"]:hover::file-selector-button,
-  input[type="file"]:hover::-webkit-file-upload-button{
-    background:#048A97;
-  }
-  .admin-product-fields label{
-    font-size:11px;
-    font-weight:700;
-    color:var(--text-sub);
-    text-transform:uppercase;
-    letter-spacing:.5px;
-  }
-  .admin-product-fields input{
-    width:100%;
-    background:var(--surface);
-    border:1px solid rgba(20,32,27,0.12);
-    border-radius:10px;
-    padding:9px 12px;
-    font-family:inherit;
-    font-size:13px;
-    color:var(--ink);
-  }
-  .admin-product-fields input:focus{outline:none;border-color:var(--primary);}
-  .admin-stock-toggle{display:flex;gap:8px;margin-top:2px;}
-  .admin-price-request-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    font-size:12px;
-    font-weight:700;
-    color:var(--text-sub);
-  }
-  .stock-btn{
-    flex:1;
-    border:1px solid rgba(20,32,27,0.15);
-    background:var(--surface);
-    color:var(--text-sub);
-    border-radius:999px;
-    padding:8px 0;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:all .2s ease;
-  }
-  .stock-btn.in-stock.active{background:#DFF5E1;border-color:#3AA65A;color:#1F7A3A;}
-  .stock-btn.out-stock.active{background:#FBE1E1;border-color:#DC2626;color:#B91C1C;}
-
-  .admin-row-status{font-size:12px;min-height:14px;color:var(--primary);}
-  .admin-row-status.error{color:#DC2626;}
-  .admin-row-actions{display:flex;gap:8px;margin-top:2px;}
-  .admin-row-actions .admin-save-btn{flex:1;padding:10px 0;font-size:13px;}
-  .admin-save-btn:disabled{opacity:0.5;cursor:not-allowed;}
-  .admin-delete-btn{
-    border:1px solid rgba(220,38,38,0.3);
-    background:#FBE1E1;
-    color:#B91C1C;
-    border-radius:999px;
-    padding:10px 16px;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:background .2s ease;
-  }
-  .admin-delete-btn:hover{background:#F8CACA;}
-  .admin-delete-btn:disabled{opacity:0.5;cursor:not-allowed;}
-
-  .admin-add-form{display:flex;flex-direction:column;gap:8px;text-align:left;margin-bottom:6px;}
-  .admin-add-form label{
-    font-size:11px;
-    font-weight:700;
-    color:var(--text-sub);
-    text-transform:uppercase;
-    letter-spacing:.5px;
-  }
-  .admin-add-form .field-optional{text-transform:none;font-weight:400;letter-spacing:0;}
-  .admin-add-form input{
-    width:100%;
-    background:var(--bg);
-    border:1px solid rgba(20,32,27,0.12);
-    border-radius:10px;
-    padding:10px 12px;
-    font-family:inherit;
-    font-size:13px;
-    color:var(--ink);
-    margin-bottom:4px;
-  }
-  .admin-add-form input:focus{outline:none;border-color:var(--primary);}
-
-  .admin-shipping-field{
-    background:var(--bg);
-    border-radius:14px;
-    padding:16px;
-    margin-bottom:16px;
-    text-align:left;
-  }
-  .admin-shipping-field label{
-    font-size:11px;
-    font-weight:700;
-    color:var(--text-sub);
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    display:block;
-    margin-bottom:8px;
-  }
-  .admin-shipping-row{display:flex;gap:10px;}
-  .admin-shipping-row input{
-    flex:1;
-    background:var(--surface);
-    border:1px solid rgba(20,32,27,0.12);
-    border-radius:10px;
-    padding:9px 12px;
-    font-family:inherit;
-    font-size:13px;
-    color:var(--ink);
-  }
-  .admin-shipping-row input:focus{outline:none;border-color:var(--primary);}
-  .admin-shipping-row .pill-btn{padding:9px 18px;font-size:13px;box-shadow:none;}
-  .admin-shipping-toggle-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding-bottom:14px;
-    margin-bottom:14px;
-    border-bottom:1px solid rgba(20,32,27,0.1);
-  }
-  .admin-shipping-toggle-text{display:flex;flex-direction:column;gap:3px;}
-  .admin-shipping-toggle-text strong{font-size:13px;font-weight:700;color:var(--ink);}
-  .admin-shipping-toggle-text span{font-size:12px;color:var(--text-sub);line-height:1.4;}
-  .admin-shipping-field.no-delivery .admin-shipping-row input{opacity:.45;}
-
+  .btn-secondary:hover{background:rgba(5,165,181,0.08);}
+  .btn-primary{background:var(--primary);color:#fff;border:none;border-radius:999px;}
+  .btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
   /* SWITCH */
   .switch{
     position:relative;
@@ -779,59 +550,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .tag-filter-btn:hover{border-color:var(--primary);color:var(--primary);}
   .tag-filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
 
-  /* TAG CHIPS (admin) */
-  .admin-tag-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-  .tag-chip-wrap{display:inline-flex;flex-shrink:0;}
-  .tag-chip{
-    background:var(--surface);
-    color:var(--text-sub);
-    border:1.5px solid rgba(20,32,27,0.15);
-    border-right:none;
-    border-radius:999px 0 0 999px;
-    padding:6px 6px 6px 14px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:all .2s ease;
-  }
-  .tag-chip:hover{border-color:var(--primary);}
-  .tag-chip.active{background:rgba(5,165,181,0.12);border-color:var(--primary);color:var(--primary);}
-  .tag-chip-del{
-    background:var(--surface);
-    color:var(--text-sub);
-    border:1.5px solid rgba(20,32,27,0.15);
-    border-radius:0 999px 999px 0;
-    padding:5px 11px;
-    font-size:13px;
-    line-height:1;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:all .2s ease;
-  }
-  .tag-chip.active + .tag-chip-del{border-color:var(--primary);}
-  .tag-chip-del:hover{background:#DC2626;border-color:#DC2626;color:#fff;}
-  .admin-tag-create-row{display:flex;gap:8px;}
-  .admin-tag-create-row input{flex:1;}
-  .admin-tag-create-btn{
-    flex-shrink:0;
-    background:var(--bg);
-    border:1px dashed rgba(20,32,27,0.3);
-    color:var(--primary);
-    border-radius:999px;
-    padding:9px 16px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    font-family:inherit;
-    transition:background .2s ease;
-  }
-  .admin-tag-create-btn:hover{background:rgba(5,165,181,0.08);}
 </style>
 </head>
 <body>
@@ -917,8 +635,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <span class="cart-badge hidden" id="cartBadge">0</span>
 </button>
 
-<div class="edit-modal-overlay" id="cartOverlay">
-  <div class="edit-modal cart-modal">
+<div class="modal-overlay" id="cartOverlay">
+  <div class="modal cart-modal">
     <h3>Tu carrito</h3>
     <div class="cart-items" id="cartItems"></div>
     <p class="cart-empty" id="cartEmpty">Tu carrito está vacío.</p>
@@ -941,114 +659,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span id="cartTotalValue">$0</span>
       </div>
     </div>
-    <div class="edit-modal-actions">
-      <button type="button" class="edit-cancel-btn" id="cartCloseBtn">Cerrar</button>
-      <button type="button" class="edit-submit-btn" id="cartCheckoutBtn">Comprar todo</button>
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" id="cartCloseBtn">Cerrar</button>
+      <button type="button" class="btn-primary" id="cartCheckoutBtn">Comprar todo</button>
     </div>
   </div>
 </div>
 
-<button class="edit-fab" id="editFab" aria-label="Editar">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-  </svg>
-</button>
-
-<div class="edit-modal-overlay" id="editOverlay">
-  <div class="edit-modal">
-    <h3>Acceso de edición</h3>
-    <p class="hint">Ingresá la contraseña para continuar.</p>
-    <input type="password" id="editPasswordInput" placeholder="Contraseña">
-    <p class="edit-error" id="editError">Contraseña incorrecta</p>
-    <div class="edit-modal-actions">
-      <button type="button" class="edit-cancel-btn" id="editCancelBtn">Cancelar</button>
-      <button type="button" class="edit-submit-btn" id="editSubmitBtn">Ingresar</button>
-    </div>
-  </div>
-</div>
-
-<div class="edit-modal-overlay" id="adminHubOverlay">
-  <div class="edit-modal admin-hub-modal">
-    <h3>Panel de administración</h3>
-    <p class="hint">¿Qué querés hacer?</p>
-    <div class="admin-hub-actions">
-      <button type="button" class="pill-btn" id="editProductsBtn">Editar productos</button>
-      <button type="button" class="pill-btn admin-secondary-btn" id="addProductsBtn">Añadir productos</button>
-    </div>
-    <button type="button" class="edit-cancel-btn admin-close-btn" id="adminHubCloseBtn">Cerrar</button>
-  </div>
-</div>
-
-<div class="edit-modal-overlay" id="adminEditOverlay">
-  <div class="edit-modal admin-edit-modal">
-    <h3>Editar productos</h3>
-    <div class="admin-shipping-field" id="adminShippingField">
-      <div class="admin-shipping-toggle-row">
-        <div class="admin-shipping-toggle-text">
-          <strong>No hay envío a domicilio por el momento</strong>
-          <span>Si lo activás, los clientes no van a poder elegir envío en el carrito.</span>
-        </div>
-        <button type="button" class="switch" id="noDeliveryToggle" role="switch" aria-checked="false" aria-label="No hay envío a domicilio por el momento">
-          <span class="switch-knob"></span>
-        </button>
-      </div>
-      <label>Precio de envío a domicilio</label>
-      <div class="admin-shipping-row">
-        <input type="number" id="shippingPriceInput" placeholder="0">
-        <button type="button" class="pill-btn" id="shippingSaveBtn">Guardar</button>
-      </div>
-      <p class="admin-row-status" id="shippingStatus"></p>
-    </div>
-    <div class="admin-product-list" id="adminProductList"></div>
-    <button type="button" class="edit-cancel-btn admin-close-btn" id="adminEditBackBtn">Volver</button>
-  </div>
-</div>
-
-<div class="edit-modal-overlay" id="adminAddOverlay">
-  <div class="edit-modal admin-edit-modal">
-    <h3>Añadir producto</h3>
-    <div class="admin-add-form">
-      <label>Imagen</label>
-      <input type="file" accept="image/*" id="addImageInput">
-      <label>Nombre</label>
-      <input type="text" id="addNameInput" placeholder="Nombre del producto">
-      <label>Precio</label>
-      <input type="number" id="addPriceInput" placeholder="0">
-      <div class="admin-price-request-row">
-        <span>Consultar por WhatsApp (ocultar precio)</span>
-        <button type="button" class="switch" id="addPriceRequestToggle" role="switch" aria-checked="false" aria-label="Consultar por WhatsApp en vez de precio">
-          <span class="switch-knob"></span>
-        </button>
-      </div>
-      <label>Descripción</label>
-      <input type="text" id="addDescInput" placeholder="Descripción breve">
-      <label>Etiquetas <span class="field-optional">(opcional, para filtros)</span></label>
-      <div class="admin-tag-chips" id="addTagChips"></div>
-      <div class="admin-tag-create-row">
-        <input type="text" id="addTagCreateInput" placeholder="Nueva etiqueta">
-        <button type="button" class="admin-tag-create-btn" id="addTagCreateBtn">+ Crear</button>
-      </div>
-    </div>
-    <p class="edit-error" id="addError"></p>
-    <div class="edit-modal-actions">
-      <button type="button" class="edit-cancel-btn" id="adminAddBackBtn">Volver</button>
-      <button type="button" class="edit-submit-btn" id="addSubmitBtn">Agregar</button>
-    </div>
-  </div>
-</div>
-
-<div class="edit-modal-overlay" id="confirmDeleteOverlay">
-  <div class="edit-modal">
-    <h3 id="confirmDeleteTitle">Eliminar producto</h3>
-    <p class="hint" id="confirmDeleteText">¿Eliminar este producto? Esta acción no se puede deshacer.</p>
-    <div class="edit-modal-actions">
-      <button type="button" class="edit-cancel-btn" id="confirmDeleteCancelBtn">Cancelar</button>
-      <button type="button" class="edit-submit-btn admin-delete-confirm-btn" id="confirmDeleteOkBtn">Eliminar</button>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1060,7 +678,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const SUPABASE_URL = 'https://lkoqygvxvyvyvmfoqaje.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxrb3F5Z3Z4dnl2eXZtZm9xYWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTExNzEsImV4cCI6MjEwMzU2NzE3MX0.MTg9eEPg4w1DIxcTVYit6dwfjFyXoowwm79eRP5Wt2Y';
   const PRODUCTS_TABLE = 'Productos';
-  const STORAGE_BUCKET = 'productos';
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let products = [];
@@ -1076,24 +693,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function formatPrice(value){
     const n = Number(value) || 0;
     return '$' + n.toLocaleString('es-AR');
-  }
-
-  function sanitizeFileName(name){
-    return name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
-  }
-
-  async function uploadProductImage(file){
-    const path = `${Date.now()}-${sanitizeFileName(file.name)}`;
-    const { error: uploadError } = await supabaseClient.storage.from(STORAGE_BUCKET).upload(path, file);
-    if (uploadError) throw uploadError;
-    const { data } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path);
-    return { url: data.publicUrl, path };
-  }
-
-  async function deleteProductImage(path){
-    if (!path) return;
-    const { error } = await supabaseClient.storage.from(STORAGE_BUCKET).remove([path]);
-    if (error) console.error('No se pudo borrar la imagen anterior:', error);
   }
 
   function mapRow(row){
@@ -1122,15 +721,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function getAllTagsSorted(){
     return Array.from(knownTags).sort((a, b) => a.localeCompare(b, 'es'));
-  }
-
-  function tagChipsHtml(selectedTags){
-    return getAllTagsSorted().map(tag => `
-      <span class="tag-chip-wrap">
-        <button type="button" class="tag-chip ${selectedTags.includes(tag) ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>
-        <button type="button" class="tag-chip-del" data-tag="${escapeHtml(tag)}" aria-label="Borrar etiqueta ${escapeHtml(tag)}" title="Borrar etiqueta">×</button>
-      </span>
-    `).join('');
   }
 
   function getCartKey(productId){
@@ -1483,630 +1073,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   });
 
-  const EDIT_PASSWORD_HASH = '46ae28b5d761b26b72438b1864c40133f428a49e0145f3a3ca1ae4c89f80840e';
-
-  async function sha256Hex(text){
-    const data = new TextEncoder().encode(text);
-    const digest = await crypto.subtle.digest('SHA-256', data);
-    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
-  const MAX_ATTEMPTS = 5;
-  const LOCK_DURATION_MS = 5 * 60 * 1000;
-  const ATTEMPTS_KEY = 'firvetEditAttempts';
-  const LOCK_KEY = 'firvetEditLockUntil';
-
-  const editFab = document.getElementById('editFab');
-  const editOverlay = document.getElementById('editOverlay');
-  const editPasswordInput = document.getElementById('editPasswordInput');
-  const editError = document.getElementById('editError');
-  const editCancelBtn = document.getElementById('editCancelBtn');
-  const editSubmitBtn = document.getElementById('editSubmitBtn');
-
-  function getLockRemainingMs(){
-    const lockUntil = Number(localStorage.getItem(LOCK_KEY) || 0);
-    return lockUntil - Date.now();
-  }
-
-  function openEditModal(){
-    editError.classList.remove('show');
-    editPasswordInput.value = '';
-    const remaining = getLockRemainingMs();
-    if (remaining > 0) {
-      const mins = Math.ceil(remaining / 60000);
-      editError.textContent = `Herramienta bloqueada. Probá de nuevo en ${mins} minuto${mins === 1 ? '' : 's'}.`;
-      editError.classList.add('show');
-      editPasswordInput.disabled = true;
-      editSubmitBtn.disabled = true;
-    } else {
-      editPasswordInput.disabled = false;
-      editSubmitBtn.disabled = false;
-    }
-    editOverlay.classList.add('open');
-    if (!editPasswordInput.disabled) editPasswordInput.focus();
-  }
-
-  function closeEditModal(){
-    editOverlay.classList.remove('open');
-  }
-
-  async function handleEditSubmit(){
-    const remaining = getLockRemainingMs();
-    if (remaining > 0) return;
-
-    const enteredHash = await sha256Hex(editPasswordInput.value);
-
-    if (enteredHash === EDIT_PASSWORD_HASH) {
-      localStorage.removeItem(ATTEMPTS_KEY);
-      localStorage.removeItem(LOCK_KEY);
-      closeEditModal();
-      openAdminHub();
-      return;
-    }
-
-    const attempts = Number(localStorage.getItem(ATTEMPTS_KEY) || 0) + 1;
-
-    if (attempts >= MAX_ATTEMPTS) {
-      localStorage.setItem(LOCK_KEY, String(Date.now() + LOCK_DURATION_MS));
-      localStorage.removeItem(ATTEMPTS_KEY);
-      editError.textContent = `Herramienta bloqueada. Probá de nuevo en 5 minutos.`;
-      editPasswordInput.disabled = true;
-      editSubmitBtn.disabled = true;
-    } else {
-      localStorage.setItem(ATTEMPTS_KEY, String(attempts));
-      editError.textContent = 'Contraseña incorrecta';
-    }
-    editError.classList.add('show');
-    editPasswordInput.value = '';
-    if (!editPasswordInput.disabled) editPasswordInput.focus();
-  }
-
-  editFab.addEventListener('click', openEditModal);
-  editCancelBtn.addEventListener('click', closeEditModal);
-  editSubmitBtn.addEventListener('click', handleEditSubmit);
-  editPasswordInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') handleEditSubmit();
-  });
-  editOverlay.addEventListener('click', (e) => {
-    if (e.target === editOverlay) closeEditModal();
-  });
-
-  const adminHubOverlay = document.getElementById('adminHubOverlay');
-  const editProductsBtn = document.getElementById('editProductsBtn');
-  const addProductsBtn = document.getElementById('addProductsBtn');
-  const adminHubCloseBtn = document.getElementById('adminHubCloseBtn');
-
-  const adminEditOverlay = document.getElementById('adminEditOverlay');
-  const adminProductList = document.getElementById('adminProductList');
-  const adminEditBackBtn = document.getElementById('adminEditBackBtn');
-
-  const adminAddOverlay = document.getElementById('adminAddOverlay');
-  const adminAddBackBtn = document.getElementById('adminAddBackBtn');
-  const addSubmitBtn = document.getElementById('addSubmitBtn');
-  const addNameInput = document.getElementById('addNameInput');
-  const addPriceInput = document.getElementById('addPriceInput');
-  const addPriceRequestToggle = document.getElementById('addPriceRequestToggle');
-  const addDescInput = document.getElementById('addDescInput');
-  const addImageInput = document.getElementById('addImageInput');
-  const addError = document.getElementById('addError');
-  const addTagChips = document.getElementById('addTagChips');
-  const addTagCreateInput = document.getElementById('addTagCreateInput');
-  const addTagCreateBtn = document.getElementById('addTagCreateBtn');
-
-  addTagChips.addEventListener('click', (e) => {
-    const delBtn = e.target.closest('.tag-chip-del');
-    if (delBtn) {
-      requestDeleteTag(delBtn.dataset.tag);
-      return;
-    }
-    const chip = e.target.closest('.tag-chip');
-    if (!chip) return;
-    chip.classList.toggle('active');
-  });
-
-  addTagCreateBtn.addEventListener('click', () => {
-    const name = addTagCreateInput.value.trim();
-    if (!name) return;
-    const selected = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag);
-    knownTags.add(name);
-    if (!selected.includes(name)) selected.push(name);
-    addTagChips.innerHTML = tagChipsHtml(selected);
-    addTagCreateInput.value = '';
-  });
-
-  const shippingPriceInput = document.getElementById('shippingPriceInput');
-  const shippingSaveBtn = document.getElementById('shippingSaveBtn');
-  const shippingStatus = document.getElementById('shippingStatus');
-  const adminShippingField = document.getElementById('adminShippingField');
-  const noDeliveryToggle = document.getElementById('noDeliveryToggle');
-  let adminDeliveryAvailable = true;
-
-  function renderNoDeliveryToggle(){
-    const noDelivery = !adminDeliveryAvailable;
-    noDeliveryToggle.classList.toggle('on', noDelivery);
-    noDeliveryToggle.setAttribute('aria-checked', String(noDelivery));
-    adminShippingField.classList.toggle('no-delivery', noDelivery);
-  }
-
-  noDeliveryToggle.addEventListener('click', () => {
-    adminDeliveryAvailable = !adminDeliveryAvailable;
-    renderNoDeliveryToggle();
-    shippingStatus.classList.remove('error');
-    shippingStatus.textContent = 'Acordate de guardar los cambios.';
-  });
-
-  shippingSaveBtn.addEventListener('click', async () => {
-    const newPrice = Number(shippingPriceInput.value) || 0;
-    const newAvailable = adminDeliveryAvailable;
-    shippingSaveBtn.disabled = true;
-    shippingStatus.classList.remove('error');
-    shippingStatus.textContent = 'Guardando...';
-    try {
-      const { data, error } = await supabaseClient
-        .from(CONFIG_TABLE)
-        .update({ PrecioEnvio: newPrice, EnvioDisponible: newAvailable })
-        .eq('id', 1)
-        .select();
-      if (error) throw error;
-      if (!data || data.length === 0) {
-        const { error: insertError } = await supabaseClient
-          .from(CONFIG_TABLE)
-          .insert({ id: 1, PrecioEnvio: newPrice, EnvioDisponible: newAvailable });
-        if (insertError) throw insertError;
-      }
-      shippingPrice = newPrice;
-      deliveryAvailable = newAvailable;
-      shippingStatus.textContent = newAvailable
-        ? 'Guardado. El envío a domicilio está activo.'
-        : 'Guardado. El carrito muestra que no hay envío por el momento.';
-      renderCart();
-    } catch (err) {
-      console.error(err);
-      const msg = String(err.message || '');
-      shippingStatus.textContent = msg.includes('EnvioDisponible')
-        ? 'Falta la columna EnvioDisponible (booleana) en la tabla Config de Supabase.'
-        : `Error: ${msg || 'no se pudo guardar.'}`;
-      shippingStatus.classList.add('error');
-    } finally {
-      shippingSaveBtn.disabled = false;
-    }
-  });
-
-  function openAdminHub(){
-    adminHubOverlay.classList.add('open');
-  }
-  function closeAdminHub(){
-    adminHubOverlay.classList.remove('open');
-  }
-
-  function renderAdminList(){
-    adminProductList.innerHTML = products.map(p => `
-      <div class="admin-product-row" data-id="${p.id}">
-        <div class="admin-product-fields">
-          <label>Imagen</label>
-          <div class="admin-image-field">
-            <div class="admin-image-preview">${p.image ? `<img src="${p.image}" alt="">` : '🐾'}</div>
-            <input type="file" accept="image/*" class="admin-image-input">
-          </div>
-          <label>Nombre</label>
-          <input type="text" class="admin-name-input" value="${escapeHtml(p.name)}">
-          <label>Precio</label>
-          <input type="number" class="admin-price-input" value="${p.price}">
-          <div class="admin-price-request-row">
-            <span>Consultar por WhatsApp (ocultar precio)</span>
-            <button type="button" class="switch ${p.priceOnRequest ? 'on' : ''}" data-price-request-toggle role="switch" aria-checked="${p.priceOnRequest}" aria-label="Consultar por WhatsApp en vez de precio">
-              <span class="switch-knob"></span>
-            </button>
-          </div>
-          <label>Descripción</label>
-          <input type="text" class="admin-desc-input" value="${escapeHtml(p.desc)}">
-          <label>Etiquetas</label>
-          <div class="admin-tag-chips">${tagChipsHtml(getTagsArray(p))}</div>
-          <div class="admin-tag-create-row">
-            <input type="text" class="admin-tag-create-input" placeholder="Nueva etiqueta">
-            <button type="button" class="admin-tag-create-btn">+ Crear</button>
-          </div>
-          <label>Stock</label>
-          <div class="admin-stock-toggle">
-            <button type="button" class="stock-btn in-stock ${p.inStock ? 'active' : ''}" data-stock="true">Con stock</button>
-            <button type="button" class="stock-btn out-stock ${!p.inStock ? 'active' : ''}" data-stock="false">Sin stock</button>
-          </div>
-          <p class="admin-row-status" data-status></p>
-          <div class="admin-row-actions">
-            <button type="button" class="pill-btn admin-save-btn">Guardar cambios</button>
-            <button type="button" class="admin-delete-btn">Eliminar</button>
-          </div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  function openAdminEdit(){
-    renderAdminList();
-    shippingPriceInput.value = shippingPrice;
-    adminDeliveryAvailable = deliveryAvailable;
-    renderNoDeliveryToggle();
-    shippingStatus.textContent = '';
-    shippingStatus.classList.remove('error');
-    adminEditOverlay.classList.add('open');
-  }
-  function closeAdminEdit(){
-    adminEditOverlay.classList.remove('open');
-  }
-
-  function openAdminAdd(){
-    addNameInput.value = '';
-    addPriceInput.value = '';
-    addPriceRequestToggle.classList.remove('on');
-    addPriceRequestToggle.setAttribute('aria-checked', 'false');
-    addDescInput.value = '';
-    addImageInput.value = '';
-    addTagChips.innerHTML = tagChipsHtml([]);
-    addTagCreateInput.value = '';
-    addError.classList.remove('show');
-    addError.textContent = '';
-    adminAddOverlay.classList.add('open');
-  }
-  function closeAdminAdd(){
-    adminAddOverlay.classList.remove('open');
-  }
-
-  addPriceRequestToggle.addEventListener('click', () => {
-    const isOn = addPriceRequestToggle.classList.toggle('on');
-    addPriceRequestToggle.setAttribute('aria-checked', String(isOn));
-  });
-
-  editProductsBtn.addEventListener('click', () => {
-    closeAdminHub();
-    openAdminEdit();
-  });
-
-  addProductsBtn.addEventListener('click', () => {
-    closeAdminHub();
-    openAdminAdd();
-  });
-
-  adminHubCloseBtn.addEventListener('click', closeAdminHub);
-  adminHubOverlay.addEventListener('click', (e) => {
-    if (e.target === adminHubOverlay) closeAdminHub();
-  });
-
-  adminEditBackBtn.addEventListener('click', () => {
-    closeAdminEdit();
-    openAdminHub();
-  });
-  adminEditOverlay.addEventListener('click', (e) => {
-    if (e.target === adminEditOverlay) closeAdminEdit();
-  });
-
-  adminAddBackBtn.addEventListener('click', () => {
-    closeAdminAdd();
-    openAdminHub();
-  });
-  adminAddOverlay.addEventListener('click', (e) => {
-    if (e.target === adminAddOverlay) closeAdminAdd();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    if (editOverlay.classList.contains('open')) closeEditModal();
-    else if (confirmDeleteOverlay.classList.contains('open')) closeConfirmDelete();
-    else if (adminAddOverlay.classList.contains('open')) closeAdminAdd();
-    else if (adminEditOverlay.classList.contains('open')) closeAdminEdit();
-    else if (adminHubOverlay.classList.contains('open')) closeAdminHub();
-    else if (cartOverlay.classList.contains('open')) closeCart();
-    else if (menuPanel.classList.contains('open')) closeMenu();
-  });
-
-  addSubmitBtn.addEventListener('click', async () => {
-    const name = addNameInput.value.trim();
-    const price = Number(addPriceInput.value) || 0;
-    const priceOnRequest = addPriceRequestToggle.classList.contains('on');
-    const desc = addDescInput.value.trim();
-    const tags = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
-    const file = addImageInput.files[0];
-
-    if (!name) {
-      addError.textContent = 'El nombre es obligatorio.';
-      addError.classList.add('show');
-      return;
-    }
-
-    addSubmitBtn.disabled = true;
-    addError.classList.remove('show');
-
-    try {
-      let imageUrl = null;
-      let imagePath = null;
-      if (file) {
-        const uploaded = await uploadProductImage(file);
-        imageUrl = uploaded.url;
-        imagePath = uploaded.path;
-      }
-
-      const { error } = await supabaseClient.from(PRODUCTS_TABLE).insert({
-        Nombre: name,
-        Precio: price,
-        Descripcion: desc,
-        ConsultarPrecio: priceOnRequest,
-        Etiquetas: tags,
-        Stock: true,
-        ImagenUrl: imageUrl,
-        ImagenPath: imagePath,
-      });
-      if (error) throw error;
-
-      await fetchProducts();
-      closeAdminAdd();
-      openAdminHub();
-    } catch (err) {
-      console.error(err);
-      addError.textContent = 'No se pudo agregar el producto. Probá de nuevo.';
-      addError.classList.add('show');
-    } finally {
-      addSubmitBtn.disabled = false;
-    }
-  });
-
-  async function saveRowTags(row){
-    const id = row.dataset.id;
-    const product = products.find(p => String(p.id) === String(id));
-    if (!product) return;
-
-    const chipsContainer = row.querySelector('.admin-tag-chips');
-    const tags = Array.from(chipsContainer.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).join(',');
-    const statusEl = row.querySelector('[data-status]');
-
-    const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Etiquetas: tags }).eq('id', id);
-    if (error) {
-      console.error(error);
-      if (statusEl) {
-        statusEl.textContent = 'No se pudo guardar la etiqueta.';
-        statusEl.classList.add('error');
-      }
-      return;
-    }
-
-    product.tags = tags;
-    if (statusEl) {
-      statusEl.classList.remove('error');
-      statusEl.textContent = 'Etiqueta guardada.';
-    }
-    renderTagFilterBar();
-    renderShop();
-  }
-
-  async function handleSaveRow(row){
-    const id = row.dataset.id;
-    const product = products.find(p => String(p.id) === String(id));
-    if (!product) return;
-
-    const statusEl = row.querySelector('[data-status]');
-    const saveBtn = row.querySelector('.admin-save-btn');
-    const name = row.querySelector('.admin-name-input').value.trim();
-    const price = Number(row.querySelector('.admin-price-input').value) || 0;
-    const desc = row.querySelector('.admin-desc-input').value.trim();
-    const priceOnRequest = row.querySelector('[data-price-request-toggle]').classList.contains('on');
-    const tags = Array.from(row.querySelectorAll('.admin-tag-chips .tag-chip.active')).map(b => b.dataset.tag).join(',');
-    const file = row.querySelector('.admin-image-input').files[0];
-
-    if (!name) {
-      statusEl.textContent = 'El nombre es obligatorio.';
-      statusEl.classList.add('error');
-      return;
-    }
-
-    saveBtn.disabled = true;
-    statusEl.classList.remove('error');
-    statusEl.textContent = 'Guardando...';
-
-    try {
-      const updates = { Nombre: name, Precio: price, Descripcion: desc, ConsultarPrecio: priceOnRequest, Etiquetas: tags };
-      let oldImagePath = null;
-
-      if (file) {
-        const uploaded = await uploadProductImage(file);
-        updates.ImagenUrl = uploaded.url;
-        updates.ImagenPath = uploaded.path;
-        oldImagePath = product.imagePath;
-      }
-
-      const { error } = await supabaseClient.from(PRODUCTS_TABLE).update(updates).eq('id', id);
-      if (error) throw error;
-
-      if (file && oldImagePath) {
-        await deleteProductImage(oldImagePath);
-      }
-
-      Object.assign(product, {
-        name, price, desc, priceOnRequest, tags,
-        image: updates.ImagenUrl || product.image,
-        imagePath: updates.ImagenPath || product.imagePath,
-      });
-
-      row.querySelector('.admin-image-input').value = '';
-      statusEl.textContent = 'Guardado.';
-      renderTagFilterBar();
-      renderShop();
-    } catch (err) {
-      console.error(err);
-      statusEl.textContent = 'Error al guardar. Probá de nuevo.';
-      statusEl.classList.add('error');
-    } finally {
-      saveBtn.disabled = false;
-    }
-  }
-
-  const confirmDeleteOverlay = document.getElementById('confirmDeleteOverlay');
-  const confirmDeleteTitle = document.getElementById('confirmDeleteTitle');
-  const confirmDeleteText = document.getElementById('confirmDeleteText');
-  const confirmDeleteCancelBtn = document.getElementById('confirmDeleteCancelBtn');
-  const confirmDeleteOkBtn = document.getElementById('confirmDeleteOkBtn');
-  let pendingConfirmAction = null;
-
-  function openConfirmDelete(title, text, onConfirm){
-    confirmDeleteTitle.textContent = title;
-    confirmDeleteText.textContent = text;
-    pendingConfirmAction = onConfirm;
-    confirmDeleteOverlay.classList.add('open');
-  }
-
-  function requestDeleteRow(row){
-    const id = row.dataset.id;
-    const product = products.find(p => String(p.id) === String(id));
-    if (!product) return;
-    openConfirmDelete('Eliminar producto', `¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`, () => performDeleteRow(row));
-  }
-
-  function requestDeleteTag(tag){
-    openConfirmDelete('Borrar etiqueta', `¿Borrar la etiqueta "${tag}"? Se va a quitar de todos los productos que la tengan.`, () => performDeleteTag(tag));
-  }
-
-  function closeConfirmDelete(){
-    confirmDeleteOverlay.classList.remove('open');
-    pendingConfirmAction = null;
-  }
-
-  confirmDeleteCancelBtn.addEventListener('click', closeConfirmDelete);
-  confirmDeleteOverlay.addEventListener('click', (e) => {
-    if (e.target === confirmDeleteOverlay) closeConfirmDelete();
-  });
-  confirmDeleteOkBtn.addEventListener('click', async () => {
-    const action = pendingConfirmAction;
-    closeConfirmDelete();
-    if (action) await action();
-  });
-
-  async function performDeleteRow(row){
-    const id = row.dataset.id;
-    const product = products.find(p => String(p.id) === String(id));
-    if (!product) return;
-
-    const deleteBtn = row.querySelector('.admin-delete-btn');
-    deleteBtn.disabled = true;
-
-    try {
-      const { error } = await supabaseClient.from(PRODUCTS_TABLE).delete().eq('id', id);
-      if (error) throw error;
-      if (product.imagePath) await deleteProductImage(product.imagePath);
-      products = products.filter(p => p.id !== product.id);
-      Object.keys(cart).forEach(key => {
-        if (String(cart[key].productId) === String(product.id)) delete cart[key];
-      });
-      saveCart();
-      renderTagFilterBar();
-      renderShop();
-      renderAdminList();
-      renderCart();
-    } catch (err) {
-      console.error(err);
-      const statusEl = row.querySelector('[data-status]');
-      if (statusEl) {
-        statusEl.textContent = 'No se pudo eliminar. Probá de nuevo.';
-        statusEl.classList.add('error');
-      }
-      deleteBtn.disabled = false;
-    }
-  }
-
-  async function performDeleteTag(tag){
-    const affected = products.filter(p => getTagsArray(p).includes(tag));
-    try {
-      for (const p of affected) {
-        const newTags = getTagsArray(p).filter(t => t !== tag).join(',');
-        const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Etiquetas: newTags }).eq('id', p.id);
-        if (error) throw error;
-        p.tags = newTags;
-      }
-      knownTags.delete(tag);
-      if (activeTagFilter === tag) activeTagFilter = null;
-      renderTagFilterBar();
-      renderShop();
-      renderAdminList();
-      const selected = Array.from(addTagChips.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag).filter(t => t !== tag);
-      addTagChips.innerHTML = tagChipsHtml(selected);
-    } catch (err) {
-      console.error(err);
-      alert('No se pudo borrar la etiqueta. Probá de nuevo.');
-    }
-  }
-
-  adminProductList.addEventListener('click', async (e) => {
-    const priceRequestToggle = e.target.closest('[data-price-request-toggle]');
-    if (priceRequestToggle) {
-      const isOn = priceRequestToggle.classList.toggle('on');
-      priceRequestToggle.setAttribute('aria-checked', String(isOn));
-      return;
-    }
-
-    const tagDelBtn = e.target.closest('.admin-tag-chips .tag-chip-del');
-    if (tagDelBtn) {
-      requestDeleteTag(tagDelBtn.dataset.tag);
-      return;
-    }
-
-    const tagChipBtn = e.target.closest('.admin-tag-chips .tag-chip');
-    if (tagChipBtn) {
-      tagChipBtn.classList.toggle('active');
-      await saveRowTags(tagChipBtn.closest('.admin-product-row'));
-      return;
-    }
-
-    const tagCreateBtn = e.target.closest('.admin-tag-create-btn');
-    if (tagCreateBtn) {
-      const input = tagCreateBtn.closest('.admin-tag-create-row').querySelector('.admin-tag-create-input');
-      const name = input.value.trim();
-      if (!name) return;
-      const row = tagCreateBtn.closest('.admin-product-row');
-      const chipsContainer = row.querySelector('.admin-tag-chips');
-      const selected = Array.from(chipsContainer.querySelectorAll('.tag-chip.active')).map(b => b.dataset.tag);
-      knownTags.add(name);
-      if (!selected.includes(name)) selected.push(name);
-      chipsContainer.innerHTML = tagChipsHtml(selected);
-      input.value = '';
-      await saveRowTags(row);
-      return;
-    }
-
-    const stockBtn = e.target.closest('.admin-stock-toggle .stock-btn');
-    if (stockBtn) {
-      const row = stockBtn.closest('.admin-product-row');
-      const id = row.dataset.id;
-      const product = products.find(p => String(p.id) === String(id));
-      if (!product) return;
-      const newStock = stockBtn.dataset.stock === 'true';
-      row.querySelector('.admin-stock-toggle').querySelectorAll('.stock-btn').forEach(b => b.classList.remove('active'));
-      stockBtn.classList.add('active');
-      const { error } = await supabaseClient.from(PRODUCTS_TABLE).update({ Stock: newStock }).eq('id', id);
-      if (error) {
-        console.error(error);
-        row.querySelector('.admin-stock-toggle').querySelectorAll('.stock-btn').forEach(b => b.classList.toggle('active', (b.dataset.stock === 'true') === product.inStock));
-        return;
-      }
-      product.inStock = newStock;
-      renderShop();
-      return;
-    }
-
-    const saveBtn = e.target.closest('.admin-save-btn');
-    if (saveBtn) {
-      handleSaveRow(saveBtn.closest('.admin-product-row'));
-      return;
-    }
-
-    const deleteBtn = e.target.closest('.admin-delete-btn');
-    if (deleteBtn) {
-      requestDeleteRow(deleteBtn.closest('.admin-product-row'));
-      return;
-    }
-  });
-
-  adminProductList.addEventListener('change', (e) => {
-    if (!e.target.classList.contains('admin-image-input')) return;
-    const file = e.target.files[0];
-    if (!file) return;
-    const preview = e.target.closest('.admin-image-field').querySelector('.admin-image-preview');
-    preview.innerHTML = `<img src="${URL.createObjectURL(file)}" alt="">`;
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (cartOverlay.classList.contains("open")) closeCart();
+    else if (menuPanel.classList.contains("open")) closeMenu();
   });
 </script>
 
