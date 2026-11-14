@@ -171,8 +171,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* SERVICIOS - BENTO */
   .bento{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    grid-template-rows:repeat(2,auto);
+    grid-template-columns:repeat(6,minmax(0,1fr));
     gap:20px;
   }
   .bento-item{
@@ -184,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .bento-item:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .bento-feature{
-    grid-column:span 2;
+    grid-column:span 3;
     grid-row:span 2;
     position:relative;
     overflow:hidden;
@@ -201,7 +200,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .bento-feature .tag{color:var(--secondary);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
   .bento-feature h3{font-size:26px;font-weight:600;margin-bottom:12px;}
   .bento-item.bento-feature p{color:#fff;font-size:14px;line-height:1.7;}
-  .bento-item:not(.bento-feature){grid-column:span 2;}
+  .bento-item{display:flex;flex-direction:column;}
+  .bento-half{grid-column:span 3;}
+  .bento-third{grid-column:span 2;}
   .bento-icon{
     width:44px;height:44px;
     border-radius:12px;
@@ -212,8 +213,74 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .bento-icon svg{width:22px;height:22px;stroke:var(--primary);}
   .bento-item h3{font-size:18px;font-weight:600;margin-bottom:8px;}
   .bento-item p{font-size:14px;color:var(--text-sub);line-height:1.6;}
-  .bento-item.bento-wide{grid-column:span 4;}
-  .bento-item.bento-wide p{max-width:520px;}
+  .bento-link{
+    margin-top:auto;padding-top:14px;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:6px;min-height:44px;
+    font-weight:700;font-size:14px;color:var(--primary-strong);
+  }
+  .bento-link:hover{text-decoration:underline;text-underline-offset:3px;}
+  .bento-feature .tag{margin-top:auto;}
+  .bento-feature .bento-link{color:#fff;margin-top:0;}
+
+  /* BADGE GOOGLE */
+  .g-badge{
+    display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 16px 6px 10px;border-radius:999px;
+    background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;
+    box-shadow:0 6px 18px rgba(20,32,27,0.1);transition:transform .2s ease;
+  }
+  .g-badge:hover{transform:translateY(-2px);}
+  .g-badge > svg{width:20px;height:20px;flex-shrink:0;}
+  .g-stars{display:inline-flex;align-items:center;gap:4px;}
+  .g-stars svg{width:16px;height:16px;fill:#B86E00;}
+  .hero-badge{margin-top:22px;opacity:0;animation:fadeUp .8s ease .5s forwards;}
+
+  /* RESEÑAS */
+  .resenas-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .review-card{
+    background:var(--surface);color:var(--ink);border-radius:22px;padding:26px;
+    display:flex;flex-direction:column;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  }
+  .review-stars{display:flex;gap:2px;}
+  .review-stars svg{width:18px;height:18px;fill:#B86E00;}
+  .review-text{font-size:15px;line-height:1.65;color:var(--ink);}
+  .review-author{margin-top:auto;font-weight:700;font-size:14px;}
+  .review-author small{display:block;font-weight:400;color:var(--text-sub);}
+  .review-card.pending{background:rgba(255,255,255,0.06);border:2px dashed rgba(249,162,37,0.6);box-shadow:none;color:#FFE2B3;}
+  .review-card.pending .review-text{color:#FFE2B3;}
+
+  /* FISIO: CASOS */
+  .fisio-cases{margin-top:44px;}
+  .fisio-cases h3{font-size:22px;font-weight:600;margin-bottom:16px;}
+  .fisio-cases-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+
+  /* TEASER TIENDA */
+  .store-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;}
+  .store-head h2{max-width:560px;}
+  .store-teaser{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
+  .store-card{
+    background:var(--surface);border-radius:20px;overflow:hidden;
+    box-shadow:0 4px 18px rgba(20,32,27,0.07);display:flex;flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .store-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,32,27,0.12);}
+  .store-card .ph{aspect-ratio:1/1;background:#F2EFEA;display:flex;align-items:center;justify-content:center;font-size:40px;}
+  .store-card img{width:100%;height:100%;object-fit:contain;padding:12px;}
+  .store-card-body{padding:16px 18px 20px;}
+  .store-card h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;line-height:1.35;margin-bottom:6px;}
+  .store-card .price{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--primary-strong);}
+  .store-card .price.ask{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;}
+  .store-card.skeleton{min-height:280px;background:linear-gradient(100deg,#EFEBE5 30%,#F7F4F0 50%,#EFEBE5 70%);background-size:200% 100%;animation:shimmer 1.4s linear infinite;box-shadow:none;}
+  @keyframes shimmer{to{background-position:-200% 0;}}
+  .store-empty{grid-column:1/-1;color:var(--text-sub);}
+
+  /* MÉTRICAS */
+  .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+  .metric{display:flex;flex-direction:column-reverse;gap:8px;padding:24px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
+  .metric-num{font-family:'Fraunces',serif;font-size:clamp(36px,4.4vw,52px);font-weight:600;color:var(--secondary);line-height:1;}
+  .metric-star{font-size:.6em;margin-left:6px;color:var(--accent);}
+  .metric-label{font-size:15px;color:var(--text-on-dark);}
+  .metric-label.todo-placeholder{color:#FFE2B3;}
 
   /* FISIOTERAPIA */
   .fisio-grid{
@@ -315,41 +382,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media(prefers-reduced-motion:reduce){.tech-card-inner{transition:none;}}
 
   /* PRODUCTOS */
-  .products-card{
-    max-width:560px;
-    margin:0 auto;
-    text-align:center;
-    background:var(--surface);
-    border-radius:28px;
-    padding:56px 40px;
-    box-shadow:0 4px 18px rgba(20,32,27,0.06);
-    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .3s ease, box-shadow .3s ease;
-  }
-  .products-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
-  .products-card .product-icon{
-    width:64px;height:64px;
-    border-radius:16px;
-    background:rgba(5,165,181,0.12);
-    display:flex;align-items:center;justify-content:center;
-    font-size:30px;
-    margin:0 auto 22px;
-  }
-  .products-card p{font-size:17px;color:var(--ink);line-height:1.6;max-width:400px;margin:0 auto 28px;}
-  .buy-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--primary);
-    color:#fff;
-    padding:16px 34px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:15px;
-    border:none;
-    cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .buy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(5,165,181,0.32);}
 
   /* UBICACIÓN Y HORARIOS */
   .visit-grid{
@@ -381,20 +413,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .hours-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(20,32,27,0.12);}
   .hours-card h3{font-size:18px;font-weight:600;margin-bottom:18px;}
-  .hours-list{display:flex;flex-direction:column;}
-  .hours-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid rgba(20,32,27,0.08);
-    font-size:14px;
-  }
-  .hours-row:last-child{border-bottom:none;}
-  .hours-row .day{font-weight:600;}
-  .hours-row .hours{color:var(--text-sub);}
-  .hours-row.closed .hours{color:var(--accent);font-weight:600;}
-  .hours-row.today .day{color:var(--primary);}
+  .hours-compact{display:flex;flex-direction:column;}
+  .hours-compact li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;}
+  .hours-compact li:last-child{border-bottom:none;}
+  .hours-compact .day{font-weight:700;}
+  .hours-compact .hours{color:var(--text-sub);}
+  .hours-compact .closed .hours{color:var(--accent-strong);font-weight:700;}
+  .hours-actions{margin-top:14px;display:flex;flex-direction:column;align-items:flex-start;}
 
   /* CASOS BAND */
   #resenas{background:var(--menu-dark);color:#fff;}
@@ -403,23 +428,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* SERVICIOS BAND */
   #servicios{background:var(--menu-dark);color:#fff;}
-  #servicios .eyebrow{color:var(--secondary);}
   #servicios .section-head h2{color:#fff;}
   #servicios .section-head p{color:rgba(255,255,255,0.65);}
   #servicios .bento-item:not(.bento-feature) h3{color:var(--ink);}
 
   /* STATS BAND */
   .stats-band{background:var(--menu-dark);color:#fff;}
-  .stats-row{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:40px;
-    text-align:center;
-  }
-  .stat{flex:1;min-width:180px;}
-  .stat-num{font-family:'Fraunces',serif;font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--secondary);}
-  .stat-label{font-size:14px;color:rgba(255,255,255,0.65);margin-top:8px;}
 
   /* CONTACT BAND */
   .contact-band{position:relative;padding:110px 0;color:#fff;overflow:hidden;}
@@ -449,10 +463,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
     .hero-visual{height:260px;order:-1;}
-    .bento{grid-template-columns:repeat(2,1fr);}
-    .bento-feature{grid-column:span 2;min-height:260px;}
-    .bento-item:not(.bento-feature){grid-column:span 1;}
-    .bento-item.bento-wide{grid-column:span 2;}
+    .bento-feature{grid-column:span 6;min-height:300px;}
+    .store-teaser{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
     .fisio-grid{grid-template-columns:1fr;}
     .fisio-faq{position:static;}
     .visit-grid{grid-template-columns:1fr;}
@@ -466,16 +479,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-ctas{width:100%;}
     .pill-btn{width:100%;justify-content:center;}
     .section-head{margin-bottom:36px;}
-    .stats-row{justify-content:flex-start;gap:32px;}
-    .stat{min-width:45%;text-align:left;}
 
     .bento{grid-template-columns:1fr;}
-    .bento-feature,
-    .bento-item:not(.bento-feature){grid-column:span 1;}
+    .bento-item.bento-item{grid-column:1 / -1;}
+    .store-teaser{gap:12px;}
+    .metric{padding:18px;}
     .fisio-step{align-items:flex-start;}
     .fisio-step-num{width:42px;height:42px;font-size:18px;}
     .fisio-faq{padding:32px 24px;}
-    .products-card{padding:40px 24px;}
   }
 </style>
 <script type="application/ld+json">
@@ -585,6 +596,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir turno por WhatsApp</a>
         <a href="contacto.html" class="text-link">o completá el formulario</a>
       </div>
+      <div class="hero-badge"><a class="g-badge" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span>· <span data-reviews-total>43</span> reseñas en Google</span></a></div>
     </div>
     <div class="hero-visual">
       <div class="blob-glow"></div>
@@ -605,7 +617,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<section id="servicios">
+<section id="servicios" class="on-dark">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Servicios</span>
@@ -615,45 +627,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bento">
       <div class="bento-item bento-feature reveal">
         <!-- TODO CONTENIDO: reemplazar por una foto propia. Esta es de stock (antes se cargaba desde postgradoveterinaria.com); revisar licencia. -->
-        <img class="bento-feature-img" src="img/atencion-clinica-750.webp" srcset="img/atencion-clinica-480.webp 480w, img/atencion-clinica-750.webp 750w" sizes="(max-width: 640px) 100vw, 580px" width="750" height="450" alt="" loading="lazy" decoding="async">
+        <img class="bento-feature-img" src="img/atencion-clinica-750.webp" srcset="img/atencion-clinica-480.webp 480w, img/atencion-clinica-750.webp 750w" sizes="(max-width: 900px) 100vw, 580px" width="750" height="450" alt="" loading="lazy" decoding="async">
         <span class="tag">Atención personalizada</span>
         <h3>Atención clínica</h3>
         <p>Consultas, diagnóstico y seguimiento con un equipo veterinario cercano, que dedica el tiempo que tu mascota necesita.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20una%20consulta." target="_blank" rel="noopener">Pedir turno <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.5-1.5 3.5 0 5s3.5 1.5 5 0l9-9c1.5-1.5 1.5-3.5 0-5s-3.5-1.5-5 0l-9 9z"/><path d="M14 8l2 2"/><path d="M8 14l2 2"/></svg>
-        </div>
+      <div class="bento-item bento-half reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg></div>
         <h3>Fisioterapia y rehabilitación</h3>
         <p>Terapias de recuperación para mejorar su movilidad y bienestar.</p>
+        <a class="bento-link" href="#fisioterapia">Cómo es una sesión <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-        </div>
+      <div class="bento-item bento-half reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
         <h3>Métodos complementarios</h3>
         <p>Terapias alternativas que acompañan el tratamiento convencional de tu mascota.</p>
+        <!-- TODO CONTENIDO: si se arma una página o sección de métodos complementarios, cambiar este link. -->
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20los%20m%C3%A9todos%20complementarios." target="_blank" rel="noopener">Consultar <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-        </div>
+      <div class="bento-item bento-third reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></div>
         <h3>Farmacia</h3>
         <p>Medicamentos y productos para el cuidado y la salud de tu mascota.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20un%20medicamento." target="_blank" rel="noopener">Consultar un medicamento <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        </div>
+      <div class="bento-item bento-third reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
         <h3>Petshop</h3>
         <p>Accesorios y artículos pensados para el día a día de tu mascota.</p>
+        <a class="bento-link" href="tienda.html">Ver la tienda <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item bento-wide reveal">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M4 11a8 8 0 0 0 16 0"/><path d="M12 3v4"/></svg>
-        </div>
+      <div class="bento-item bento-third reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18"/><path d="M4 11a8 8 0 0 0 16 0"/><path d="M12 3v4"/></svg></div>
         <h3>Alimentos balanceados</h3>
         <p>Nutrición balanceada según la etapa y las necesidades de tu mascota.</p>
+        <a class="bento-link" href="tienda.html?categoria=Alimentos">Ver alimentos <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -693,6 +702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="fisio-tech reveal">
       <span class="fisio-tech-label">Tecnologías que usamos</span>
+      <!-- TODO CONTENIDO: revisar con el equipo los textos del dorso de cada tarjeta (los redactamos nosotras como base). -->
       <div class="tech-cards">
         <button type="button" class="tech-card" aria-pressed="false">
           <span class="tech-card-inner">
@@ -748,6 +758,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
       </div>
     </div>
+    <div class="fisio-cases reveal">
+      <h3>¿Para qué casos sirve?</h3>
+      <!-- TODO CONTENIDO: completar con los casos reales que trata FirVet (ej.: postoperatorios, artrosis, displasia, hernias...). -->
+      <ul class="fisio-cases-list">
+        <li class="todo-placeholder">Caso 1 — completar</li>
+        <li class="todo-placeholder">Caso 2 — completar</li>
+        <li class="todo-placeholder">Caso 3 — completar</li>
+        <li class="todo-placeholder">Caso 4 — completar</li>
+      </ul>
+    </div>
     <div class="fisio-cta reveal">
       <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20una%20evaluaci%C3%B3n%20de%20fisioterapia%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir evaluación de fisioterapia</a>
       <a href="contacto.html?motivo=fisioterapia" class="text-link">o completá el formulario</a>
@@ -755,46 +775,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section id="resenas">
+<section id="resenas" class="on-dark">
   <div class="container">
-    <div class="section-head reveal">
-      <h2>Historias que nos llenan de orgullo</h2>
-      <p>Algunos de los pacientes que pasaron por nuestra clínica y hoy están mejor que nunca.</p>
+    <div class="section-head reveal resenas-head">
+      <div>
+        <span class="eyebrow">Reseñas</span>
+        <h2>Historias que nos llenan de orgullo</h2>
+        <p>Algunos de los pacientes que pasaron por nuestra clínica y hoy están mejor que nunca.</p>
+      </div>
+      <a class="g-badge g-badge-dark" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span>· <span data-reviews-total>43</span> reseñas en Google</span></a>
     </div>
-    <div class="elfsight-app-5b102a4d-5674-497b-8de8-6b0a35cade06" data-elfsight-app-lazy></div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+    <noscript><p><a class="text-link" href="https://www.google.com/maps?cid=15733491255711557415">Ver las reseñas en Google</a></p></noscript>
   </div>
 </section>
 
 <section id="productos">
   <div class="container">
-    <div class="products-card reveal">
-      <div class="product-icon">🐾</div>
-      <p>También vendemos productos para cuidar la felicidad de tu mascota.</p>
-      <a href="tienda.html" class="buy-btn">Comprar</a>
+    <div class="section-head reveal store-head">
+      <div>
+        <span class="eyebrow">Tienda</span>
+        <h2>También vendemos productos para cuidar la felicidad de tu mascota</h2>
+      </div>
+      <a href="tienda.html" class="pill-btn">Ver tienda <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="store-teaser" id="storeTeaser" aria-live="polite">
+      <div class="store-card skeleton" aria-hidden="true"></div>
+      <div class="store-card skeleton" aria-hidden="true"></div>
+      <div class="store-card skeleton" aria-hidden="true"></div>
+      <div class="store-card skeleton" aria-hidden="true"></div>
     </div>
   </div>
 </section>
 
-<section id="nosotros" class="stats-band">
+<section id="nosotros" class="stats-band on-dark">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow" style="color:var(--secondary)">Por qué elegirnos</span>
-      <h2 style="color:#fff">Cuidado con profesionalismo y cariño</h2>
+      <span class="eyebrow">Por qué elegirnos</span>
+      <h2>Cuidado con profesionalismo y cariño</h2>
     </div>
-    <div class="stats-row">
-      <div class="stat reveal">
-        <div class="stat-num">Amor por los animales</div>
-        <div class="stat-label">Elegimos esta profesión por pasión a las mascotas.</div>
+    <!-- TODO CONTENIDO: completar las métricas con datos reales (número + etiqueta). -->
+    <dl class="metrics">
+      <div class="metric reveal">
+        <dt class="metric-label">Calificación en Google</dt>
+        <dd class="metric-num"><span data-reviews-rating>5.0</span><span class="metric-star" aria-hidden="true">★</span></dd>
       </div>
-      <div class="stat reveal">
-        <div class="stat-num">Atención personalizada</div>
-        <div class="stat-label">Cada paciente recibe tiempo y dedicación, sin apuro.</div>
+      <div class="metric reveal">
+        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: años de experiencia)</dt>
+        <dd class="metric-num">00</dd>
       </div>
-      <div class="stat reveal">
-        <div class="stat-num">Equipo profesional</div>
-        <div class="stat-label">Formación y experiencia dedicadas al bienestar de tu mascota.</div>
+      <div class="metric reveal">
+        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: pacientes atendidos)</dt>
+        <dd class="metric-num">000+</dd>
       </div>
-    </div>
+      <div class="metric reveal">
+        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: profesionales en el equipo)</dt>
+        <dd class="metric-num">0</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
@@ -807,23 +845,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="visit-grid">
       <div class="map-card reveal">
-        <iframe src="https://www.google.com/maps?q=Catamarca+530,+W3400CEE+Corrientes,+Argentina&z=16&output=embed" loading="lazy" allowfullscreen title="Mapa: ubicación de FirVet" width="600" height="280"></iframe>
+        <iframe src="https://maps.google.com/maps?cid=15733491255711557415&amp;output=embed" width="600" height="300" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Mapa: FirVet Veterinaria, Catamarca 530, Corrientes"></iframe>
         <div class="map-card-body">
           <h3>FirVet Veterinaria</h3>
           <p>Catamarca 530, Corrientes Capital (W3400CEE)</p>
-          <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener" class="pill-btn">Ver en Google Maps →</a>
+          <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener" class="pill-btn">Cómo llegar <span aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="hours-card reveal">
         <h3>Horarios de atención</h3>
-        <div class="hours-list">
-          <div class="hours-row"><span class="day">Lunes</span><span class="hours">9 a.m.–7 p.m.</span></div>
-          <div class="hours-row"><span class="day">Martes</span><span class="hours">9 a.m.–7 p.m.</span></div>
-          <div class="hours-row"><span class="day">Miércoles</span><span class="hours">9 a.m.–7 p.m.</span></div>
-          <div class="hours-row"><span class="day">Jueves</span><span class="hours">9 a.m.–7 p.m.</span></div>
-          <div class="hours-row"><span class="day">Viernes</span><span class="hours">9 a.m.–7 p.m.</span></div>
-          <div class="hours-row"><span class="day">Sábado</span><span class="hours">9 a.m.–1 p.m.</span></div>
-          <div class="hours-row closed"><span class="day">Domingo</span><span class="hours">Cerrado</span></div>
+        <ul class="hours-compact">
+          <li><span class="day">Lun a Vie</span><span class="hours">9 a 19 h</span></li>
+          <li><span class="day">Sáb</span><span class="hours">9 a 13 h</span></li>
+          <li class="closed"><span class="day">Dom</span><span class="hours">Cerrado</span></li>
+        </ul>
+        <div class="hours-actions">
+          <a class="text-link" href="tel:+5493795033587">Llamar al +54 9 379 503-3587</a>
+          <a class="text-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener">Escribir por WhatsApp</a>
         </div>
       </div>
     </div>
@@ -903,8 +941,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </script>
 
-<!-- Elfsight Google Reviews | Untitled Google Reviews -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
 
 <script>
   const installAppBtn = document.getElementById('installAppBtn');
@@ -934,6 +970,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 </script>
 
+<script src="resenas.js"></script>
+<script>
+  /* ---------- Reseñas (datos en resenas.js) ---------- */
+  (function(){
+    const cfg = window.FIRVET_RESENAS;
+    if (!cfg) return;
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    document.querySelectorAll('[data-reviews-rating]').forEach(el => el.textContent = cfg.rating);
+    document.querySelectorAll('[data-reviews-total]').forEach(el => el.textContent = cfg.total);
+    document.querySelectorAll('[data-reviews-badge]').forEach(el => {
+      el.href = cfg.url;
+      el.setAttribute('aria-label', `${cfg.rating} estrellas, ${cfg.total} reseñas en Google (se abre en otra pestaña)`);
+    });
+    const star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
+    const grid = document.getElementById('reviewsGrid');
+    grid.innerHTML = cfg.items.map(r => r.texto ? `
+      <figure class="review-card reveal">
+        <div class="review-stars" role="img" aria-label="${r.estrellas} de 5 estrellas">${star.repeat(r.estrellas || 5)}</div>
+        <blockquote class="review-text">${esc(r.texto)}</blockquote>
+        <figcaption class="review-author">${esc(r.autor)}${r.fecha ? `<small>${esc(r.fecha)} · Google</small>` : ''}</figcaption>
+      </figure>` : `
+      <figure class="review-card pending reveal">
+        <p class="review-text">Reseña pendiente: copiar una reseña real de Google en <code>resenas.js</code>.</p>
+      </figure>`).join('');
+    grid.querySelectorAll('.reveal').forEach(el => window.siteReveal ? window.siteReveal(el) : el.classList.add('visible'));
+  })();
+
+  /* ---------- Teaser de tienda: 4 productos de Supabase ---------- */
+  (function(){
+    const box = document.getElementById('storeTeaser');
+    if (!box) return;
+    const URL_API = 'https://lkoqygvxvyvyvmfoqaje.supabase.co/rest/v1/Productos?select=id,Nombre,Precio,ConsultarPrecio,ImagenUrl,Stock&Stock=neq.false&order=id.asc&limit=4';
+    const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxrb3F5Z3Z4dnl2eXZtZm9xYWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc5OTExNzEsImV4cCI6MjEwMzU2NzE3MX0.MTg9eEPg4w1DIxcTVYit6dwfjFyXoowwm79eRP5Wt2Y';
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const price = (n) => '$' + (Number(n) || 0).toLocaleString('es-AR');
+    function load(){
+      fetch(URL_API, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(rows => {
+          if (!rows.length) { box.innerHTML = '<p class="store-empty">Pronto vas a ver productos acá.</p>'; return; }
+          box.innerHTML = rows.map(p => `
+            <a class="store-card" href="tienda.html">
+              <div class="ph">${p.ImagenUrl ? `<img src="${esc(p.ImagenUrl)}" alt="" width="300" height="300" loading="lazy" decoding="async">` : '<span aria-hidden="true">🐾</span>'}</div>
+              <div class="store-card-body">
+                <h3>${esc(p.Nombre)}</h3>
+                ${p.ConsultarPrecio ? '<span class="price ask">Consultar precio</span>' : `<span class="price">${price(p.Precio)}</span>`}
+              </div>
+            </a>`).join('');
+        })
+        .catch(() => { box.innerHTML = '<p class="store-empty">No pudimos cargar los productos. <a class="text-link" href="tienda.html">Ir a la tienda</a></p>'; });
+    }
+    // Carga recién cuando la sección se acerca a la pantalla
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => { if (entries.some(e => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '400px' });
+      io.observe(box);
+    } else load();
+  })();
+</script>
 <script src="site.js"></script>
 </body>
 </html>
