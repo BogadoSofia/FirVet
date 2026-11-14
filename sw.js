@@ -1,12 +1,12 @@
-const CACHE_NAME = 'firvet-cache-v2';
+const CACHE_NAME = 'firvet-cache-v3';
 
 const CORE_ASSETS = [
   './',
   './index.html',
   './contacto.html',
   './tienda.html',
-  './favicon.png',
-  './logo-icon.png',
+  './favicon.ico',
+  './logo.webp',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',

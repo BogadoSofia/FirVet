@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Panel de administración — FirVet</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -73,7 +74,7 @@
 <body>
 <div class="wrap">
   <div class="topbar">
-    <a href="index.html"><img src="logo-icon.png" alt="FirVet — volver al sitio" width="44" height="44"></a>
+    <a href="index.html"><img src="logo.webp" alt="FirVet — volver al sitio" width="53" height="44"></a>
     <div class="topbar-right" id="sessionBar" hidden>
       <span id="sessionEmail"></span>
       <button type="button" class="btn ghost" id="logoutBtn">Cerrar sesión</button>
@@ -274,9 +275,26 @@
   });
 
   /* ---------- STORAGE ---------- */
-  async function uploadImage(file){
+  // Achica la foto a 1000px como máximo y la convierte a WebP antes de subirla,
+  // así la tienda no descarga archivos de varios MB.
+  async function toWebp(file, max = 1000){
+    try {
+      const bmp = await createImageBitmap(file);
+      const scale = Math.min(1, max / Math.max(bmp.width, bmp.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(bmp.width * scale);
+      canvas.height = Math.round(bmp.height * scale);
+      canvas.getContext('2d').drawImage(bmp, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.82));
+      if (!blob || blob.type !== 'image/webp') return file;
+      return new File([blob], file.name.replace(/\.[^.]+$/, '') + '.webp', { type: 'image/webp' });
+    } catch { return file; }
+  }
+
+  async function uploadImage(original){
+    const file = await toWebp(original);
     const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`;
-    const { error } = await sb.storage.from(STORAGE_BUCKET).upload(path, file);
+    const { error } = await sb.storage.from(STORAGE_BUCKET).upload(path, file, { contentType: file.type, cacheControl: '31536000' });
     if (error) throw error;
     return { url: sb.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl, path };
   }

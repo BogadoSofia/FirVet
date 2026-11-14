@@ -11,24 +11,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05A5B5">
-<title>FirVet — Clínica Veterinaria</title>
+<title>FirVet — Clínica veterinaria en Corrientes Capital</title>
 <meta name="description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<link rel="canonical" href="https://bogadosofia.github.io/FirVet/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FirVet Veterinaria">
-<meta property="og:title" content="FirVet — Clínica Veterinaria">
-<meta property="og:description" content="Consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda de productos para tu mascota en Corrientes Capital.">
-<meta property="og:image" content="Mejorar%20imagen.png">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://bogadosofia.github.io/FirVet/">
+<meta property="og:title" content="FirVet — Clínica veterinaria en Corrientes Capital">
+<meta property="og:description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta property="og:image" content="https://bogadosofia.github.io/FirVet/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo de FirVet Veterinaria, Catamarca 530, Corrientes Capital">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FirVet — Clínica Veterinaria">
-<meta name="twitter:description" content="Consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda de productos para tu mascota en Corrientes Capital.">
-<meta name="twitter:image" content="Mejorar%20imagen.png">
-<link rel="icon" type="image/png" href="favicon.png">
+<meta name="twitter:title" content="FirVet — Clínica veterinaria en Corrientes Capital">
+<meta name="twitter:description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta name="twitter:image" content="https://bogadosofia.github.io/FirVet/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="FirVet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -186,13 +195,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     from{opacity:0;transform:translateY(24px);}
     to{opacity:1;transform:translateY(0);}
   }
-  .hero-logo{
-    height:64px;width:auto;
-    margin-bottom:22px;
-    filter:drop-shadow(0 10px 20px rgba(20,32,27,0.18));
-    opacity:0;
-    animation:fadeUp .8s ease forwards;
-  }
   .eyebrow{
     color:var(--primary);
     font-size:13px;
@@ -268,13 +270,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     inset:0;
     margin:auto;
     width:320px;height:320px;
-    background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(17, 175, 162, 0.55)), url('https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg');
-    background-size:cover;
-    background-position:center;
+    overflow:hidden;
     border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;
     box-shadow:0 20px 50px rgba(20,32,27,0.25);
     animation:blobMove 9s ease-in-out infinite;
   }
+  .blob img{width:100%;height:100%;object-fit:cover;display:block;}
+  .blob::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(17,175,162,0.55));}
   @keyframes blobMove{
     0%,100%{border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;}
     50%{border-radius:45% 55% 38% 62% / 62% 38% 55% 45%;}
@@ -332,15 +334,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .bento-feature{
     grid-column:span 2;
     grid-row:span 2;
-    background:linear-gradient(0deg, rgba(20,32,27,0.92) 0%, rgba(20,32,27,0.35) 55%, rgba(20,32,27,0.55) 100%), url('https://postgradoveterinaria.com/wp-content/uploads/veterinario-de-urgencias.jpg');
-    background-size:cover;
-    background-position:center;
+    position:relative;
+    overflow:hidden;
+    background:#14201B;
     color:#fff;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
     min-height:340px;
   }
+  .bento-feature-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .bento-feature::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg, rgba(20,32,27,0.92) 0%, rgba(20,32,27,0.35) 55%, rgba(20,32,27,0.55) 100%);}
+  .bento-feature > :not(img){position:relative;z-index:2;}
   .bento-feature .tag{color:var(--secondary);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
   .bento-feature h3{font-size:26px;font-weight:600;margin-bottom:12px;}
   .bento-item.bento-feature p{color:#fff;font-size:14px;line-height:1.7;}
@@ -614,7 +619,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .whatsapp-fab svg{width:24px;height:24px;}
     .menu-panel{justify-content:flex-start;padding:96px 20px 32px;}
     .hero{padding:110px 0 60px;}
-    .hero-logo{height:52px;}
     .hero p{max-width:none;}
     .hero-ctas{width:100%;}
     .pill-btn{width:100%;justify-content:center;}
@@ -631,6 +635,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .products-card{padding:40px 24px;}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VeterinaryCare",
+  "@id": "https://bogadosofia.github.io/FirVet/#clinica",
+  "name": "FirVet Veterinaria",
+  "url": "https://bogadosofia.github.io/FirVet/",
+  "logo": "https://bogadosofia.github.io/FirVet/logo.png",
+  "image": "https://bogadosofia.github.io/FirVet/og-image.jpg",
+  "telephone": "+54 9 379 503-3587",
+  "email": "firvet.veterinaria@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Catamarca 530",
+    "addressLocality": "Corrientes",
+    "addressRegion": "Corrientes",
+    "postalCode": "W3400CEE",
+    "addressCountry": "AR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -27.4638639, "longitude": -58.8328057 },
+  "hasMap": "https://maps.app.goo.gl/swao9cz3iKC9LN326",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+  ],
+  "sameAs": ["https://instagram.com/firvet.veterinaria"]
+}
+</script>
+<!-- TODO CONTENIDO: verificar las coordenadas "geo" (tomadas de OpenStreetMap para Catamarca 530) contra el pin de Google Maps. -->
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -639,7 +672,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <a href="index.html" class="brand-chip">
-  <img src="logo-icon.png" alt="FirVet">
+  <img src="logo.webp" alt="FirVet Veterinaria — inicio" width="53" height="44">
 </a>
 
 <button class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
@@ -681,7 +714,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <img src="logo-icon.png" alt="FirVet" class="hero-logo">
       <span class="eyebrow">Clínica veterinaria integral</span>
       <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
       <p>Consultas, cirugías y vacunación, con un equipo que trata a cada paciente como familia.</p>
@@ -691,7 +723,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="hero-visual">
       <div class="blob-glow"></div>
-      <div class="blob"></div>
+      <div class="blob">
+        <!-- TODO CONTENIDO: reemplazar por una foto propia de FirVet. Esta es de stock (antes se cargaba desde axoncomunicacion.net); revisar licencia/atribución. -->
+        <img src="img/hero-640.webp" srcset="img/hero-400.webp 400w, img/hero-640.webp 640w" sizes="(max-width: 640px) 260px, 320px" width="640" height="640" alt="Veterinaria revisando a un cachorro con el estetoscopio" fetchpriority="high" decoding="async">
+      </div>
       <span class="chip chip-1">🐾 Amor por los animales</span>
       <span class="chip chip-2">Atención personalizada</span>
       <span class="chip chip-3">Equipo profesional</span>
@@ -714,6 +749,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="bento">
       <div class="bento-item bento-feature reveal">
+        <!-- TODO CONTENIDO: reemplazar por una foto propia. Esta es de stock (antes se cargaba desde postgradoveterinaria.com); revisar licencia. -->
+        <img class="bento-feature-img" src="img/atencion-clinica-750.webp" srcset="img/atencion-clinica-480.webp 480w, img/atencion-clinica-750.webp 750w" sizes="(max-width: 640px) 100vw, 580px" width="750" height="450" alt="" loading="lazy" decoding="async">
         <span class="tag">Atención personalizada</span>
         <h3>Atención clínica</h3>
         <p>Consultas, diagnóstico y seguimiento con un equipo veterinario cercano, que dedica el tiempo que tu mascota necesita.</p>
@@ -901,7 +938,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="visit-grid">
       <div class="map-card reveal">
-        <iframe src="https://www.google.com/maps?q=Catamarca+530,+W3400CEE+Corrientes,+Argentina&z=16&output=embed" loading="lazy" allowfullscreen title="Ubicación de FirVet"></iframe>
+        <iframe src="https://www.google.com/maps?q=Catamarca+530,+W3400CEE+Corrientes,+Argentina&z=16&output=embed" loading="lazy" allowfullscreen title="Mapa: ubicación de FirVet" width="600" height="280"></iframe>
         <div class="map-card-body">
           <h3>FirVet Veterinaria</h3>
           <p>Catamarca 530, Corrientes Capital (W3400CEE)</p>
