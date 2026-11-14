@@ -39,134 +39,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 <style>
-  :root{
-    --bg:#FAF8F5;
-    --surface:#FFFFFF;
-    --ink:#14201B;
-    --primary:#05A5B5;
-    --secondary:#2DCFE0;
-    --accent:#F9A225;
-    --text-sub:#5B6660;
-    --menu-dark:#0B2530;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    overflow-x:hidden;
-  }
-  a{text-decoration:none;color:inherit;}
-  :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px;}
-  ul{list-style:none;}
-  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
-  .container{
-    max-width:1180px;
-    margin:0 auto;
-    padding:0 32px;
-  }
 
   /* FLOATING NAV */
-  .brand-chip{
-    position:fixed;
-    top:24px;left:24px;
-    z-index:110;
-    display:flex;
-    align-items:center;
-    background:var(--surface);
-    border-radius:999px;
-    padding:8px 16px;
-    box-shadow:0 6px 20px rgba(20,32,27,0.1);
-    font-weight:700;
-    font-size:16px;
-  }
-  .brand-chip img{width:auto;height:44px;display:block;}
-  .menu-btn{
-    position:fixed;
-    top:24px;right:24px;
-    z-index:110;
-    width:52px;height:52px;
-    border-radius:50%;
-    background:var(--menu-dark);
-    border:none;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 20px rgba(20,32,27,0.18);
-    transition:transform .2s ease;
-  }
-  .menu-btn:hover{transform:scale(1.06);}
-  .menu-btn svg{width:20px;height:20px;}
 
   /* WHATSAPP FAB */
-  .whatsapp-fab{
-    position:fixed;
-    bottom:24px;right:24px;
-    z-index:110;
-    width:58px;height:58px;
-    border-radius:50%;
-    background:#25D366;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 24px rgba(37,211,102,0.4);
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .whatsapp-fab:hover{transform:scale(1.08);box-shadow:0 10px 30px rgba(37,211,102,0.5);}
-  .whatsapp-fab svg{width:28px;height:28px;fill:#fff;}
-  .menu-btn .bar{
-    stroke:#fff;
-    transition:transform .3s ease, opacity .2s ease;
-    transform-box:fill-box;
-    transform-origin:center;
-  }
-  .menu-btn.open .bar1{transform:translateY(6px) rotate(45deg);}
-  .menu-btn.open .bar2{opacity:0;}
-  .menu-btn.open .bar3{transform:translateY(-6px) rotate(-45deg);}
 
   /* OFF-CANVAS MENU */
-  .menu-panel{
-    position:fixed;
-    inset:0;
-    z-index:105;
-    background:var(--menu-dark);
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:32px;
-    overflow-y:auto;
-    transform:translateX(100%);
-    opacity:0;
-    transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .3s ease;
-  }
-  .menu-panel.open{transform:translateX(0);opacity:1;}
-  .menu-panel-inner{max-width:1180px;margin:0 auto;width:100%;}
-  .menu-links{display:flex;flex-direction:column;gap:6px;}
-  .menu-links a{
-    font-family:'Fraunces',serif;
-    font-size:clamp(32px,7vw,56px);
-    font-weight:600;
-    padding:10px 0;
-    display:inline-block;
-    color:rgba(255,255,255,0.55);
-    transition:color .25s ease, padding-left .25s ease;
-  }
-  .menu-links a:hover{color:#fff;padding-left:12px;}
-  .menu-links a.active{color:var(--secondary);}
-  .menu-foot{
-    margin-top:48px;
-    padding-top:24px;
-    border-top:1px solid rgba(255,255,255,0.15);
-    display:flex;
-    gap:32px;
-    flex-wrap:wrap;
-    font-size:14px;
-    color:rgba(255,255,255,0.6);
-  }
-  .menu-foot a{transition:color .2s ease;}
-  .menu-foot a:hover{color:#fff;}
-  .install-app-btn{margin-top:28px;}
-  .install-app-btn[hidden]{display:none;}
 
   /* HERO */
   .hero{
@@ -195,15 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     from{opacity:0;transform:translateY(24px);}
     to{opacity:1;transform:translateY(0);}
   }
-  .eyebrow{
-    color:var(--primary);
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:18px;
-    display:block;
-  }
+
   .hero .eyebrow{opacity:0;animation:fadeUp .8s ease .1s forwards;}
   .hero h1{
     font-size:clamp(34px,5.2vw,58px);
@@ -231,20 +103,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity:0;
     animation:fadeUp .8s ease .4s forwards;
   }
-  .pill-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:var(--primary);
-    color:#fff;
-    padding:16px 30px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:15px;
-    box-shadow:0 10px 26px rgba(5,165,181,0.32);
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(5,165,181,0.4);}
 
   .hero-visual{
     position:relative;
@@ -298,13 +156,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .chip-1{top:8%;left:0;animation-delay:0s;}
   .chip-2{bottom:14%;right:0;color:var(--primary);animation-delay:.6s;}
   .chip-3{top:46%;right:-4%;background:var(--accent);color:#fff;animation-delay:1.2s;}
-
-  .reveal{
-    opacity:0;
-    transform:scale(.97);
-    transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
-  }
-  .reveal.visible{opacity:1;transform:scale(1);}
 
   section{padding:100px 0;}
   .section-head{margin-bottom:56px;}
@@ -545,9 +396,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hours-row.today .day{color:var(--primary);}
 
   /* CASOS BAND */
-  #casos{background:var(--menu-dark);color:#fff;}
-  #casos .section-head h2{color:#fff;}
-  #casos .section-head p{color:rgba(255,255,255,0.65);}
+  #resenas{background:var(--menu-dark);color:#fff;}
+  #resenas .section-head h2{color:#fff;}
+  #resenas .section-head p{color:rgba(255,255,255,0.65);}
 
   /* SERVICIOS BAND */
   #servicios{background:var(--menu-dark);color:#fff;}
@@ -584,19 +435,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-band .pill-btn{background:#fff;color:var(--primary);}
 
   /* FOOTER */
-  .footer-mini{padding:44px 0;text-align:center;}
-  .footer-mini svg{width:24px;height:24px;margin-bottom:12px;animation:pawBounce 3s ease-in-out infinite;}
-  @keyframes pawBounce{
-    0%,100%{transform:translateY(0) rotate(0deg);}
-    50%{transform:translateY(-5px) rotate(-4deg);}
-  }
-  .footer-mini p{color:var(--text-sub);font-size:13px;margin-bottom:10px;}
-  .vertex-link{color:var(--primary);font-weight:700;transition:color .2s ease;}
-  .vertex-link:hover{color:var(--accent);text-decoration:underline;}
-  .footer-links-row{font-size:13px;color:var(--text-sub);}
-  .footer-links-row a{font-weight:700;color:var(--ink);}
-  .footer-links-row a:hover{color:var(--primary);}
-  .dot{margin:0 10px;color:var(--text-sub);}
 
   @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
@@ -611,13 +449,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   @media(max-width:640px){
     section{padding:64px 0;}
-    .container{padding:0 20px;}
-    .brand-chip{top:16px;left:16px;padding:6px 14px;font-size:14px;}
-    .brand-chip img{width:auto;height:36px;}
-    .menu-btn{top:16px;right:16px;width:46px;height:46px;}
-    .whatsapp-fab{bottom:16px;right:16px;width:50px;height:50px;}
-    .whatsapp-fab svg{width:24px;height:24px;}
-    .menu-panel{justify-content:flex-start;padding:96px 20px 32px;}
+
     .hero{padding:110px 0 60px;}
     .hero p{max-width:none;}
     .hero-ctas{width:100%;}
@@ -625,7 +457,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .section-head{margin-bottom:36px;}
     .stats-row{justify-content:flex-start;gap:32px;}
     .stat{min-width:45%;text-align:left;}
-    .menu-links a{font-size:32px;}
+
     .bento{grid-template-columns:1fr;}
     .bento-feature,
     .bento-item:not(.bento-feature){grid-column:span 1;}
@@ -671,46 +503,67 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<a href="index.html" class="brand-chip">
-  <img src="logo.webp" alt="FirVet Veterinaria — inicio" width="53" height="44">
-</a>
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
-<button class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <line class="bar bar1" x1="3" y1="6" x2="21" y2="6"/>
-    <line class="bar bar2" x1="3" y1="12" x2="21" y2="12"/>
-    <line class="bar bar3" x1="3" y1="18" x2="21" y2="18"/>
-  </svg>
-</button>
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="logo.webp" alt="FirVet Veterinaria — inicio" width="53" height="44"></a>
+    <nav class="main-nav" aria-label="Principal">
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#fisioterapia">Fisioterapia</a></li>
+        <li><a href="#resenas">Reseñas</a></li>
+        <li><a href="tienda.html">Productos</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="header-cta" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir turno</a>
+    <button type="button" class="menu-btn" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuPanel">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line class="bar bar1" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="bar bar2" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="bar bar3" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</header>
 
-<div class="menu-panel" id="menuPanel">
+<div class="menu-panel" id="menuPanel" role="dialog" aria-modal="true" aria-label="Menú">
   <div class="menu-panel-inner">
-    <nav class="menu-links">
+    <nav class="menu-links" aria-label="Menú principal">
       <a href="#servicios">Servicios</a>
       <a href="#fisioterapia">Fisioterapia</a>
-      <a href="#casos">Historias que nos llenan de orgullo</a>
+      <a href="#resenas">Reseñas</a>
       <a href="tienda.html">Productos</a>
-      <a href="#nosotros">Nosotros</a>
       <a href="#ubicacion">Ubicación</a>
       <a href="contacto.html">Contacto</a>
+      <!-- TODO CONTENIDO: "Nosotros" queda oculto hasta que exista la sección de equipo. Cuando esté, agregar: <a href="#equipo">Nosotros</a> -->
     </nav>
+    <div class="menu-urgent">
+      <strong>¿Urgencia?</strong>
+      <a class="pill-btn light" href="tel:+5493795033587"><svg stroke="currentColor" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>Llamar al +54 9 379 503-3587</a>
+      <!-- TODO CONTENIDO: ¿hay guardia? ¿qué hacer fuera de horario? -->
+      <p class="todo-placeholder">Completar: si hay guardia y qué hacer fuera del horario de atención.</p>
+    </div>
     <div class="menu-foot">
-      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener">firvet.veterinaria@gmail.com</a>
-      <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">+54 9 379 503-3587</a>
+      <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">WhatsApp +54 9 379 503-3587</a>
+      <a href="mailto:firvet.veterinaria@gmail.com">firvet.veterinaria@gmail.com</a>
       <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener">@firvet.veterinaria</a>
       <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener">Catamarca 530, Corrientes</a>
     </div>
     <button type="button" class="pill-btn install-app-btn" id="installAppBtn" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
       Descargar app
     </button>
   </div>
 </div>
 
-<a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener" class="whatsapp-fab" aria-label="Escribinos por WhatsApp">
+<a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener" class="whatsapp-fab" aria-label="Escribinos por WhatsApp">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>
 </a>
 
+<main id="main">
 <section class="hero">
   <div class="container hero-grid">
     <div>
@@ -886,7 +739,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section id="casos">
+<section id="resenas">
   <div class="container">
     <div class="section-head reveal">
       <h2>Historias que nos llenan de orgullo</h2>
@@ -969,30 +822,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<footer class="footer-mini">
+</main>
+
+<footer class="site-footer on-dark">
   <div class="container">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="50" cy="68" rx="26" ry="20" fill="#05A5B5"/>
-      <circle cx="18" cy="42" r="11" fill="#6BD9E3"/>
-      <circle cx="40" cy="16" r="11" fill="#6BD9E3"/>
-      <circle cx="62" cy="16" r="11" fill="#6BD9E3"/>
-      <circle cx="84" cy="42" r="11" fill="#6BD9E3"/>
-    </svg>
-    <p>&copy; 2026 FirVet — Hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener" class="vertex-link">Vertex</a></p>
-    <div class="footer-links-row">
-      <a href="#servicios">Servicios</a><span class="dot">·</span><a href="#fisioterapia">Fisioterapia</a><span class="dot">·</span><a href="#casos">Historias que nos llenan de orgullo</a><span class="dot">·</span><a href="tienda.html">Productos</a><span class="dot">·</span><a href="#ubicacion">Ubicación</a><span class="dot">·</span><a href="contacto.html">Contacto</a>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.webp" alt="FirVet Veterinaria" width="67" height="56" loading="lazy">
+        <p>Clínica veterinaria integral en Corrientes Capital.</p>
+        <ul class="footer-list">
+          <li><a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Catamarca 530, Corrientes (W3400CEE)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <ul class="footer-list">
+          <li><a href="tel:+5493795033587"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>Llamar: +54 9 379 503-3587</a></li>
+          <li><a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</a></li>
+          <li><a href="mailto:firvet.veterinaria@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>firvet.veterinaria@gmail.com</a></li>
+          <li><a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@firvet.veterinaria</a></li>
+        </ul>
+      </div>
+      <div class="footer-hours">
+        <h2>Horarios</h2>
+        <p>Lun a Vie 9 a 19 h</p>
+        <p>Sáb 9 a 13 h</p>
+        <p class="closed">Dom cerrado</p>
+      </div>
+      <div>
+        <h2>Navegación</h2>
+        <ul class="footer-list">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#fisioterapia">Fisioterapia</a></li>
+          <li><a href="#resenas">Reseñas</a></li>
+          <li><a href="tienda.html">Productos</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FirVet Veterinaria</span>
+      <span>Sitio hecho por Sofia Bogado de <a href="https://bogadosofia.github.io/Vertex/" target="_blank" rel="noopener">Vertex</a></span>
     </div>
   </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
   document.querySelectorAll('.tech-card').forEach(card => {
     card.addEventListener('click', () => {
       const on = card.classList.toggle('flipped');
@@ -1000,49 +876,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 
-  const navLinks = document.querySelectorAll('.menu-links a[href^="#"]');
-  const navSections = Array.from(navLinks)
-    .map(link => document.querySelector(link.getAttribute('href')))
-    .filter(Boolean);
-  const spyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-      });
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  navSections.forEach(section => spyObserver.observe(section));
-
-  const menuToggle = document.getElementById('menuToggle');
-  const menuPanel = document.getElementById('menuPanel');
-
-  function closeMenu(){
-    menuPanel.classList.remove('open');
-    menuToggle.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  menuToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = menuPanel.classList.toggle('open');
-    menuToggle.classList.toggle('open', isOpen);
-    menuToggle.setAttribute('aria-expanded', isOpen);
-  });
-
-  menuPanel.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  document.addEventListener('click', (e) => {
-    if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuPanel.classList.contains('open')) closeMenu();
-  });
 
 </script>
 
@@ -1050,12 +883,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="https://elfsightcdn.com/platform.js" async></script>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch((err) => console.error('SW registration failed:', err));
-    });
-  }
-
   const installAppBtn = document.getElementById('installAppBtn');
   const isStandaloneApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   let deferredInstallPrompt = null;
@@ -1069,7 +896,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     installAppBtn.addEventListener('click', async () => {
       if (!deferredInstallPrompt) return;
-      if (typeof closeMenu === 'function') closeMenu();
+      if (window.siteMenu) window.siteMenu.close(false);
       deferredInstallPrompt.prompt();
       await deferredInstallPrompt.userChoice;
       deferredInstallPrompt = null;
@@ -1083,5 +910,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 </script>
 
+<script src="site.js"></script>
 </body>
 </html>

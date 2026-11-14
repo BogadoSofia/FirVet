@@ -7,6 +7,8 @@ const CORE_ASSETS = [
   './tienda.html',
   './favicon.ico',
   './logo.webp',
+  './site.css',
+  './site.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
