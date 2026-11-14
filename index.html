@@ -135,7 +135,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     animation:blobMove 9s ease-in-out infinite;
   }
   .blob img{width:100%;height:100%;object-fit:cover;display:block;}
-  .blob::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(5,165,181,0.5), rgba(17,175,162,0.55));}
   @keyframes blobMove{
     0%,100%{border-radius:62% 38% 55% 45% / 45% 55% 38% 62%;}
     50%{border-radius:45% 55% 38% 62% / 62% 38% 55% 45%;}
@@ -490,6 +489,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hero-visual{height:240px;margin-top:8px;}
     .blob-glow{width:260px;height:260px;}
     .blob{width:220px;height:220px;}
+    .chip-3{right:0;} /* con el hero a ancho completo, el -4% la sacaba de la pantalla */
+    .chip-2{right:auto;left:0;} /* a la derecha la tapaba el botón flotante de WhatsApp */
     .bento-feature{grid-column:span 6;min-height:300px;}
     .store-teaser{grid-template-columns:repeat(2,minmax(0,1fr));}
     .metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -514,6 +515,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .fisio-step{align-items:flex-start;}
     .fisio-step-num{width:42px;height:42px;font-size:18px;}
     .fisio-faq{padding:32px 24px;}
+  }
+  /* HERO MOBILE (< 768px): foto rectangular arriba, textos y CTA a ancho completo, sin etiquetas flotantes */
+  @media(max-width:767px){
+    .hero{padding:calc(var(--header-h) + 12px) 0 40px;}
+    .hero-grid{grid-template-columns:1fr;gap:20px;}
+    .hero-visual{order:-1;height:auto;margin-top:0;}
+    .hero .blob-glow,.hero .chip,.hero .eyebrow{display:none;}
+    .blob{
+      position:relative;inset:auto;margin:0;width:100%;height:auto;aspect-ratio:4 / 3;
+      border-radius:16px;animation:none;box-shadow:0 12px 28px rgba(20,32,27,0.16);
+    }
+    .hero h1{font-size:30px;line-height:1.18;margin-bottom:12px;}
+    .hero p{font-size:16px;line-height:1.6;margin-bottom:20px;max-width:none;}
+    .hero-ctas{flex-direction:column;align-items:stretch;gap:4px;}
+    .hero-ctas .pill-btn{width:100%;justify-content:center;}
+    .hero-ctas .text-link{align-self:center;min-height:44px;display:inline-flex;align-items:center;}
+    .hero-badge{margin-top:2px;text-align:center;}
+    .hero-badge .g-badge{background:none;box-shadow:none;padding:0;gap:6px;color:var(--ink);}
+    .hero-badge .g-badge:hover{transform:none;}
+    .hero-badge .g-badge > svg{display:none;}
+    .hero-badge .g-badge > span:last-child{text-decoration:underline;text-underline-offset:3px;}
   }
 </style>
 <script type="application/ld+json">
@@ -622,13 +644,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir turno por WhatsApp</a>
         <a href="contacto.html" class="text-link">o completá el formulario</a>
       </div>
-      <div class="hero-badge"><a class="g-badge" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span>· <span data-reviews-total>43</span> reseñas en Google</span></a></div>
+      <div class="hero-badge"><a class="g-badge" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span aria-hidden="true">·</span><span><span data-reviews-total>43</span> reseñas en Google</span></a></div>
     </div>
     <div class="hero-visual">
       <div class="blob-glow"></div>
       <div class="blob">
         <!-- TODO CONTENIDO: reemplazar por una foto propia de FirVet. Esta es de stock (antes se cargaba desde axoncomunicacion.net); revisar licencia/atribución. -->
-        <img src="img/hero-640.webp" srcset="img/hero-400.webp 400w, img/hero-640.webp 640w" sizes="(max-width: 640px) 260px, 320px" width="640" height="640" alt="Veterinaria revisando a un cachorro con el estetoscopio" fetchpriority="high" decoding="async">
+        <img src="img/hero-640.webp" srcset="img/hero-400.webp 400w, img/hero-640.webp 640w" sizes="(max-width: 767px) calc(100vw - 32px), 320px" width="640" height="640" alt="Veterinaria revisando a un cachorro con el estetoscopio" fetchpriority="high" decoding="async">
       </div>
       <span class="chip chip-1">🐾 Amor por los animales</span>
       <span class="chip chip-2">Atención personalizada</span>
