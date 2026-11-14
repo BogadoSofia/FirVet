@@ -538,22 +538,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hero-badge .g-badge > span:last-child{text-decoration:underline;text-underline-offset:3px;}
 
     /* SERVICIOS MOBILE: grilla 2x3 de tarjetas compactas; toda la tarjeta es el link */
-    .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;}
+    .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0;padding:0;}
     .bento .bento-item.bento-item{
-      grid-column:auto;grid-row:auto;min-height:0;padding:14px;border-radius:18px;
+      grid-column:auto;grid-row:auto;min-height:104px;padding:14px;border-radius:18px;
+      justify-content:space-between;
       position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;
       transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .12s ease, box-shadow .12s ease;
     }
     .bento .bento-item:hover{transform:none;box-shadow:0 4px 18px rgba(20,32,27,0.06);}
     .bento .bento-item.visible:active,.bento .bento-item:active{transform:scale(.96);box-shadow:0 0 0 3px var(--secondary);}
-    .bento-icon{width:36px;height:36px;border-radius:10px;margin-bottom:10px;flex-shrink:0;}
-    .bento-icon svg{width:18px;height:18px;}
-    /* 15px en 375; baja hasta 14px en pantallas más angostas para que "complementarios" no se parta */
-    .bento .bento-item h3{font-size:clamp(14px, 4vw, 15px);line-height:1.25;margin-bottom:5px;}
-    .bento .bento-item p{
-      font-size:13px;line-height:1.45;
-      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    .bento-icon{width:32px;height:32px;border-radius:9px;margin:0 0 12px;flex-shrink:0;}
+    .bento-icon svg{width:17px;height:17px;}
+    /* Solo ícono + título. Sin guiones: si una palabra no entra, baja entera a la línea siguiente.
+       15px desde 375px; en pantallas más angostas baja un poco para que "complementarios" entre en el ancho. */
+    .bento .bento-item h3{
+      font-size:clamp(13px, 4vw, 15px);line-height:1.25;margin:auto 0 0;
+      hyphens:none;-webkit-hyphens:none;overflow-wrap:normal;word-break:normal;
     }
+    .bento .bento-item p{display:none;}
+
     /* El link cubre toda la tarjeta; su texto se oculta y el nombre accesible lo da el aria-label */
     .bento .bento-link{
       position:absolute;inset:0;z-index:3;margin:0;padding:0;min-height:0;
@@ -565,6 +568,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento .bento-feature .tag{display:none;}
     .bento .bento-feature::before{background:linear-gradient(0deg, rgba(20,32,27,0.94) 0%, rgba(20,32,27,0.7) 55%, rgba(20,32,27,0.35) 100%);}
     .bento .bento-feature h3{color:#fff;}
+  }
+  @media(max-width:340px){
+    /* Pantallas muy angostas (320px): un poco menos de padding y letra para que "complementarios" entre sin partirse */
+    .bento .bento-item.bento-item{padding:12px;}
+    .bento .bento-item h3{font-size:12.5px;}
   }
 </style>
 <script type="application/ld+json">
@@ -718,7 +726,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="bento-item bento-half reveal">
         <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
-        <h3>Métodos complemen&shy;tarios</h3>
+        <h3>Métodos complementarios</h3>
         <p>Terapias alternativas que acompañan el tratamiento convencional de tu mascota.</p>
         <!-- TODO CONTENIDO: si se arma una página o sección de métodos complementarios, cambiar este link. -->
         <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20los%20m%C3%A9todos%20complementarios." target="_blank" rel="noopener" aria-label="Métodos complementarios: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
