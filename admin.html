@@ -77,6 +77,12 @@
   .file-row .btn{cursor:pointer;}
   .file-name{font-size:13px;color:var(--text-sub);}
   input[type=file]:focus-visible + .file-row .btn{outline:3px solid var(--primary-strong);outline-offset:2px;}
+  .extras{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+  .extras:empty{display:none;}
+  .extra{position:relative;width:80px;height:80px;border-radius:12px;border:1px solid var(--line);overflow:hidden;background:var(--bg);}
+  .extra img{width:100%;height:100%;object-fit:contain;}
+  .extra.is-new{border:2px dashed var(--primary-dark);}
+  .extra button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(20,32,27,.78);color:#fff;font-size:14px;line-height:1;cursor:pointer;}
   @media(max-width:640px){
     .grid2{grid-template-columns:1fr;}
     .product{grid-template-columns:1fr;}
@@ -125,6 +131,7 @@
       <h2>Productos</h2>
       <p class="sub">Editá y guardá cada producto por separado.</p>
       <div class="notice" id="presentacionNotice" hidden>Para cargar talle o peso, primero hay que crear la columna <code>Presentacion</code> en Supabase (paso 5 de <code>SUPABASE-RLS.md</code>).</div>
+      <div class="notice" id="imagenesNotice" hidden>Para cargar más de una imagen por producto, primero hay que crear la columna <code>Imagenes</code> en Supabase (paso 6 de <code>SUPABASE-RLS.md</code>).</div>
       <div id="productList"><p>Cargando…</p></div>
     </section>
 
@@ -179,6 +186,12 @@
 
   let products = [];
   let hasPresentacion = false;
+  let hasImagenes = false;
+  const MAX_EXTRAS = 5;
+  // Columna "Imagenes" (jsonb): lista de { url, path } con las fotos extra del producto.
+  const extrasOf = (v) => (Array.isArray(v) ? v : [])
+    .map(x => typeof x === 'string' ? { url: x, path: null } : x)
+    .filter(x => x && x.url);
   const knownTags = new Set();
 
   /* ---------- AUTH ---------- */
@@ -244,14 +257,26 @@
   }
 
   function fieldsHtml(p, prefix){
-    const v = p || { name:'', price:'', desc:'', presentacion:'', tags:'', priceOnRequest:false, inStock:true };
+    const v = p || { name:'', price:'', desc:'', presentacion:'', tags:'', priceOnRequest:false, inStock:true, extras:[] };
     return `
-      <label for="${prefix}-img">Imagen <span class="opt">(cuadrada, ideal 800×800)</span></label>
+      <label for="${prefix}-img">Imagen principal <span class="opt">(cuadrada, ideal 800×800)</span></label>
       <input type="file" accept="image/*" id="${prefix}-img" data-f="img" class="visually-hidden">
       <div class="file-row">
         <label for="${prefix}-img" class="btn ghost" style="margin:0;">Elegir imagen</label>
         <span class="file-name" data-file-name>Ningún archivo elegido</span>
       </div>
+      ${hasImagenes ? `
+      <label for="${prefix}-extra">Más imágenes <span class="opt">(opcional, hasta ${MAX_EXTRAS})</span></label>
+      <div class="extras" data-f="extras">${v.extras.map((x, i) => `
+        <figure class="extra" data-url="${esc(x.url)}" data-path="${esc(x.path || '')}">
+          <img src="${esc(x.url)}" alt="">
+          <button type="button" data-act="rmExtra" aria-label="Quitar imagen ${i + 1}">✕</button>
+        </figure>`).join('')}</div>
+      <input type="file" accept="image/*" multiple id="${prefix}-extra" data-f="extra" class="visually-hidden">
+      <div class="file-row">
+        <label for="${prefix}-extra" class="btn ghost" style="margin:0;">Agregar imágenes</label>
+        <span class="file-name" data-extra-name></span>
+      </div>` : ''}
       <label for="${prefix}-name">Nombre</label>
       <input type="text" id="${prefix}-name" data-f="name" value="${esc(v.name)}" required>
       <div class="grid2">
@@ -290,14 +315,44 @@
       Stock: get('stock').querySelector('[data-stock=true]').getAttribute('aria-pressed') === 'true',
     };
     if (hasPresentacion) out.Presentacion = get('presentacion').value.trim() || null;
-    return { values: out, file: get('img').files[0] };
+    const kept = hasImagenes
+      ? [...get('extras').querySelectorAll('.extra:not(.is-new)')].map(f => ({ url: f.dataset.url, path: f.dataset.path || null }))
+      : [];
+    const newExtras = hasImagenes ? [...(root._newExtras || [])] : [];
+    return { values: out, file: get('img').files[0], kept, newExtras };
+  }
+
+  function extrasPendingLabel(root){
+    const span = root.querySelector('[data-extra-name]');
+    const n = (root._newExtras || []).length;
+    if (span) span.textContent = n ? `${n} ${n === 1 ? 'imagen nueva' : 'imágenes nuevas'} (se suben al guardar)` : '';
   }
 
   // Muestra el nombre del archivo elegido (reemplaza el texto nativo del navegador)
   document.addEventListener('change', (e) => {
-    if (e.target.dataset.f !== 'img') return;
-    const span = e.target.closest('[data-root]').querySelector('[data-file-name]');
-    span.textContent = e.target.files[0] ? e.target.files[0].name : 'Ningún archivo elegido';
+    const f = e.target.dataset.f;
+    const root = e.target.closest('[data-root]');
+    if (f === 'img') {
+      root.querySelector('[data-file-name]').textContent = e.target.files[0] ? e.target.files[0].name : 'Ningún archivo elegido';
+    } else if (f === 'extra') {
+      // Las imágenes nuevas se acumulan (se puede elegir varias veces) y se previsualizan
+      const box = root.querySelector('[data-f=extras]');
+      root._newExtras = root._newExtras || [];
+      const room = MAX_EXTRAS - box.querySelectorAll('.extra').length;
+      const files = [...e.target.files].slice(0, Math.max(0, room));
+      files.forEach(file => {
+        root._newExtras.push(file);
+        box.insertAdjacentHTML('beforeend', `<figure class="extra is-new"><img src="${URL.createObjectURL(file)}" alt="">
+          <button type="button" data-act="rmExtra" aria-label="Quitar imagen nueva">✕</button></figure>`);
+        box.lastElementChild._file = file;
+      });
+      e.target.value = '';
+      extrasPendingLabel(root);
+      if (e.target.files.length > files.length || room <= 0) {
+        const span = root.querySelector('[data-extra-name]');
+        span.textContent = `Máximo ${MAX_EXTRAS} imágenes extra. ` + span.textContent;
+      }
+    }
   });
 
   // Interacciones compartidas por las filas de edición y el formulario de alta
@@ -306,6 +361,16 @@
     if (sw) { sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true')); return; }
     const stock = e.target.closest('.stock-toggle .chip');
     if (stock) { stock.parentElement.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === stock))); return; }
+    const rm = e.target.closest('[data-act=rmExtra]');
+    if (rm) {
+      // Se quita de la lista; el archivo se borra del storage recién al guardar
+      const fig = rm.closest('.extra');
+      const root = rm.closest('[data-root]');
+      if (fig._file) root._newExtras = (root._newExtras || []).filter(f => f !== fig._file);
+      fig.remove();
+      extrasPendingLabel(root);
+      return;
+    }
     const chip = e.target.closest('.chips .chip');
     if (chip) { chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true')); return; }
     const addTag = e.target.closest('[data-act=addTag]');
@@ -341,7 +406,7 @@
 
   async function uploadImage(original){
     const file = await toWebp(original);
-    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`;
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')}`;
     const { error } = await sb.storage.from(STORAGE_BUCKET).upload(path, file, { contentType: file.type, cacheControl: '31536000' });
     if (error) throw error;
     return { url: sb.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl, path };
@@ -356,14 +421,19 @@
   async function loadProducts(){
     const { data, error } = await sb.from(PRODUCTS_TABLE).select('*').order('id', { ascending: true });
     if (error) { $('productList').innerHTML = `<p class="status error">No se pudieron cargar los productos. ${esc(errEs(error))}</p>`; return; }
-    hasPresentacion = data && data.length
-      ? Object.prototype.hasOwnProperty.call(data[0], 'Presentacion')
-      : !(await sb.from(PRODUCTS_TABLE).select('Presentacion').limit(1)).error; // tabla vacía: se consulta la columna
+    // Columnas opcionales: si la tabla está vacía, se consulta la columna directamente
+    const hasColumn = async (name) => data && data.length
+      ? Object.prototype.hasOwnProperty.call(data[0], name)
+      : !(await sb.from(PRODUCTS_TABLE).select(name).limit(1)).error;
+    hasPresentacion = await hasColumn('Presentacion');
+    hasImagenes = await hasColumn('Imagenes');
     $('presentacionNotice').hidden = hasPresentacion;
+    $('imagenesNotice').hidden = hasImagenes;
     products = (data || []).map(r => ({
       id: r.id, name: r.Nombre || '', price: r.Precio ?? '', desc: r.Descripcion || '',
       presentacion: r.Presentacion || '', tags: r.Etiquetas || '', priceOnRequest: r.ConsultarPrecio === true,
       inStock: r.Stock !== false, image: r.ImagenUrl || null, imagePath: r.ImagenPath || null,
+      extras: extrasOf(r.Imagenes),
     }));
     products.forEach(p => tagsOf(p.tags).forEach(t => knownTags.add(t)));
     renderProducts();
@@ -404,12 +474,13 @@
       const { error } = await sb.from(PRODUCTS_TABLE).delete().eq('id', product.id);
       if (error) { setStatus('No se pudo eliminar. ' + errEs(error), true); btn.disabled = false; return; }
       await removeImage(product.imagePath);
+      for (const x of product.extras) await removeImage(x.path);
       products = products.filter(p => p !== product);
       renderProducts();
       return;
     }
 
-    const { values, file } = readFields(row);
+    const { values, file, kept, newExtras } = readFields(row);
     if (!values.Nombre) { setStatus('El nombre es obligatorio.', true); return; }
     btn.disabled = true; setStatus('Guardando…');
     try {
@@ -418,10 +489,19 @@
         const up = await uploadImage(file);
         values.ImagenUrl = up.url; values.ImagenPath = up.path; oldPath = product.imagePath;
       }
+      if (hasImagenes) {
+        const uploaded = [];
+        for (const f of newExtras) uploaded.push(await uploadImage(f));
+        values.Imagenes = kept.concat(uploaded).slice(0, MAX_EXTRAS);
+      }
       const { data, error } = await sb.from(PRODUCTS_TABLE).update(values).eq('id', product.id).select();
       if (error) throw error;
       if (!data || !data.length) throw Object.assign(new Error('Sin permiso para editar.'), { es: true });
       if (oldPath) await removeImage(oldPath);
+      if (hasImagenes) {
+        const keptPaths = new Set(kept.map(x => x.path));
+        for (const x of product.extras) if (x.path && !keptPaths.has(x.path)) await removeImage(x.path);
+      }
       setStatus('Guardado.');
       await loadProducts();
     } catch (err) {
@@ -439,11 +519,16 @@
     e.preventDefault();
     const status = $('addStatus');
     const btn = $('addForm').querySelector('[type=submit]');
-    const { values, file } = readFields($('addForm'));
+    const { values, file, newExtras } = readFields($('addForm').querySelector('[data-root]'));
     if (!values.Nombre) { status.className = 'status error'; status.textContent = 'El nombre es obligatorio.'; return; }
     btn.disabled = true; status.className = 'status'; status.textContent = 'Guardando…';
     try {
       if (file) { const up = await uploadImage(file); values.ImagenUrl = up.url; values.ImagenPath = up.path; }
+      if (hasImagenes) {
+        const uploaded = [];
+        for (const f of newExtras) uploaded.push(await uploadImage(f));
+        values.Imagenes = uploaded;
+      }
       const { error } = await sb.from(PRODUCTS_TABLE).insert(values);
       if (error) throw error;
       await loadProducts();

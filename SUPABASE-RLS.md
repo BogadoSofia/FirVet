@@ -125,6 +125,17 @@ El panel muestra el campo "Talle / peso" solo si existe esta columna:
 alter table public."Productos" add column if not exists "Presentacion" text;
 ```
 
+## Paso 6 — (Opcional) Varias imágenes por producto
+
+La imagen principal sigue en `ImagenUrl`. Las fotos extra (hasta 5) se guardan en esta columna, como una lista de
+`{ "url": ..., "path": ... }`. El panel muestra "Más imágenes" y la tienda arma un carrusel solo si la columna existe:
+
+```sql
+alter table public."Productos" add column if not exists "Imagenes" jsonb not null default '[]'::jsonb;
+```
+
+No hace falta cambiar las políticas: las de `Productos` y las del bucket `productos` ya cubren esta columna y los archivos nuevos.
+
 ---
 
 ## Cómo comprobar que funciona
