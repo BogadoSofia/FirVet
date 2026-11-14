@@ -95,6 +95,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity:0;
     animation:fadeUp .8s ease .3s forwards;
   }
+  .hero-ctas .text-link{font-size:15px;}
   .hero-ctas{
     display:flex;
     align-items:center;
@@ -432,7 +433,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-band .container{position:relative;z-index:1;text-align:center;}
   .contact-band h2{font-size:clamp(28px,4.4vw,44px);font-weight:600;margin-bottom:16px;}
   .contact-band p{color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto 34px;}
-  .contact-band .pill-btn{background:#fff;color:var(--primary);}
+  .contact-band .container{display:flex;flex-direction:column;align-items:center;}
+  .contact-band-ctas{display:flex;align-items:center;justify-content:center;gap:8px 24px;flex-wrap:wrap;}
+  .urgent-box{margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:12px;max-width:520px;}
+  .urgent-call{
+    display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 22px;border-radius:999px;
+    border:2px solid rgba(255,255,255,0.75);color:#fff;font-size:15px;transition:background .2s ease;
+  }
+  .urgent-call:hover{background:rgba(255,255,255,0.12);}
+  .urgent-call svg{width:18px;height:18px;flex-shrink:0;}
+  .fisio-cta{margin-top:36px;display:flex;align-items:center;gap:8px 24px;flex-wrap:wrap;}
 
   /* FOOTER */
 
@@ -452,7 +462,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .hero{padding:110px 0 60px;}
     .hero p{max-width:none;}
-    .hero-ctas{width:100%;}
+    .hero-ctas .text-link{font-size:15px;}
+  .hero-ctas{width:100%;}
     .pill-btn{width:100%;justify-content:center;}
     .section-head{margin-bottom:36px;}
     .stats-row{justify-content:flex-start;gap:32px;}
@@ -571,7 +582,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
       <p>Consultas, cirugías y vacunación, con un equipo que trata a cada paciente como familia.</p>
       <div class="hero-ctas">
-        <a href="contacto.html" class="pill-btn">Reservar turno →</a>
+        <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir turno por WhatsApp</a>
+        <a href="contacto.html" class="text-link">o completá el formulario</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -736,6 +748,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
       </div>
     </div>
+    <div class="fisio-cta reveal">
+      <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20una%20evaluaci%C3%B3n%20de%20fisioterapia%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir evaluación de fisioterapia</a>
+      <a href="contacto.html?motivo=fisioterapia" class="text-link">o completá el formulario</a>
+    </div>
   </div>
 </section>
 
@@ -814,11 +830,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="contact-band">
+<section class="contact-band on-dark">
   <div class="container reveal">
     <h2>¿Tu mascota necesita atención?</h2>
     <p>Escribinos y coordinamos un turno a la brevedad, o contactanos ante cualquier emergencia.</p>
-    <a href="contacto.html" class="pill-btn">Escribinos →</a>
+    <div class="contact-band-ctas">
+      <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn light"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Escribinos por WhatsApp</a>
+      <a href="contacto.html" class="text-link">o completá el formulario</a>
+    </div>
+    <div class="urgent-box">
+      <a href="tel:+5493795033587" class="urgent-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><span><strong>Urgencias:</strong> llamar al +54 9 379 503-3587</span></a>
+      <!-- TODO CONTENIDO: ¿hay guardia? ¿qué hacer fuera de horario? -->
+      <p class="todo-placeholder">Completar: si hay guardia y qué hacer fuera del horario de atención.</p>
+    </div>
   </div>
 </section>
 

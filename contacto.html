@@ -70,23 +70,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     box-shadow:0 20px 50px rgba(20,32,27,0.08);
   }
   .contact-info{
-    background:linear-gradient(160deg, var(--primary), #03737E);
+    background:linear-gradient(160deg, var(--primary-strong), #024D55);
     color:#fff;
     padding:48px 40px;
     position:relative;
   }
-  .contact-info h3{font-size:24px;font-weight:600;margin-bottom:14px;}
-  .contact-info > p{color:rgba(255,255,255,0.8);font-size:14px;line-height:1.7;margin-bottom:32px;}
+  .contact-info h2{font-size:24px;font-weight:600;margin-bottom:14px;}
+  .contact-info > p{color:rgba(255,255,255,0.9);font-size:15px;line-height:1.7;margin-bottom:28px;}
   .contact-info-item{
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:20px;
-    font-size:14px;
+    min-height:48px;
+    margin-bottom:10px;
+    font-size:15px;
     color:#fff;
-    transition:opacity .2s ease;
   }
-  .contact-info-item:hover{opacity:0.8;}
+  .contact-info-item:hover span{text-decoration:underline;text-underline-offset:3px;}
+  .contact-info-item small{display:block;font-size:12px;color:rgba(255,255,255,0.85);}
   .contact-info-item .ic{
     width:38px;height:38px;
     border-radius:10px;
@@ -104,49 +105,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     grid-template-columns:1fr 1fr;
     gap:20px;
   }
-  .field{margin-bottom:20px;}
-  .field label{
+  .form-legend{font-size:13px;color:var(--text-sub);margin-bottom:20px;}
+  .req{color:#B42318;font-weight:700;}
+  .opt{font-weight:400;color:var(--text-sub);}
+  .field{margin-bottom:20px;border:none;min-width:0;}
+  .field > label,
+  .field legend{
     display:block;
-    font-size:13px;
+    font-size:14px;
     font-weight:700;
-    color:var(--text-sub);
+    color:var(--ink);
     margin-bottom:8px;
+    padding:0;
   }
-  .field input,
+  .field input:not([type=radio]),
+  .field select,
   .field textarea{
     width:100%;
+    min-height:48px;
     background:var(--bg);
-    border:1px solid rgba(20,32,27,0.12);
+    border:1.5px solid rgba(20,32,27,0.28);
     border-radius:12px;
-    padding:13px 16px;
+    padding:12px 16px;
     color:var(--ink);
     font-family:inherit;
-    font-size:14px;
-    transition:border-color .25s ease;
+    font-size:16px; /* evita el zoom automático en iOS */
+    transition:border-color .2s ease, box-shadow .2s ease;
   }
-  .field input:focus,
-  .field textarea:focus{
+  .field select{
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2314201B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+  }
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible{
     outline:none;
-    border-color:var(--primary);
+    border-color:var(--primary-strong);
+    box-shadow:0 0 0 3px rgba(3,118,130,0.25);
   }
-  .field textarea{resize:vertical;min-height:120px;}
-
+  .field textarea{resize:vertical;min-height:110px;}
+  .field [aria-invalid="true"]{border-color:#B42318 !important;background-color:#FEF3F2 !important;}
+  .field-error{display:none;margin-top:6px;font-size:13px;font-weight:600;color:#B42318;}
+  .field-error:not(:empty){display:flex;gap:6px;align-items:flex-start;}
+  .field-error:not(:empty)::before{content:'!';flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#B42318;color:#fff;font-size:11px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px;}
+  .radio-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .radio-row label{
+    display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;
+    border:1.5px solid rgba(20,32,27,0.28);border-radius:999px;cursor:pointer;font-size:15px;font-weight:600;background:var(--bg);
+  }
+  .radio-row input{width:18px;height:18px;accent-color:var(--primary-strong);}
+  .radio-row label:has(input:checked){border-color:var(--primary-strong);background:rgba(3,118,130,0.08);}
+  .radio-row label:has(input:focus-visible){outline:3px solid var(--primary-strong);outline-offset:2px;}
+  .contact-form .pill-btn{width:100%;margin-top:4px;}
   .form-note{
-    font-size:12px;
+    font-size:13px;
     color:var(--text-sub);
-    margin-top:14px;
+    margin-top:12px;
     text-align:center;
   }
-  .form-status{
-    font-size:14px;
-    margin-top:16px;
-    text-align:center;
-    display:none;
-  }
-  .form-status.success{color:var(--primary);display:block;}
-  .form-status.error{color:#DC2626;display:block;}
-
-  /* FOOTER */
+  .form-status{font-size:14px;margin-top:14px;text-align:center;}
+  .form-status:empty{display:none;}
+  .form-status.success{color:var(--primary-strong);font-weight:600;}
+  .form-status.error{color:#B42318;font-weight:600;}
 
   @media(max-width:900px){
     .contact-wrap{grid-template-columns:1fr;border-radius:22px;}
@@ -227,7 +248,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow">Contacto</span>
-    <h1>Reservá un turno para tu mascota</h1>
+    <!-- TODO CONTENIDO: título definitivo (que no prometa una reserva automática; el turno se confirma por WhatsApp). -->
+    <h1>Pedí un turno para tu mascota</h1>
     <p>Contanos qué necesita y te respondemos a la brevedad.</p>
   </div>
 </section>
@@ -236,58 +258,107 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="contact-wrap reveal">
       <div class="contact-info">
-        <h3>Hablemos</h3>
+        <h2>Hablemos</h2>
         <p>Elegí el medio que prefieras o completá el formulario y nos pondremos en contacto lo antes posible.</p>
-        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=firvet.veterinaria@gmail.com" target="_blank" rel="noopener" class="contact-info-item">
-          <div class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
-          </div>
-          <span>firvet.veterinaria@gmail.com</span>
-        </a>
         <a href="https://wa.me/5493795033587" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </div>
-          <span>+54 9 379 503-3587</span>
+          <span><small>WhatsApp</small>+54 9 379 503-3587</span>
+        </a>
+        <a href="tel:+5493795033587" class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span><small>Llamar / urgencias</small>+54 9 379 503-3587</span>
+        </a>
+        <a href="mailto:firvet.veterinaria@gmail.com" class="contact-info-item">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </div>
+          <span><small>Email</small>firvet.veterinaria@gmail.com</span>
         </a>
         <a href="https://instagram.com/firvet.veterinaria" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </div>
-          <span>@firvet.veterinaria</span>
+          <span><small>Instagram</small>@firvet.veterinaria</span>
         </a>
         <a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener" class="contact-info-item">
           <div class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <span>Catamarca 530, Corrientes Capital (W3400CEE)</span>
+          <span><small>Dirección</small>Catamarca 530, Corrientes Capital (W3400CEE)</span>
         </a>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" novalidate aria-describedby="formLegend">
+        <p class="form-legend" id="formLegend">Los campos marcados con <span class="req" aria-hidden="true">*</span> son obligatorios.</p>
         <div class="form-row">
           <div class="field">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" placeholder="Tu nombre">
+            <label for="name">Tu nombre <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required minlength="2" aria-describedby="name-error">
+            <p class="field-error" id="name-error"></p>
           </div>
           <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            <label for="phone">Teléfono <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required pattern="[0-9+()\-\s]{8,20}" placeholder="Ej: 379 412-3456" aria-describedby="phone-error">
+            <p class="field-error" id="phone-error"></p>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="pet">Nombre de la mascota <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="pet" name="pet" autocomplete="off" required aria-describedby="pet-error">
+            <p class="field-error" id="pet-error"></p>
+          </div>
+          <div class="field">
+            <label for="species">Especie <span class="req" aria-hidden="true">*</span></label>
+            <select id="species" name="species" required aria-describedby="species-error">
+              <option value="">Elegí una opción</option>
+              <option>Perro</option>
+              <option>Gato</option>
+              <option>Otro</option>
+            </select>
+            <p class="field-error" id="species-error"></p>
           </div>
         </div>
         <div class="field">
-          <label for="phone">Teléfono</label>
-          <input type="tel" id="phone" name="phone" placeholder="Tu número de contacto">
+          <label for="reason">Motivo <span class="req" aria-hidden="true">*</span></label>
+          <select id="reason" name="reason" required aria-describedby="reason-error">
+            <option value="">Elegí una opción</option>
+            <option value="Consulta">Consulta</option>
+            <option value="Vacunación">Vacunación</option>
+            <option value="Fisioterapia / rehabilitación">Fisioterapia / rehabilitación</option>
+            <option value="Control">Control</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <p class="field-error" id="reason-error"></p>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email <span class="opt">(opcional)</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" aria-describedby="email-error">
+            <p class="field-error" id="email-error"></p>
+          </div>
+          <fieldset class="field">
+            <legend>Franja horaria preferida <span class="opt">(opcional)</span></legend>
+            <div class="radio-row">
+              <label><input type="radio" name="slot" value="Mañana"> Mañana</label>
+              <label><input type="radio" name="slot" value="Tarde"> Tarde</label>
+            </div>
+          </fieldset>
         </div>
         <div class="field">
-          <label for="message">Mensaje</label>
-          <textarea id="message" name="message" placeholder="Contanos sobre tu mascota y el motivo de la consulta..." required></textarea>
+          <label for="message">Mensaje <span class="opt">(opcional)</span></label>
+          <textarea id="message" name="message" placeholder="Contanos sobre tu mascota y el motivo de la consulta..."></textarea>
         </div>
-        <button type="submit" class="pill-btn">
-          Enviar mensaje
+        <button type="submit" class="pill-btn wa">
+          <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>
+          Pedir turno por WhatsApp
         </button>
-        <p class="form-status" id="formStatus"></p>
-        <p class="form-note">Te respondemos a la brevedad.</p>
+        <p class="form-note">Se abrirá WhatsApp con tu consulta lista para enviar.</p>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
@@ -344,35 +415,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const status = document.getElementById('formStatus');
   const WHATSAPP_NUMBER = '5493795033587';
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Mensajes de error en español, independientes del idioma del navegador
+  const MESSAGES = {
+    name:    { valueMissing: 'Escribí tu nombre.', tooShort: 'El nombre es muy corto.' },
+    phone:   { valueMissing: 'Escribí un teléfono para poder contactarte.', patternMismatch: 'Revisá el teléfono: usá solo números (mínimo 8).' },
+    pet:     { valueMissing: 'Escribí el nombre de tu mascota.' },
+    species: { valueMissing: 'Elegí la especie.' },
+    reason:  { valueMissing: 'Elegí el motivo de la consulta.' },
+    email:   { typeMismatch: 'Revisá el email (ejemplo: nombre@gmail.com).' },
+  };
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const message = document.getElementById('message').value.trim();
+  function validateField(input){
+    const msgs = MESSAGES[input.name];
+    if (!msgs) return true;
+    let msg = '';
+    if (!input.validity.valid) {
+      const key = Object.keys(msgs).find(k => input.validity[k]);
+      msg = key ? msgs[key] : 'Revisá este campo.';
+    }
+    const errorEl = document.getElementById(input.id + '-error');
+    if (errorEl) errorEl.textContent = msg;
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+    return !msg;
+  }
 
-    const lines = [
-      'Hola, quiero hacer una consulta desde la web:',
-      '',
-      name ? `Nombre: ${name}` : null,
-      `Email: ${email}`,
-      phone ? `Teléfono: ${phone}` : null,
-      '',
-      message,
-    ].filter(Boolean);
-
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
-
-    status.className = 'form-status success';
-    status.textContent = 'Te llevamos a WhatsApp para enviar tu mensaje.';
-    form.reset();
+  const fields = Array.from(form.querySelectorAll('input:not([type=radio]), select'));
+  fields.forEach(input => {
+    // Valida al salir del campo y, si ya tenía error, mientras se corrige
+    input.addEventListener('blur', () => { if (input.value || input.hasAttribute('aria-invalid')) validateField(input); });
+    input.addEventListener('input', () => { if (input.hasAttribute('aria-invalid')) validateField(input); });
+    input.addEventListener('change', () => { if (input.hasAttribute('aria-invalid')) validateField(input); });
   });
 
+  // Permite preseleccionar el motivo: contacto.html?motivo=fisioterapia
+  const motivo = new URLSearchParams(location.search).get('motivo');
+  if (motivo) {
+    const opt = Array.from(form.reason.options).find(o => o.value && o.value.toLowerCase().startsWith(motivo.toLowerCase()));
+    if (opt) form.reason.value = opt.value;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const invalid = fields.filter(f => !validateField(f));
+    if (invalid.length) {
+      status.className = 'form-status error';
+      status.textContent = invalid.length === 1 ? 'Falta completar 1 campo.' : `Faltan completar ${invalid.length} campos.`;
+      invalid[0].focus();
+      return;
+    }
+
+    const val = (n) => (form.elements[n].value || '').trim();
+    const slot = (form.querySelector('input[name=slot]:checked') || {}).value;
+    const lines = [
+      '¡Hola FirVet! Quiero pedir un turno:',
+      '',
+      `*Nombre:* ${val('name')}`,
+      `*Teléfono:* ${val('phone')}`,
+      `*Mascota:* ${val('pet')} (${val('species')})`,
+      `*Motivo:* ${val('reason')}`,
+      slot ? `*Franja preferida:* ${slot}` : null,
+      val('email') ? `*Email:* ${val('email')}` : null,
+      val('message') ? `\n*Mensaje:* ${val('message')}` : null,
+    ].filter(l => l !== null);
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    const win = window.open(url, '_blank');
+    if (win) win.opener = null;
+    else location.href = url; // si el navegador bloquea la ventana nueva
+    status.className = 'form-status success';
+    status.textContent = 'Listo: se abrió WhatsApp con tu consulta. Solo falta tocar Enviar.';
+  });
 </script>
-
-
-
 <script src="site.js"></script>
 </body>
 </html>
