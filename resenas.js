@@ -9,10 +9,15 @@ window.FIRVET_RESENAS = {
   total: 43, // TODO CONTENIDO: el pedido decía 36; el 13/11/2026 Google mostraba 43. Confirmar.
   // Perfil de Google de FirVet (abre la ficha con las reseñas)
   url: 'https://www.google.com/maps?cid=15733491255711557415',
-  // TODO CONTENIDO: elegir 3 o 4 reseñas reales de Google y pegarlas acá.
+  // Copiadas textualmente de Google (capturas del 14/11/2026). "fecha" queda vacía a propósito:
+  // Google solo muestra fechas relativas ("hace 5 meses"), que con el tiempo quedarían mal.
   items: [
-    { autor: '', texto: '', estrellas: 5, fecha: '' },
-    { autor: '', texto: '', estrellas: 5, fecha: '' },
-    { autor: '', texto: '', estrellas: 5, fecha: '' },
+    { autor: 'Mariana Ozuna', estrellas: 5, fecha: '',
+      texto: 'Excelente atención, los chicos son muy amables, Rocío siempre atenta a nuestras consultas y lo más importante al momento de llegar con una urgencia: CALIDAD HUMANA, te atienden con una calidez y tratan a tu mascota como si fuere de ellos. La recomiendo una y mil veces.' },
+    { autor: 'Nicolas Castañeda', estrellas: 5, fecha: '',
+      texto: 'Excelente la atención de la Doc Rocio. Se nota el amor y la pasión con la que atiende a sus pacientitos. Sansa ama ir, porque la atienden como una reina. Se notan los avances en el tratamiento después de cada sesión! Súper recomendable' },
+    // TODO CONTENIDO: en la captura esta reseña aparece cortada ("..."); si es más larga, pegar el texto completo.
+    { autor: 'Ivan Agustin Michelson', estrellas: 5, fecha: '',
+      texto: 'Excelente atención a mi perrito! 🐶' },
   ],
 };

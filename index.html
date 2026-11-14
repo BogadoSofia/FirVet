@@ -1004,7 +1004,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <figure class="review-card reveal">
         <div class="review-stars" role="img" aria-label="${r.estrellas} de 5 estrellas">${star.repeat(r.estrellas || 5)}</div>
         <blockquote class="review-text">${esc(r.texto)}</blockquote>
-        <figcaption class="review-author">${esc(r.autor)}${r.fecha ? `<small>${esc(r.fecha)} · Google</small>` : ''}</figcaption>
+        <figcaption class="review-author">${esc(r.autor)}<small>${r.fecha ? esc(r.fecha) + ' · ' : ''}Reseña de Google</small></figcaption>
       </figure>`).join('');
     grid.querySelectorAll('.reveal').forEach(el => window.siteReveal ? window.siteReveal(el) : el.classList.add('visible'));
   })();
