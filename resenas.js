@@ -2,7 +2,7 @@
    RESEÑAS DE GOOGLE — editar solo este archivo
    - rating y total: copiarlos del perfil de Google (se muestran en el hero y en la sección Reseñas).
    - items: 3 o 4 reseñas reales, copiadas tal cual de Google.
-     Si "texto" está vacío, la tarjeta se muestra como pendiente.
+     Las reseñas con "texto" vacío no se muestran; si no hay ninguna, se ve solo el link a Google.
    ========================================================= */
 window.FIRVET_RESENAS = {
   rating: '5.0',

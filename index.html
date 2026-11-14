@@ -264,8 +264,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     transition:transform .25s ease, box-shadow .25s ease;
   }
   .store-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,32,27,0.12);}
-  .store-card .ph{aspect-ratio:1/1;background:#F2EFEA;display:flex;align-items:center;justify-content:center;font-size:40px;}
-  .store-card img{width:100%;height:100%;object-fit:contain;padding:12px;}
+  .store-card .ph{position:relative;aspect-ratio:1/1;overflow:hidden;background:#F2EFEA;display:flex;align-items:center;justify-content:center;font-size:40px;}
+  .store-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12px;box-sizing:border-box;}
   .store-card-body{padding:16px 18px 20px;}
   .store-card h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;line-height:1.35;margin-bottom:6px;}
   .store-card .price{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--primary-strong);}
@@ -349,7 +349,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .tech-card:focus-visible{outline:3px solid var(--primary-strong);outline-offset:3px;}
   .tech-card-inner{
     position:relative;display:block;width:100%;height:100%;
-    transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,.2,.2,1);
+    -webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,.2,.2,1);
+    will-change:transform;
   }
   .tech-card.flipped .tech-card-inner{transform:rotateY(180deg);}
   .tech-face{
@@ -357,7 +358,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
     -webkit-backface-visibility:hidden;backface-visibility:hidden;
   }
-  .tech-front{background:var(--surface);box-shadow:0 4px 18px rgba(20,32,27,0.07);}
+  /* rotateY(0) explícito: sin esto Safari/iOS muestra la cara de atrás espejada durante el giro */
+  .tech-front{background:var(--surface);box-shadow:0 4px 18px rgba(20,32,27,0.07);transform:rotateY(0deg);}
   .tech-icon{
     width:56px;height:56px;border-radius:16px;margin-bottom:16px;
     display:flex;align-items:center;justify-content:center;
@@ -425,6 +427,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   #resenas{background:var(--menu-dark);color:#fff;}
   #resenas .section-head h2{color:#fff;}
   #resenas .section-head p{color:rgba(255,255,255,0.65);}
+  .reviews-cta{margin-top:8px;}
 
   /* SERVICIOS BAND */
   #servicios{background:var(--menu-dark);color:#fff;}
@@ -566,10 +569,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- TODO CONTENIDO: "Nosotros" queda oculto hasta que exista la sección de equipo. Cuando esté, agregar: <a href="#equipo">Nosotros</a> -->
     </nav>
     <div class="menu-urgent">
-      <strong>¿Urgencia?</strong>
       <a class="pill-btn light" href="tel:+5493795033587"><svg stroke="currentColor" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>Llamar al +54 9 379 503-3587</a>
-      <!-- TODO CONTENIDO: ¿hay guardia? ¿qué hacer fuera de horario? -->
-      <p class="todo-placeholder">Completar: si hay guardia y qué hacer fuera del horario de atención.</p>
+      <!-- TODO CONTENIDO (oculto): ¿hay guardia? ¿qué hacer fuera de horario? Cuando esté el dato, agregar:
+      <p>…texto sobre guardia / fuera de horario…</p> -->
     </div>
     <div class="menu-foot">
       <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">WhatsApp +54 9 379 503-3587</a>
@@ -761,16 +763,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
       </div>
     </div>
+    <!-- TODO CONTENIDO (oculto): "¿Para qué casos sirve?" — completar con los casos reales que trata FirVet
+         (ej.: postoperatorios, artrosis, displasia, hernias...) y quitar este comentario para mostrarlo.
     <div class="fisio-cases reveal">
       <h3>¿Para qué casos sirve?</h3>
-      <!-- TODO CONTENIDO: completar con los casos reales que trata FirVet (ej.: postoperatorios, artrosis, displasia, hernias...). -->
       <ul class="fisio-cases-list">
-        <li class="todo-placeholder">Caso 1 — completar</li>
-        <li class="todo-placeholder">Caso 2 — completar</li>
-        <li class="todo-placeholder">Caso 3 — completar</li>
-        <li class="todo-placeholder">Caso 4 — completar</li>
+        <li>Caso 1</li>
+        <li>Caso 2</li>
+        <li>Caso 3</li>
+        <li>Caso 4</li>
       </ul>
     </div>
+    -->
     <div class="fisio-cta reveal">
       <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20una%20evaluaci%C3%B3n%20de%20fisioterapia%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir evaluación de fisioterapia</a>
       <a href="contacto.html?motivo=fisioterapia" class="text-link">o completá el formulario</a>
@@ -811,33 +815,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- TODO CONTENIDO (oculto): sección "Por qué elegirnos". Completar las métricas con datos reales
+     (número + etiqueta) y quitar este comentario para mostrarla.
 <section id="nosotros" class="stats-band on-dark">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Por qué elegirnos</span>
       <h2>Cuidado con profesionalismo y cariño</h2>
     </div>
-    <!-- TODO CONTENIDO: completar las métricas con datos reales (número + etiqueta). -->
     <dl class="metrics">
       <div class="metric reveal">
         <dt class="metric-label">Calificación en Google</dt>
         <dd class="metric-num"><span data-reviews-rating>5.0</span><span class="metric-star" aria-hidden="true">★</span></dd>
       </div>
       <div class="metric reveal">
-        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: años de experiencia)</dt>
+        <dt class="metric-label">Años de experiencia</dt>
         <dd class="metric-num">00</dd>
       </div>
       <div class="metric reveal">
-        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: pacientes atendidos)</dt>
+        <dt class="metric-label">Pacientes atendidos</dt>
         <dd class="metric-num">000+</dd>
       </div>
       <div class="metric reveal">
-        <dt class="metric-label todo-placeholder">Completar etiqueta (ej.: profesionales en el equipo)</dt>
+        <dt class="metric-label">Profesionales en el equipo</dt>
         <dd class="metric-num">0</dd>
       </div>
     </dl>
   </div>
 </section>
+-->
 
 <section id="ubicacion">
   <div class="container">
@@ -874,15 +880,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="contact-band on-dark">
   <div class="container reveal">
     <h2>¿Tu mascota necesita atención?</h2>
-    <p>Escribinos y coordinamos un turno a la brevedad, o contactanos ante cualquier emergencia.</p>
+    <p>Escribinos y coordinamos un turno a la brevedad.</p>
     <div class="contact-band-ctas">
       <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn light"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Escribinos por WhatsApp</a>
       <a href="contacto.html" class="text-link">o completá el formulario</a>
     </div>
     <div class="urgent-box">
-      <a href="tel:+5493795033587" class="urgent-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><span><strong>Urgencias:</strong> llamar al <span class="nowrap">+54 9 379 503-3587</span></span></a>
-      <!-- TODO CONTENIDO: ¿hay guardia? ¿qué hacer fuera de horario? -->
-      <p class="todo-placeholder">Completar: si hay guardia y qué hacer fuera del horario de atención.</p>
+      <a href="tel:+5493795033587" class="urgent-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><span>Llamar al <span class="nowrap">+54 9 379 503-3587</span></span></a>
+      <!-- TODO CONTENIDO (oculto): ¿hay guardia? ¿qué hacer fuera de horario? Cuando esté el dato, agregar:
+      <p>…texto sobre guardia / fuera de horario…</p> -->
     </div>
   </div>
 </section>
@@ -988,14 +994,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
     const star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
     const grid = document.getElementById('reviewsGrid');
-    grid.innerHTML = cfg.items.map(r => r.texto ? `
+    const reales = cfg.items.filter(r => r.texto && r.texto.trim());
+    if (!reales.length) {
+      grid.outerHTML = `<p class="reviews-cta reveal"><a class="pill-btn light" href="${esc(cfg.url)}" target="_blank" rel="noopener">Leer las reseñas en Google <span aria-hidden="true">→</span></a></p>`;
+      document.querySelectorAll('.reviews-cta').forEach(el => window.siteReveal ? window.siteReveal(el) : el.classList.add('visible'));
+      return;
+    }
+    grid.innerHTML = reales.map(r => `
       <figure class="review-card reveal">
         <div class="review-stars" role="img" aria-label="${r.estrellas} de 5 estrellas">${star.repeat(r.estrellas || 5)}</div>
         <blockquote class="review-text">${esc(r.texto)}</blockquote>
         <figcaption class="review-author">${esc(r.autor)}${r.fecha ? `<small>${esc(r.fecha)} · Google</small>` : ''}</figcaption>
-      </figure>` : `
-      <figure class="review-card pending reveal">
-        <p class="review-text">Reseña pendiente: copiar una reseña real de Google en <code>resenas.js</code>.</p>
       </figure>`).join('');
     grid.querySelectorAll('.reveal').forEach(el => window.siteReveal ? window.siteReveal(el) : el.classList.add('visible'));
   })();
