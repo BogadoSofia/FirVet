@@ -2,6 +2,17 @@
 (function () {
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Cartel de versión demo ----------
+     Poner DEMO = false (y quitar el <meta name="robots" noindex> de cada página) al publicar el sitio final. */
+  var DEMO = true;
+  if (DEMO) {
+    var demo = document.createElement('div');
+    demo.className = 'demo-banner';
+    demo.setAttribute('role', 'note');
+    demo.innerHTML = 'Versión demo<span class="demo-extra"> · sitio en desarrollo</span>';
+    document.body.appendChild(demo);
+  }
+
   /* ---------- Header con fondo al scrollear ---------- */
   var header = document.getElementById('siteHeader');
   function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 8); }
