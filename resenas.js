@@ -20,5 +20,12 @@ window.FIRVET_RESENAS = {
       texto: 'Excelente lugar, muy buena atención, los productos son todos de primera calidad y el servicio que brindan es muy bueno.' },
     { autor: 'Dardo R.', estrellas: 5, fecha: '',
       texto: 'Muy buena atención a nuestra mascota. Salió ya con vacunación completa y medicamentos para su tratamiento.' },
+    // TODO CONTENIDO: en la captura esta reseña aparece cortada ("..."); si es más larga, pegar el texto completo.
+    { autor: 'Liza T.', estrellas: 5, fecha: '',
+      texto: 'Excelente atención!! La veterinaria salvó la vida de mi perrita 2 veces. Son los mejores !! Aman los animalitos!! 🐶💖' },
+    { autor: 'Gabriela D.', estrellas: 5, fecha: '',
+      texto: 'Muy buenos precios y gran variedad en sus productos!' },
+    { autor: 'Hugo R.', estrellas: 5, fecha: '',
+      texto: 'Excelente atención y muy buenos productos para el cuidado de mi perrijo' },
   ],
 };
