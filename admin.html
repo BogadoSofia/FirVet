@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Panel de administración — FirVet</title>
+<title>Acceso del equipo — FirVet</title>
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAF8F5;--surface:#FFFFFF;--ink:#14201B;--primary:#05A5B5;--primary-dark:#037682;
+    --bg:#FAF8F5;--surface:#FFFFFF;--ink:#14201B;--primary:#05A5B5;--primary-dark:#037682;--primary-strong:#037682;
     --text-sub:#4F5A54;--menu-dark:#0B2530;--danger:#B91C1C;--line:rgba(20,32,27,0.14);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -63,7 +63,20 @@
   .stock-toggle{display:flex;gap:8px;}
   .stock-toggle .chip[aria-pressed=true][data-stock=false]{background:#FBE1E1;border-color:var(--danger);color:var(--danger);}
   .notice{background:#FFF6E5;border:1px solid #F3C77A;color:#6B4600;border-radius:12px;padding:12px 16px;font-size:13px;margin-bottom:16px;}
-  .login{max-width:400px;margin:8vh auto 0;}
+  .login{max-width:420px;margin:6vh auto 0;}
+  .login-logo{display:block;margin:0 auto 18px;height:64px;width:auto;}
+  .login h1{font-size:24px;line-height:1.25;text-align:center;margin-bottom:8px;}
+  .login > p.sub{text-align:center;}
+  .login .btn{width:100%;}
+  .login-actions{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+  .back-link{display:inline-block;margin-top:18px;color:var(--primary-strong);font-weight:600;font-size:14px;text-decoration:none;}
+  .back-link:hover{text-decoration:underline;}
+  .login-foot{text-align:center;}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .file-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .file-row .btn{cursor:pointer;}
+  .file-name{font-size:13px;color:var(--text-sub);}
+  input[type=file]:focus-visible + .file-row .btn{outline:3px solid var(--primary-strong);outline-offset:2px;}
   @media(max-width:640px){
     .grid2{grid-template-columns:1fr;}
     .product{grid-template-columns:1fr;}
@@ -73,7 +86,7 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar">
+  <div class="topbar" id="topbar" hidden>
     <a href="index.html"><img src="logo.webp" alt="FirVet — volver al sitio" width="53" height="44"></a>
     <div class="topbar-right" id="sessionBar" hidden>
       <span id="sessionEmail"></span>
@@ -82,21 +95,23 @@
   </div>
 
   <!-- LOGIN -->
-  <section class="card login" id="loginView" hidden>
-    <h2>Panel de administración</h2>
-    <p class="sub">Ingresá con tu cuenta para editar los productos de la tienda.</p>
+  <main class="card login" id="loginView" hidden>
+    <img class="login-logo" src="logo.webp" alt="FirVet" width="77" height="64">
+    <h1>Acceso exclusivo para el equipo de FirVet</h1>
+    <p class="sub">Ingresá con tu email y tu contraseña.</p>
     <form id="loginForm" novalidate>
       <label for="loginEmail">Email</label>
       <input type="email" id="loginEmail" autocomplete="username" required>
       <label for="loginPassword">Contraseña</label>
       <input type="password" id="loginPassword" autocomplete="current-password" required>
-      <div class="row" style="margin-top:20px;">
+      <div class="login-actions">
         <button type="submit" class="btn" id="loginBtn">Ingresar</button>
-        <button type="button" class="btn ghost" id="magicBtn">Enviarme un link por email</button>
+        <button type="button" class="btn ghost" id="magicBtn">Recibir un enlace de acceso por email</button>
       </div>
       <p class="status" id="loginStatus" role="status"></p>
     </form>
-  </section>
+    <div class="login-foot"><a class="back-link" href="tienda.html">← Volver a la tienda</a></div>
+  </main>
 
   <!-- PANEL -->
   <div id="panelView" hidden>
@@ -147,6 +162,20 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const tagsOf = (s) => String(s || '').split(',').map(t => t.trim()).filter(Boolean);
+  // Supabase devuelve los errores en inglés: se muestran siempre en español
+  // y el original queda en la consola para diagnosticar.
+  function errEs(err){
+    if (err && err.es) return err.message;
+    console.error(err);
+    const m = String((err && err.message) || '').toLowerCase();
+    const code = String((err && (err.code || err.statusCode || err.status)) || '');
+    if (m.includes('row-level security') || m.includes('permission') || ['42501', '401', '403'].includes(code)) return 'No tenés permiso para hacer este cambio.';
+    if (m.includes('jwt') || m.includes('expired')) return 'Tu sesión venció. Volvé a ingresar.';
+    if (m.includes('fetch') || m.includes('network')) return 'Sin conexión. Revisá internet y probá de nuevo.';
+    if (m.includes('too large') || m.includes('exceeded') || code === '413') return 'La imagen es demasiado pesada.';
+    if (m.includes('mime')) return 'Ese tipo de archivo no está permitido.';
+    return 'Ocurrió un error inesperado. Probá de nuevo.';
+  }
 
   let products = [];
   let hasPresentacion = false;
@@ -159,6 +188,7 @@
     $('loginView').hidden = logged;
     $('panelView').hidden = !logged;
     $('sessionBar').hidden = !logged;
+    $('topbar').hidden = !logged;
     if (logged) {
       $('sessionEmail').textContent = session.user.email;
       loadProducts();
@@ -171,12 +201,19 @@
     const status = $('loginStatus');
     const email = $('loginEmail').value.trim();
     const password = $('loginPassword').value;
-    if (!email || !password) { status.className = 'status error'; status.textContent = 'Completá email y contraseña.'; return; }
+    if (!email || !password) { status.className = 'status error'; status.textContent = 'Completá tu email y tu contraseña.'; return; }
     $('loginBtn').disabled = true;
     status.className = 'status'; status.textContent = 'Ingresando…';
     const { error } = await sb.auth.signInWithPassword({ email, password });
     $('loginBtn').disabled = false;
-    if (error) { status.className = 'status error'; status.textContent = 'Email o contraseña incorrectos.'; return; }
+    if (error) {
+      const m = String(error.message || '').toLowerCase();
+      status.className = 'status error';
+      status.textContent = m.includes('fetch') || m.includes('network') ? 'Sin conexión. Revisá internet y probá de nuevo.'
+        : m.includes('rate') || error.status === 429 ? 'Demasiados intentos. Esperá unos minutos y probá de nuevo.'
+        : 'Email o contraseña incorrectos.';
+      return;
+    }
     status.textContent = '';
     refreshSession();
   });
@@ -187,7 +224,7 @@
     if (!email) { status.className = 'status error'; status.textContent = 'Escribí tu email primero.'; return; }
     const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false, emailRedirectTo: location.href.split('#')[0] } });
     status.className = error ? 'status error' : 'status';
-    status.textContent = error ? 'No se pudo enviar el link. ¿El email está dado de alta?' : 'Te mandamos un link de acceso. Revisá tu correo.';
+    status.textContent = error ? 'No se pudo enviar el enlace. ¿Ese email está dado de alta?' : 'Te mandamos un enlace de acceso. Revisá tu correo.';
   });
 
   $('logoutBtn').addEventListener('click', async () => { await sb.auth.signOut(); refreshSession(); });
@@ -210,7 +247,11 @@
     const v = p || { name:'', price:'', desc:'', presentacion:'', tags:'', priceOnRequest:false, inStock:true };
     return `
       <label for="${prefix}-img">Imagen <span class="opt">(cuadrada, ideal 800×800)</span></label>
-      <input type="file" accept="image/*" id="${prefix}-img" data-f="img">
+      <input type="file" accept="image/*" id="${prefix}-img" data-f="img" class="visually-hidden">
+      <div class="file-row">
+        <label for="${prefix}-img" class="btn ghost" style="margin:0;">Elegir imagen</label>
+        <span class="file-name" data-file-name>Ningún archivo elegido</span>
+      </div>
       <label for="${prefix}-name">Nombre</label>
       <input type="text" id="${prefix}-name" data-f="name" value="${esc(v.name)}" required>
       <div class="grid2">
@@ -252,7 +293,14 @@
     return { values: out, file: get('img').files[0] };
   }
 
-  // Delegated interactions shared by edit rows and add form
+  // Muestra el nombre del archivo elegido (reemplaza el texto nativo del navegador)
+  document.addEventListener('change', (e) => {
+    if (e.target.dataset.f !== 'img') return;
+    const span = e.target.closest('[data-root]').querySelector('[data-file-name]');
+    span.textContent = e.target.files[0] ? e.target.files[0].name : 'Ningún archivo elegido';
+  });
+
+  // Interacciones compartidas por las filas de edición y el formulario de alta
   document.addEventListener('click', (e) => {
     const sw = e.target.closest('.switch[data-f]');
     if (sw) { sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true')); return; }
@@ -307,9 +355,11 @@
   /* ---------- PRODUCTS ---------- */
   async function loadProducts(){
     const { data, error } = await sb.from(PRODUCTS_TABLE).select('*').order('id', { ascending: true });
-    if (error) { $('productList').innerHTML = `<p class="status error">No se pudieron cargar los productos: ${esc(error.message)}</p>`; return; }
-    hasPresentacion = !!(data && data.length && Object.prototype.hasOwnProperty.call(data[0], 'Presentacion'));
-    $('presentacionNotice').hidden = hasPresentacion || !data || !data.length;
+    if (error) { $('productList').innerHTML = `<p class="status error">No se pudieron cargar los productos. ${esc(errEs(error))}</p>`; return; }
+    hasPresentacion = data && data.length
+      ? Object.prototype.hasOwnProperty.call(data[0], 'Presentacion')
+      : !(await sb.from(PRODUCTS_TABLE).select('Presentacion').limit(1)).error; // tabla vacía: se consulta la columna
+    $('presentacionNotice').hidden = hasPresentacion;
     products = (data || []).map(r => ({
       id: r.id, name: r.Nombre || '', price: r.Precio ?? '', desc: r.Descripcion || '',
       presentacion: r.Presentacion || '', tags: r.Etiquetas || '', priceOnRequest: r.ConsultarPrecio === true,
@@ -352,7 +402,7 @@
       if (!confirm(`¿Eliminar "${product.name}"? Esta acción no se puede deshacer.`)) return;
       btn.disabled = true;
       const { error } = await sb.from(PRODUCTS_TABLE).delete().eq('id', product.id);
-      if (error) { setStatus('No se pudo eliminar: ' + error.message, true); btn.disabled = false; return; }
+      if (error) { setStatus('No se pudo eliminar. ' + errEs(error), true); btn.disabled = false; return; }
       await removeImage(product.imagePath);
       products = products.filter(p => p !== product);
       renderProducts();
@@ -370,12 +420,12 @@
       }
       const { data, error } = await sb.from(PRODUCTS_TABLE).update(values).eq('id', product.id).select();
       if (error) throw error;
-      if (!data || !data.length) throw new Error('Sin permiso para editar (revisá las políticas RLS).');
+      if (!data || !data.length) throw Object.assign(new Error('Sin permiso para editar.'), { es: true });
       if (oldPath) await removeImage(oldPath);
       setStatus('Guardado.');
       await loadProducts();
     } catch (err) {
-      console.error(err); setStatus('Error al guardar: ' + (err.message || ''), true);
+      setStatus(err && err.es ? err.message : 'No se pudo guardar. ' + errEs(err), true);
     } finally { btn.disabled = false; }
   });
 
@@ -400,7 +450,7 @@
       renderAddForm();
       $('addStatus').textContent = 'Producto agregado.';
     } catch (err) {
-      console.error(err); status.className = 'status error'; status.textContent = 'No se pudo agregar: ' + (err.message || '');
+      status.className = 'status error'; status.textContent = 'No se pudo agregar. ' + errEs(err);
     } finally { btn.disabled = false; }
   });
 
@@ -421,7 +471,7 @@
     const { error } = await sb.from(CONFIG_TABLE).upsert(row);
     $('shippingSave').disabled = false;
     status.className = error ? 'status error' : 'status';
-    status.textContent = error ? 'Error: ' + error.message : 'Guardado.';
+    status.textContent = error ? 'No se pudo guardar. ' + errEs(error) : 'Guardado.';
   });
 
   refreshSession();
