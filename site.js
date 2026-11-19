@@ -9,7 +9,7 @@
     var demo = document.createElement('div');
     demo.className = 'demo-banner';
     demo.setAttribute('role', 'note');
-    demo.innerHTML = 'Versión demo<span class="demo-extra"> · sitio en desarrollo</span>';
+    demo.innerHTML = 'Propuesta de diseño de Vertex<span class="demo-extra"> · sitio de demostración</span>';
     document.body.appendChild(demo);
   }
 

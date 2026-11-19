@@ -6,9 +6,9 @@
   --bg:#FAF8F5;
   --surface:#FFFFFF;
   --ink:#14201B;
-  --primary:#05A5B5;        /* acentos, íconos y fondos decorativos */
-  --primary-strong:#037682; /* texto y botones sobre fondo claro (AA) */
-  --secondary:#2DCFE0;      /* acento sobre fondos oscuros */
+  --primary:#0A8F94;        /* acentos, íconos y fondos decorativos */
+  --primary-strong:#006B70; /* texto y botones sobre fondo claro (AA) */
+  --secondary:#5FD3CF;      /* acento sobre fondos oscuros */
   --accent:#F9A225;
   --accent-strong:#9A5B00;  /* texto naranja sobre claro (AA) */
   --text-sub:#4F5A54;
@@ -58,15 +58,15 @@ h1,h2,h3,.serif{font-family:'Fraunces',serif;}
   background:var(--primary-strong);color:#fff;
   padding:14px 28px;border-radius:999px;border:none;cursor:pointer;
   font-family:inherit;font-weight:700;font-size:15px;
-  box-shadow:0 10px 26px rgba(3,118,130,0.28);
+  box-shadow:0 10px 26px rgba(0,107,112,0.28);
   transition:transform .25s ease, box-shadow .25s ease, background .2s ease;
 }
-.pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(3,118,130,0.36);background:#02646E;}
+.pill-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,107,112,0.36);background:#00585C;}
 .pill-btn svg{width:18px;height:18px;flex-shrink:0;}
 .pill-btn.wa{background:#1E7A45;box-shadow:0 10px 26px rgba(30,122,69,0.28);}
 .pill-btn.wa:hover{background:#18663A;}
 .pill-btn.light{background:#fff;color:var(--primary-strong);box-shadow:0 10px 26px rgba(0,0,0,0.12);}
-.pill-btn.light:hover{background:#F1FBFC;}
+.pill-btn.light:hover{background:#EEF8F7;}
 .text-link{
   display:inline-flex;align-items:center;gap:6px;min-height:44px;
   font-weight:700;color:var(--primary-strong);
@@ -113,7 +113,7 @@ h1,h2,h3,.serif{font-family:'Fraunces',serif;}
   font-weight:600;font-size:15px;color:var(--ink);
   transition:background .2s ease, color .2s ease;
 }
-.main-nav a:hover{background:rgba(5,165,181,0.1);color:var(--primary-strong);}
+.main-nav a:hover{background:rgba(10,143,148,0.1);color:var(--primary-strong);}
 .main-nav a[aria-current]{color:var(--primary-strong);box-shadow:inset 0 -2px 0 var(--primary-strong);border-radius:0;}
 .header-cta{
   display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;
@@ -173,12 +173,13 @@ body.menu-open .brand{background:#fff;border-radius:999px;padding:0 12px;}
 }
 .menu-links a:hover{color:#fff;padding-left:12px;}
 .menu-links a[aria-current]{color:var(--secondary);}
-.menu-urgent{
+.menu-call{
   margin-top:28px;padding:18px 20px;border-radius:18px;
   background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);
   display:flex;flex-direction:column;gap:12px;max-width:560px;
 }
-.menu-urgent strong{font-size:15px;}
+.menu-call strong{font-size:15px;}
+.menu-call p{font-size:15px;line-height:1.5;color:var(--text-on-dark);}
 .menu-foot{
   margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.18);
   display:flex;gap:4px 28px;flex-wrap:wrap;font-size:15px;color:var(--text-on-dark);
@@ -266,4 +267,4 @@ body.modal-open .whatsapp-fab{opacity:0;pointer-events:none;visibility:hidden;}
   box-shadow:0 6px 18px rgba(0,0,0,0.18);pointer-events:none;
 }
 body.menu-open .demo-banner{display:none;}
-@media(max-width:400px){.demo-extra{display:none;}}
+@media(max-width:480px){.demo-extra{display:none;}}

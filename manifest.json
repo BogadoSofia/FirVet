@@ -1,12 +1,12 @@
 {
   "name": "FirVet Veterinaria",
   "short_name": "FirVet",
-  "description": "Clínica veterinaria integral en Corrientes Capital: consultas, cirugías, vacunación y tienda de productos para tu mascota.",
+  "description": "Veterinaria en Corrientes Capital con atención con turno previo: clínica general, fisioterapia y rehabilitación, cirugía y animales exóticos.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
   "background_color": "#FAF8F5",
-  "theme_color": "#05A5B5",
+  "theme_color": "#0A8F94",
   "lang": "es",
   "icons": [
     {

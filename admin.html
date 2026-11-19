@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAF8F5;--surface:#FFFFFF;--ink:#14201B;--primary:#05A5B5;--primary-dark:#037682;--primary-strong:#037682;
+    --bg:#FAF8F5;--surface:#FFFFFF;--ink:#14201B;--primary:#0A8F94;--primary-dark:#006B70;--primary-strong:#006B70;
     --text-sub:#4F5A54;--menu-dark:#0B2530;--danger:#B91C1C;--line:rgba(20,32,27,0.14);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -35,10 +35,10 @@
   input:focus,textarea:focus{outline:none;border-color:var(--primary-strong);}
   textarea{resize:vertical;min-height:70px;}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 22px;border-radius:999px;border:none;font:inherit;font-weight:700;cursor:pointer;background:var(--primary-dark);color:#fff;}
-  .btn:hover{background:#02646E;}
+  .btn:hover{background:#00585C;}
   .btn:disabled{opacity:.5;cursor:not-allowed;}
   .btn.ghost{background:transparent;color:var(--primary-dark);border:1.5px solid var(--primary-dark);}
-  .btn.ghost:hover{background:rgba(5,165,181,0.08);}
+  .btn.ghost:hover{background:rgba(10,143,148,0.08);}
   .btn.danger{background:#FBE1E1;color:var(--danger);}
   .btn.danger:hover{background:#F8CACA;}
   .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
@@ -55,7 +55,7 @@
   .switch[aria-checked=true]::after{transform:translateX(20px);}
   .chips{display:flex;flex-wrap:wrap;gap:8px;}
   .chip{min-height:36px;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-size:13px;font-weight:700;color:var(--text-sub);cursor:pointer;}
-  .chip[aria-pressed=true]{background:rgba(5,165,181,0.12);border-color:var(--primary-dark);color:var(--primary-dark);}
+  .chip[aria-pressed=true]{background:rgba(10,143,148,0.12);border-color:var(--primary-dark);color:var(--primary-dark);}
   .product{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line);}
   .product:first-child{border-top:none;padding-top:0;}
   .thumb{width:120px;height:120px;border-radius:14px;background:var(--bg);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;}

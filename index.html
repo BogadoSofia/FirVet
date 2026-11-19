@@ -12,23 +12,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- DEMO: sacar esta línea cuando la clienta apruebe el sitio y se publique de verdad (y poner DEMO = false en site.js) -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#05A5B5">
+<meta name="theme-color" content="#0A8F94">
 <title>FirVet — Clínica veterinaria en Corrientes Capital</title>
-<meta name="description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta name="description" content="Veterinaria en Corrientes Capital con atención con turno previo: clínica general, fisioterapia y rehabilitación, cirugía, animales exóticos y diagnóstico.">
 <link rel="canonical" href="https://bogadosofia.github.io/FirVet/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FirVet Veterinaria">
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://bogadosofia.github.io/FirVet/">
 <meta property="og:title" content="FirVet — Clínica veterinaria en Corrientes Capital">
-<meta property="og:description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta property="og:description" content="Veterinaria en Corrientes Capital con atención con turno previo: clínica general, fisioterapia y rehabilitación, cirugía, animales exóticos y diagnóstico.">
 <meta property="og:image" content="https://bogadosofia.github.io/FirVet/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Logo de FirVet Veterinaria, Catamarca 530, Corrientes Capital">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FirVet — Clínica veterinaria en Corrientes Capital">
-<meta name="twitter:description" content="Clínica veterinaria integral en Corrientes Capital: consultas, fisioterapia y rehabilitación, vacunación, farmacia y tienda para tu mascota.">
+<meta name="twitter:description" content="Veterinaria en Corrientes Capital con atención con turno previo: clínica general, fisioterapia y rehabilitación, cirugía, animales exóticos y diagnóstico.">
 <meta name="twitter:image" content="https://bogadosofia.github.io/FirVet/og-image.jpg">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -62,7 +62,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position:absolute;
     top:-15%;right:-8%;
     width:520px;height:520px;
-    background:radial-gradient(circle, rgba(5,165,181,0.16) 0%, transparent 70%);
+    background:radial-gradient(circle, rgba(10,143,148,0.16) 0%, transparent 70%);
     pointer-events:none;
   }
   .hero-grid{
@@ -118,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     inset:0;
     margin:auto;
     width:360px;height:360px;
-    background:radial-gradient(circle, rgba(5,165,181,0.35), rgba(249,162,37,0.18) 55%, transparent 75%);
+    background:radial-gradient(circle, rgba(10,143,148,0.35), rgba(249,162,37,0.18) 55%, transparent 75%);
     filter:blur(18px);
     animation:pulseGlow 5s ease-in-out infinite;
   }
@@ -207,7 +207,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .bento-icon{
     width:44px;height:44px;
     border-radius:12px;
-    background:rgba(5,165,181,0.12);
+    background:rgba(10,143,148,0.12);
     display:flex;align-items:center;justify-content:center;
     margin-bottom:18px;
   }
@@ -268,13 +268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .review-text{font-size:15px;line-height:1.65;color:var(--ink);}
   .review-author{margin-top:auto;font-weight:700;font-size:14px;}
   .review-author small{display:block;font-weight:400;color:var(--text-sub);}
-  .review-card.pending{background:rgba(255,255,255,0.06);border:2px dashed rgba(249,162,37,0.6);box-shadow:none;color:#FFE2B3;}
-  .review-card.pending .review-text{color:#FFE2B3;}
 
-  /* FISIO: CASOS */
-  .fisio-cases{margin-top:44px;}
-  .fisio-cases h3{font-size:22px;font-weight:600;margin-bottom:16px;}
-  .fisio-cases-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
 
   /* TEASER TIENDA */
   .store-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;}
@@ -296,13 +290,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @keyframes shimmer{to{background-position:-200% 0;}}
   .store-empty{grid-column:1/-1;color:var(--text-sub);}
 
-  /* MÉTRICAS */
-  .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
-  .metric{display:flex;flex-direction:column-reverse;gap:8px;padding:24px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
-  .metric-num{font-family:'Fraunces',serif;font-size:clamp(36px,4.4vw,52px);font-weight:600;color:var(--secondary);line-height:1;}
-  .metric-star{font-size:.6em;margin-left:6px;color:var(--accent);}
-  .metric-label{font-size:15px;color:var(--text-on-dark);}
-  .metric-label.todo-placeholder{color:#FFE2B3;}
+  /* HERO: DATOS CLAVE */
+  .hero-facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;opacity:0;animation:fadeUp .8s ease .45s forwards;}
+  .hero-facts li{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ink);}
+  .hero-facts svg{width:18px;height:18px;flex-shrink:0;padding:3px;border-radius:50%;background:rgba(0,107,112,0.12);color:var(--primary-strong);box-sizing:content-box;}
+
+  /* CONOCÉ A ROCÍO */
+  .rocio-band{background:#EEF6F5;}
+  .rocio-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;align-items:center;}
+  .rocio-photo{
+    position:relative;aspect-ratio:4 / 5;border-radius:28px;overflow:hidden;
+    background:linear-gradient(150deg, var(--primary-strong) 0%, #004A4E 100%);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 20px 44px rgba(0,74,78,0.22);
+  }
+  .rocio-initials{font-family:'Fraunces',serif;font-size:clamp(64px,9vw,112px);font-weight:600;color:rgba(255,255,255,0.92);letter-spacing:2px;}
+  .rocio-paw{position:absolute;right:-18px;bottom:-18px;width:150px;height:150px;color:rgba(255,255,255,0.08);transform:rotate(-18deg);}
+  .rocio-text .section-head{margin-bottom:28px;}
+  .rocio-creds{display:flex;flex-direction:column;gap:12px;margin-bottom:30px;}
+  .rocio-creds li{display:flex;align-items:flex-start;gap:12px;background:var(--surface);border-radius:16px;padding:14px 18px;font-size:15px;line-height:1.5;box-shadow:0 4px 18px rgba(20,32,27,0.06);}
+  .rocio-creds svg{width:22px;height:22px;flex-shrink:0;color:var(--primary-strong);margin-top:1px;}
+  .rocio-sub{font-size:20px;font-weight:600;margin-bottom:14px;}
+  .rocio-ways{list-style:none;counter-reset:way;display:flex;flex-direction:column;gap:12px;}
+  .rocio-ways li{counter-increment:way;position:relative;padding-left:42px;font-size:15px;line-height:1.6;color:var(--text-sub);}
+  .rocio-ways li strong{color:var(--ink);}
+  .rocio-ways li::before{
+    content:counter(way);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+    background:var(--accent);color:var(--ink);font-family:'Fraunces',serif;font-weight:700;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .rocio-cta{margin-top:30px;}
+
+  /* CIRUGÍA */
+  .cirugia-band{background:var(--surface);}
+  .surgery-steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:none;}
+  .surgery-step{position:relative;background:var(--bg);border-radius:22px;padding:28px 26px;border:1px solid var(--line);}
+  .surgery-num{
+    display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;margin-bottom:16px;
+    background:var(--primary-strong);color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:19px;
+  }
+  .surgery-step h3{font-size:19px;font-weight:600;margin-bottom:8px;}
+  .surgery-step p{font-size:15px;line-height:1.6;color:var(--text-sub);}
+
+  /* PREGUNTAS FRECUENTES */
+  .faq-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:48px;align-items:start;}
+  .faq-list{display:flex;flex-direction:column;gap:12px;}
+  .faq-item{background:var(--surface);border-radius:18px;box-shadow:0 4px 18px rgba(20,32,27,0.06);border:1px solid transparent;transition:border-color .2s ease;}
+  .faq-item[open]{border-color:rgba(0,107,112,0.35);}
+  .faq-item summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    min-height:56px;padding:16px 22px;font-weight:700;font-size:16px;color:var(--ink);border-radius:18px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"";flex-shrink:0;width:12px;height:12px;margin-right:4px;
+    border-right:2.5px solid var(--primary-strong);border-bottom:2.5px solid var(--primary-strong);
+    transform:translateY(-3px) rotate(45deg);transition:transform .25s ease;
+  }
+  .faq-item[open] summary::after{transform:translateY(3px) rotate(-135deg);}
+  .faq-item summary:hover{color:var(--primary-strong);}
+  .faq-item p{padding:0 22px 20px;font-size:15px;line-height:1.65;color:var(--text-sub);}
 
   /* FISIOTERAPIA */
   .fisio-grid{
@@ -385,7 +431,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .tech-icon{
     width:56px;height:56px;border-radius:16px;margin-bottom:16px;
     display:flex;align-items:center;justify-content:center;
-    background:rgba(5,165,181,0.1);color:var(--primary-strong);
+    background:rgba(10,143,148,0.1);color:var(--primary-strong);
   }
   .tech-icon svg{width:28px;height:28px;}
   .tech-name{font-weight:700;font-size:17px;color:var(--ink);}
@@ -457,15 +503,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   #servicios .section-head p{color:rgba(255,255,255,0.65);}
   #servicios .bento-item:not(.bento-feature) h3{color:var(--ink);}
 
-  /* STATS BAND */
-  .stats-band{background:var(--menu-dark);color:#fff;}
 
   /* CONTACT BAND */
   .contact-band{position:relative;padding:110px 0;color:#fff;overflow:hidden;}
   .contact-band::before{
     content:'';
     position:absolute;inset:0;
-    background:linear-gradient(135deg, var(--primary-strong), #024D55);
+    background:linear-gradient(135deg, var(--primary-strong), #004A4E);
     clip-path:polygon(0 9%,100% 0,100% 91%,0 100%);
     z-index:0;
   }
@@ -474,14 +518,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-band p{color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto 34px;}
   .contact-band .container{display:flex;flex-direction:column;align-items:center;}
   .contact-band-ctas{display:flex;align-items:center;justify-content:center;gap:8px 24px;flex-wrap:wrap;}
-  .urgent-box{margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:12px;max-width:520px;}
-  .urgent-call{
+  .call-box{margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:12px;max-width:520px;}
+  .call-link{
     display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 22px;border-radius:999px;
     border:2px solid rgba(255,255,255,0.75);color:#fff;font-size:15px;transition:background .2s ease;
   }
-  .urgent-call:hover{background:rgba(255,255,255,0.12);}
+  .call-link:hover{background:rgba(255,255,255,0.12);}
   .nowrap{white-space:nowrap;}
-  .urgent-call svg{width:18px;height:18px;flex-shrink:0;}
+  .call-link svg{width:18px;height:18px;flex-shrink:0;}
+  .contact-band .call-box p{margin:0;font-size:14px;}
   .fisio-cta{margin-top:36px;display:flex;align-items:center;gap:8px 24px;flex-wrap:wrap;}
 
   /* FOOTER */
@@ -495,7 +540,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .chip-2{right:auto;left:0;} /* a la derecha la tapaba el botón flotante de WhatsApp */
     .bento-feature{grid-column:span 6;min-height:300px;}
     .store-teaser{grid-template-columns:repeat(2,minmax(0,1fr));}
-    .metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .rocio-grid,.faq-grid{grid-template-columns:1fr;gap:32px;}
+    .rocio-photo{max-width:340px;width:100%;aspect-ratio:1 / 1;}
+    .surgery-steps{grid-template-columns:1fr;gap:14px;}
+    .faq-grid .section-head{margin-bottom:0;}
     .fisio-grid{grid-template-columns:1fr;}
     .fisio-faq{position:static;}
     .visit-grid{grid-template-columns:1fr;}
@@ -513,7 +561,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento{grid-template-columns:1fr;}
     .bento-item.bento-item{grid-column:1 / -1;}
     .store-teaser{gap:12px;}
-    .metric{padding:18px;}
+    .hero-facts{justify-content:center;}
+    .rocio-photo{max-width:none;aspect-ratio:16 / 9;border-radius:20px;}
+    .faq-item summary{padding:14px 18px;font-size:15px;}
+    .faq-item p{padding:0 18px 18px;}
     .fisio-step{align-items:flex-start;}
     .fisio-step-num{width:42px;height:42px;font-size:18px;}
     .fisio-faq{padding:32px 24px;}
@@ -552,7 +603,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento-icon{width:32px;height:32px;border-radius:9px;margin:0 0 12px;flex-shrink:0;}
     .bento-icon svg{width:17px;height:17px;}
     /* Solo ícono + título. Sin guiones: si una palabra no entra, baja entera a la línea siguiente.
-       15px desde 375px; en pantallas más angostas baja un poco para que "complementarios" entre en el ancho. */
+       15px desde 375px; en pantallas más angostas baja un poco para que "convencionales" entre en el ancho. */
     .bento .bento-item h3{
       font-size:clamp(13px, 4vw, 15px);line-height:1.25;margin:auto 0 0;
       hyphens:none;-webkit-hyphens:none;overflow-wrap:normal;word-break:normal;
@@ -572,7 +623,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bento .bento-feature h3{color:#fff;}
   }
   @media(max-width:340px){
-    /* Pantallas muy angostas (320px): un poco menos de padding y letra para que "complementarios" entre sin partirse */
+    /* Pantallas muy angostas (320px): un poco menos de padding y letra para que "convencionales" entre sin partirse */
     .bento .bento-item.bento-item{padding:12px;}
     .bento .bento-item h3{font-size:12.5px;}
   }
@@ -605,6 +656,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "sameAs": ["https://instagram.com/firvet.veterinaria"]
 }
 </script>
+<!-- TODO CONTENIDO: openingHoursSpecification usa los horarios sin confirmar; revisarlo cuando la clienta los confirme. -->
 <!-- TODO CONTENIDO: verificar las coordenadas "geo" (tomadas de OpenStreetMap para Catamarca 530) contra el pin de Google Maps. -->
 </head>
 <body>
@@ -621,6 +673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="main-nav" aria-label="Principal">
       <ul>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#rocio">Conocé a Rocío</a></li>
         <li><a href="#fisioterapia">Fisioterapia</a></li>
         <li><a href="#resenas">Reseñas</a></li>
         <li><a href="tienda.html">Productos</a></li>
@@ -643,17 +696,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="menu-panel-inner">
     <nav class="menu-links" aria-label="Menú principal">
       <a href="#servicios">Servicios</a>
+      <a href="#rocio">Conocé a Rocío</a>
       <a href="#fisioterapia">Fisioterapia</a>
       <a href="#resenas">Reseñas</a>
       <a href="tienda.html">Productos</a>
       <a href="#ubicacion">Ubicación</a>
       <a href="contacto.html">Contacto</a>
-      <!-- TODO CONTENIDO: "Nosotros" queda oculto hasta que exista la sección de equipo. Cuando esté, agregar: <a href="#equipo">Nosotros</a> -->
     </nav>
-    <div class="menu-urgent">
+    <div class="menu-call">
       <a class="pill-btn light" href="tel:+5493795033587"><svg stroke="currentColor" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>Llamar al +54 9 379 503-3587</a>
-      <!-- TODO CONTENIDO (oculto): ¿hay guardia? ¿qué hacer fuera de horario? Cuando esté el dato, agregar:
-      <p>…texto sobre guardia / fuera de horario…</p> -->
+      <p>Atendemos solo con turno previo, coordinado por WhatsApp.</p>
     </div>
     <div class="menu-foot">
       <a href="https://wa.me/5493795033587" target="_blank" rel="noopener">WhatsApp +54 9 379 503-3587</a>
@@ -676,13 +728,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="eyebrow">Clínica veterinaria integral</span>
-      <h1>Porque tu mejor amigo merece <em>el mejor cuidado.</em></h1>
-      <p>Consultas, cirugías y vacunación, con un equipo que trata a cada paciente como familia.</p>
+      <span class="eyebrow">Veterinaria en Corrientes Capital</span>
+      <h1>Medicina veterinaria con <em>empatía y ciencia.</em></h1>
+      <p>Escuchamos a tu animal, acompañamos a su familia y te explicamos cómo seguir sus cuidados en casa. Atendemos con turno previo: escribinos y lo coordinamos.</p>
       <div class="hero-ctas">
         <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir turno por WhatsApp</a>
         <a href="contacto.html" class="text-link">o completá el formulario</a>
       </div>
+      <ul class="hero-facts" aria-label="Datos clave">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Atención con turno previo</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Clínica, cirugía y rehabilitación</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>También exóticos</li>
+      </ul>
       <div class="hero-badge"><a class="g-badge" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span aria-hidden="true">·</span><span><span data-reviews-total>43</span> reseñas en Google</span></a></div>
     </div>
     <div class="hero-visual">
@@ -691,9 +748,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- TODO CONTENIDO: reemplazar por una foto propia de FirVet. Esta es de stock (antes se cargaba desde axoncomunicacion.net); revisar licencia/atribución. -->
         <img src="img/hero-640.webp" srcset="img/hero-400.webp 400w, img/hero-640.webp 640w" sizes="(max-width: 767px) calc(100vw - 32px), 320px" width="640" height="640" alt="Veterinaria revisando a un cachorro con el estetoscopio" fetchpriority="high" decoding="async">
       </div>
-      <span class="chip chip-1">🐾 Amor por los animales</span>
-      <span class="chip chip-2">Atención personalizada</span>
-      <span class="chip chip-3">Equipo profesional</span>
+      <span class="chip chip-1">🐾 Empatía y cercanía</span>
+      <span class="chip chip-2">MV Rocío Ramírez</span>
+      <span class="chip chip-3">Fisioterapia y rehabilitación</span>
     </div>
   </div>
 </section>
@@ -708,48 +765,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Servicios</span>
-      <h2>Todo lo que tu mascota necesita, en un solo lugar</h2>
-      <p>Un equipo veterinario preparado para acompañar cada etapa de su vida.</p>
+      <h2>Cuidamos su salud en cada etapa</h2>
+      <p>Desde la consulta de rutina hasta la rehabilitación, con atención pensada para cada especie.</p>
     </div>
     <div class="bento">
       <div class="bento-item bento-feature reveal">
-        <!-- TODO CONTENIDO: reemplazar por una foto propia. Esta es de stock (antes se cargaba desde postgradoveterinaria.com); revisar licencia. -->
+        <!-- TODO CONTENIDO: foto de stock (antes se cargaba desde postgradoveterinaria.com). Reemplazar por una foto propia de FirVet cuando la clienta la pase. -->
         <img class="bento-feature-img" src="img/atencion-clinica-750.webp" srcset="img/atencion-clinica-480.webp 480w, img/atencion-clinica-750.webp 750w" sizes="(max-width: 900px) 100vw, 580px" width="750" height="450" alt="" loading="lazy" decoding="async">
-        <span class="tag">Atención personalizada</span>
-        <h3>Atención clínica</h3>
-        <p>Consultas, diagnóstico y seguimiento con un equipo veterinario cercano, que dedica el tiempo que tu mascota necesita.</p>
-        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20una%20consulta." target="_blank" rel="noopener" aria-label="Atención clínica: pedir turno por WhatsApp">Pedir turno <span aria-hidden="true">→</span></a>
+        <span class="tag">Consultas y controles</span>
+        <h3>Clínica general</h3>
+        <p>Consultas, controles de salud y orientación para el cuidado de todos los días, con tiempo para escucharte.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20de%20cl%C3%ADnica%20general%20para%20mi%20mascota." target="_blank" rel="noopener" aria-label="Clínica general: pedir turno por WhatsApp">Pedir turno <span aria-hidden="true">→</span></a>
       </div>
       <div class="bento-item bento-half reveal">
         <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg></div>
         <h3>Fisioterapia y rehabilitación</h3>
-        <p>Terapias de recuperación para mejorar su movilidad y bienestar.</p>
-        <a class="bento-link" href="#fisioterapia" aria-label="Fisioterapia y rehabilitación: ver cómo es una sesión">Cómo es una sesión <span aria-hidden="true">→</span></a>
+        <p>Evaluación, plan individual y seguimiento para mejorar su movilidad y su calidad de vida, con pautas para seguir en casa.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20fisioterapia%20y%20rehabilitaci%C3%B3n%20para%20mi%20mascota." target="_blank" rel="noopener" aria-label="Fisioterapia y rehabilitación: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
       </div>
       <div class="bento-item bento-half reveal">
-        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
-        <h3>Métodos complementarios</h3>
-        <p>Terapias alternativas que acompañan el tratamiento convencional de tu mascota.</p>
-        <!-- TODO CONTENIDO: si se arma una página o sección de métodos complementarios, cambiar este link. -->
-        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20los%20m%C3%A9todos%20complementarios." target="_blank" rel="noopener" aria-label="Métodos complementarios: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg></div>
+        <h3>Cirugía</h3>
+        <p>Evaluación previa, cirugía y acompañamiento durante la recuperación, con indicaciones claras para casa.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20una%20cirug%C3%ADa%20para%20mi%20mascota." target="_blank" rel="noopener" aria-label="Cirugía: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
       </div>
       <div class="bento-item bento-third reveal">
-        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></div>
-        <h3>Farmacia</h3>
-        <p>Medicamentos y productos para el cuidado y la salud de tu mascota.</p>
-        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20un%20medicamento." target="_blank" rel="noopener" aria-label="Farmacia: consultar un medicamento por WhatsApp">Consultar un medicamento <span aria-hidden="true">→</span></a>
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 16a3 3 0 0 1 2.24 5"/><path d="M18 12h.01"/><path d="M18 21h-8a4 4 0 0 1-4-4 7 7 0 0 1 7-7h.2L9.6 6.4a1 1 0 1 1 2.8-2.8L15.8 7h.2c3.3 0 6 2.7 6 6v1a2 2 0 0 1-2 2h-1a3 3 0 0 0-3 3"/><path d="M20 8.54V4a2 2 0 1 0-4 0v3"/><path d="M7.612 12.524a3 3 0 1 0-1.6 4.3"/></svg></div>
+        <h3>Exóticos y no convencionales</h3>
+        <p>Atención adaptada a cada especie, como conejos y cobayos.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno%20para%20mi%20animal.%20La%20especie%20es%3A%20" target="_blank" rel="noopener" aria-label="Exóticos y no convencionales: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="bento-item bento-third reveal">
+        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></svg></div>
+        <h3>Diagnóstico</h3>
+        <p>Análisis, citología, radiografías, ecografías y evaluación cardíaca. Consultanos la disponibilidad por WhatsApp.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20la%20disponibilidad%20de%20estudios%20de%20diagn%C3%B3stico%20para%20mi%20mascota." target="_blank" rel="noopener" aria-label="Diagnóstico: consultar disponibilidad por WhatsApp">Consultar disponibilidad <span aria-hidden="true">→</span></a>
       </div>
       <div class="bento-item bento-third reveal">
         <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-        <h3>Petshop</h3>
-        <p>Accesorios y artículos pensados para el día a día de tu mascota.</p>
-        <a class="bento-link" href="tienda.html" aria-label="Petshop: ver la tienda">Ver la tienda <span aria-hidden="true">→</span></a>
+        <h3>Farmacia, alimentos y petshop</h3>
+        <p>Productos para su salud y su día a día, con asesoramiento para elegir bien.</p>
+        <a class="bento-link" href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20farmacia%2C%20alimentos%20o%20productos%20del%20petshop." target="_blank" rel="noopener" aria-label="Farmacia, alimentos y petshop: consultar por WhatsApp">Consultar <span aria-hidden="true">→</span></a>
       </div>
-      <div class="bento-item bento-third reveal">
-        <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18"/><path d="M4 11a8 8 0 0 0 16 0"/><path d="M12 3v4"/></svg></div>
-        <h3>Alimentos balanceados</h3>
-        <p>Nutrición balanceada según la etapa y las necesidades de tu mascota.</p>
-        <a class="bento-link" href="tienda.html?categoria=Alimentos" aria-label="Alimentos balanceados: ver alimentos en la tienda">Ver alimentos <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="rocio" class="rocio-band">
+  <div class="container rocio-grid">
+    <div class="rocio-photo reveal" aria-hidden="true">
+      <!-- TODO CONTENIDO: foto real de Rocío (pedírsela a la clienta). No usar stock acá: tiene que ser ella.
+           Cuando esté, reemplazar este bloque por <img src="img/rocio.webp" alt="MV Rocío Ramírez en el consultorio de FirVet" ...>. -->
+      <span class="rocio-initials">RR</span>
+      <svg class="rocio-paw" viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="9.5" r="2.2"/><circle cx="9.5" cy="5.5" r="2.2"/><circle cx="14.5" cy="5.5" r="2.2"/><circle cx="18.5" cy="9.5" r="2.2"/><path d="M12 11c-3.2 0-6 3.4-6 6.2 0 1.8 1.4 2.8 3 2.8 1.3 0 2-.6 3-.6s1.7.6 3 .6c1.6 0 3-1 3-2.8 0-2.8-2.8-6.2-6-6.2Z"/></svg>
+    </div>
+    <div class="rocio-text">
+      <div class="section-head reveal">
+        <span class="eyebrow">Conocé a Rocío</span>
+        <h2>MV Rocío Ramírez</h2>
+        <p>Es la médica veterinaria a cargo de FirVet. Atiende clínica general, cirugía y animales no convencionales y exóticos.</p>
+      </div>
+      <ul class="rocio-creds reveal">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span><strong>Médica veterinaria</strong> egresada de la UNNE</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg><span><strong>Maestría en Fisioterapia y Rehabilitación Veterinaria</strong> para todas las especies</span></li>
+      </ul>
+      <h3 class="rocio-sub reveal">Cómo trabaja</h3>
+      <ol class="rocio-ways reveal">
+        <li><strong>Escucha al paciente.</strong> Cada consulta empieza por entender qué le pasa a tu animal.</li>
+        <li><strong>Acompaña a la familia.</strong> Te explica cada paso y responde tus dudas.</li>
+        <li><strong>Te enseña a cuidarlo en casa.</strong> Con indicaciones que se adaptan a tus posibilidades.</li>
+      </ol>
+      <div class="rocio-cta reveal">
+        <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20un%20turno.%20El%20motivo%20de%20la%20consulta%20es%3A%20" target="_blank" rel="noopener" class="pill-btn">Agendá un turno con Rocío <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -758,38 +845,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="fisioterapia">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Fisioterapia</span>
-      <h2>Así es una sesión de rehabilitación</h2>
-      <p>Un proceso pensado para que tu mascota recupere movilidad sin estrés, paso a paso.</p>
+      <span class="eyebrow">Fisioterapia y rehabilitación</span>
+      <h2>Para que vuelva a moverse con comodidad</h2>
+      <p>Rocío tiene una maestría en Fisioterapia y Rehabilitación Veterinaria. Cada plan busca mejorar la movilidad, la recuperación funcional y la calidad de vida de tu animal.</p>
     </div>
     <div class="fisio-grid">
       <div class="fisio-steps">
         <div class="fisio-step reveal">
           <div class="fisio-step-num">1</div>
-          <div class="fisio-step-text">Evaluamos su condición.</div>
+          <div class="fisio-step-text"><strong>Evaluación inicial</strong> para conocer su condición y lo que necesita.</div>
         </div>
         <div class="fisio-step reveal">
           <div class="fisio-step-num">2</div>
-          <div class="fisio-step-text">Armamos un plan a medida.</div>
+          <div class="fisio-step-text"><strong>Plan individual</strong>, pensado para tu animal y sus objetivos.</div>
         </div>
         <div class="fisio-step reveal">
           <div class="fisio-step-num">3</div>
-          <div class="fisio-step-text">Hacemos ejercicios, masajes, ayudamos con tecnologías.</div>
+          <div class="fisio-step-text"><strong>Seguimiento</strong> de su recuperación a lo largo del tratamiento.</div>
         </div>
         <div class="fisio-step reveal">
           <div class="fisio-step-num">4</div>
-          <div class="fisio-step-text">Usamos refuerzos positivos, entonces tu mascota termina feliz.</div>
+          <div class="fisio-step-text"><strong>Pautas para seguir en casa</strong>, adaptadas a tus posibilidades.</div>
         </div>
       </div>
       <div class="fisio-faq reveal">
-        <h3>¿Cuántas sesiones necesita?</h3>
-        <span class="fisio-answer">Depende de la enfermedad</span>
-        <p>Se le entrega al tutor una ficha explicativa del tratamiento con sus objetivos y pronóstico.</p>
+        <h3>Formación específica</h3>
+        <span class="fisio-answer">Maestría en rehabilitación veterinaria</span>
+        <p>Rocío se especializó en fisioterapia y rehabilitación para todas las especies. Además del trabajo en el consultorio, te enseña cómo acompañar la recuperación en casa.</p>
+        <!-- TODO CONTENIDO: antes este recuadro decía "¿Cuántas sesiones necesita? Depende de la enfermedad. Se le entrega al tutor una ficha explicativa del tratamiento con sus objetivos y pronóstico." Confirmar con la clienta si se puede volver a usar. -->
       </div>
     </div>
-    <div class="fisio-tech reveal">
+    <!-- TODO CONTENIDO: confirmar con la clienta si usa estas tecnologías (ultrasonido, magnetoterapia, electroestimulación, fototerapia)
+         y revisar los textos del dorso. Mientras tanto quedan ocultas: para mostrarlas, quitar el atributo hidden. -->
+    <div class="fisio-tech reveal" hidden>
       <span class="fisio-tech-label">Tecnologías que usamos</span>
-      <!-- TODO CONTENIDO: revisar con el equipo los textos del dorso de cada tarjeta (los redactamos nosotras como base). -->
       <div class="tech-cards">
         <button type="button" class="tech-card" aria-pressed="false">
           <span class="tech-card-inner">
@@ -845,21 +934,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
       </div>
     </div>
-    <!-- TODO CONTENIDO (oculto): "¿Para qué casos sirve?" — completar con los casos reales que trata FirVet
-         (ej.: postoperatorios, artrosis, displasia, hernias...) y quitar este comentario para mostrarlo.
-    <div class="fisio-cases reveal">
-      <h3>¿Para qué casos sirve?</h3>
-      <ul class="fisio-cases-list">
-        <li>Caso 1</li>
-        <li>Caso 2</li>
-        <li>Caso 3</li>
-        <li>Caso 4</li>
-      </ul>
-    </div>
-    -->
     <div class="fisio-cta reveal">
-      <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20pedir%20una%20evaluaci%C3%B3n%20de%20fisioterapia%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Pedir evaluación de fisioterapia</a>
+      <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20fisioterapia%20y%20rehabilitaci%C3%B3n%20para%20mi%20mascota.%20Te%20cuento%20el%20caso%3A%20" target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Consultar por rehabilitación</a>
       <a href="contacto.html?motivo=fisioterapia" class="text-link">o completá el formulario</a>
+    </div>
+  </div>
+</section>
+
+<section id="cirugia" class="cirugia-band">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cirugía</span>
+      <h2>Te acompañamos antes, durante y después</h2>
+      <p>Cada cirugía se planifica con tiempo y sigue con un acompañamiento cercano mientras tu animal se recupera.</p>
+    </div>
+    <ol class="surgery-steps">
+      <li class="surgery-step reveal">
+        <span class="surgery-num" aria-hidden="true">1</span>
+        <h3>Evaluación previa</h3>
+        <p>Revisamos su estado de salud y te explicamos el procedimiento.</p>
+      </li>
+      <li class="surgery-step reveal">
+        <span class="surgery-num" aria-hidden="true">2</span>
+        <h3>Cirugía</h3>
+        <p>Realizamos la intervención en el día que coordinamos con vos.</p>
+      </li>
+      <li class="surgery-step reveal">
+        <span class="surgery-num" aria-hidden="true">3</span>
+        <h3>Recuperación acompañada</h3>
+        <p>Seguimos su evolución y te damos indicaciones claras para casa.</p>
+      </li>
+    </ol>
+    <div class="fisio-cta reveal">
+      <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20una%20cirug%C3%ADa%20para%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn wa"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Consultar por cirugía</a>
     </div>
   </div>
 </section>
@@ -870,7 +977,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <span class="eyebrow">Reseñas</span>
         <h2>Historias que nos llenan de orgullo</h2>
-        <p>Algunos de los pacientes que pasaron por nuestra clínica y hoy están mejor que nunca.</p>
+        <p>Lo que cuentan en Google las familias que nos visitaron.</p>
       </div>
       <a class="g-badge g-badge-dark" data-reviews-badge href="https://www.google.com/maps?cid=15733491255711557415" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9c-.3 1.4-1 2.5-2.2 3.3v2.7h3.6c2.1-1.9 3.3-4.8 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.7c-1 .7-2.3 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8C3.9 20.5 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.8 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.1C1.4 8.5 1 10.2 1 12s.4 3.5 1.1 5l3.7-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2C17.5 2.1 15 1 12 1 7.7 1 3.9 3.5 2.1 7l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg><span class="g-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg><strong data-reviews-rating>5.0</strong></span><span>· <span data-reviews-total>43</span> reseñas en Google</span></a>
     </div>
@@ -904,42 +1011,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- TODO CONTENIDO (oculto): sección "Por qué elegirnos". Completar las métricas con datos reales
-     (número + etiqueta) y quitar este comentario para mostrarla.
-<section id="nosotros" class="stats-band on-dark">
-  <div class="container">
+<section id="preguntas" class="faq-band">
+  <div class="container faq-grid">
     <div class="section-head reveal">
-      <span class="eyebrow">Por qué elegirnos</span>
-      <h2>Cuidado con profesionalismo y cariño</h2>
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Antes de tu visita</h2>
+      <p>Si te queda alguna duda, escribinos por WhatsApp y te respondemos.</p>
     </div>
-    <dl class="metrics">
-      <div class="metric reveal">
-        <dt class="metric-label">Calificación en Google</dt>
-        <dd class="metric-num"><span data-reviews-rating>5.0</span><span class="metric-star" aria-hidden="true">★</span></dd>
-      </div>
-      <div class="metric reveal">
-        <dt class="metric-label">Años de experiencia</dt>
-        <dd class="metric-num">00</dd>
-      </div>
-      <div class="metric reveal">
-        <dt class="metric-label">Pacientes atendidos</dt>
-        <dd class="metric-num">000+</dd>
-      </div>
-      <div class="metric reveal">
-        <dt class="metric-label">Profesionales en el equipo</dt>
-        <dd class="metric-num">0</dd>
-      </div>
-    </dl>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>¿Cómo pido un turno?</summary>
+        <p>Escribinos por WhatsApp y contanos el motivo de la consulta. Coordinamos el día y el horario según la disponibilidad.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Atienden animales exóticos?</summary>
+        <p>Sí. Al escribirnos, contanos qué especie es y cuál es el motivo de la consulta.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué llevo a la primera consulta?</summary>
+        <p>La libreta sanitaria, los informes, análisis o estudios que tengas y la medicación que esté tomando.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo consulto por rehabilitación?</summary>
+        <p>Escribinos por WhatsApp contándonos el caso. Si tenés una derivación o informes de otro profesional, compartilos así los revisamos.</p>
+      </details>
+    </div>
   </div>
 </section>
--->
 
 <section id="ubicacion">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Visitanos</span>
       <h2>Ubicación y horarios</h2>
-      <p>Encontranos en Catamarca 530, Corrientes Capital, o coordiná tu visita en el horario que más te convenga.</p>
+      <p>Estamos en Catamarca 530, Corrientes Capital. Atendemos solo con turno previo: escribinos por WhatsApp antes de venir y coordinamos tu visita.</p>
     </div>
     <div class="visit-grid">
       <div class="map-card reveal">
@@ -952,6 +1057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="hours-card reveal">
         <h3>Horarios de atención</h3>
+        <!-- TODO CONTENIDO: horarios sin confirmar (la web oficial no los publica). Confirmar con la clienta; actualizar también el footer de las 3 páginas y openingHoursSpecification en el JSON-LD. -->
         <ul class="hours-compact">
           <li><span class="day">Lun a Vie</span><span class="hours">9 a 19 h</span></li>
           <li><span class="day">Sáb</span><span class="hours">9 a 13 h</span></li>
@@ -968,16 +1074,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="contact-band on-dark">
   <div class="container reveal">
-    <h2>¿Tu mascota necesita atención?</h2>
-    <p>Escribinos y coordinamos un turno a la brevedad.</p>
+    <h2>Agendá su próximo turno</h2>
+    <p>Contanos por WhatsApp qué necesita tu animal y coordinamos el turno según la disponibilidad.</p>
     <div class="contact-band-ctas">
       <a href="https://wa.me/5493795033587?text=%C2%A1Hola%20FirVet!%20Quiero%20consultar%20por%20mi%20mascota." target="_blank" rel="noopener" class="pill-btn light"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.688 4.564 1.874 6.418L4 29l7.775-1.842A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6c-1.98 0-3.855-.548-5.457-1.5l-.392-.232-4.61 1.092 1.127-4.49-.257-.407A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.843-1.971-.938-.264-.096-.457-.144-.649.144-.192.288-.745.938-.913 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.316-1.428-.856-.763-1.434-1.706-1.602-1.994-.168-.288-.018-.444.126-.588.129-.128.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.649-1.564-.889-2.14-.234-.563-.472-.487-.649-.496l-.553-.01c-.192 0-.504.072-.768.36-.264.288-1.008.985-1.008 2.404 0 1.418 1.032 2.788 1.176 2.98.144.192 2.03 3.1 4.918 4.347.687.297 1.223.474 1.641.606.689.219 1.316.188 1.812.114.553-.083 1.706-.697 1.947-1.372.24-.674.24-1.252.168-1.372-.072-.12-.264-.192-.552-.336z"/></svg>Escribinos por WhatsApp</a>
       <a href="contacto.html" class="text-link">o completá el formulario</a>
     </div>
-    <div class="urgent-box">
-      <a href="tel:+5493795033587" class="urgent-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><span>Llamar al <span class="nowrap">+54 9 379 503-3587</span></span></a>
-      <!-- TODO CONTENIDO (oculto): ¿hay guardia? ¿qué hacer fuera de horario? Cuando esté el dato, agregar:
-      <p>…texto sobre guardia / fuera de horario…</p> -->
+    <div class="call-box">
+      <a href="tel:+5493795033587" class="call-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg><span>Llamar al <span class="nowrap">+54 9 379 503-3587</span></span></a>
+      <p>Atendemos solo con turno previo, coordinado por WhatsApp.</p>
     </div>
   </div>
 </section>
@@ -989,7 +1094,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="logo.webp" alt="FirVet Veterinaria" width="67" height="56" loading="lazy">
-        <p>Clínica veterinaria integral en Corrientes Capital.</p>
+        <p>Medicina veterinaria con empatía, ciencia y cercanía, en Corrientes Capital. Atención con turno previo.</p>
         <ul class="footer-list">
           <li><a href="https://maps.app.goo.gl/swao9cz3iKC9LN326" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Catamarca 530, Corrientes (W3400CEE)</a></li>
         </ul>
@@ -1005,17 +1110,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="footer-hours">
         <h2>Horarios</h2>
+        <!-- TODO CONTENIDO: horarios sin confirmar (la web oficial no los publica). Confirmar con la clienta. -->
         <p>Lun a Vie 9 a 19 h</p>
         <p>Sáb 9 a 13 h</p>
         <p class="closed">Dom cerrado</p>
+        <p>Siempre con turno previo</p>
       </div>
       <div>
         <h2>Navegación</h2>
         <ul class="footer-list">
           <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#rocio">Conocé a Rocío</a></li>
           <li><a href="#fisioterapia">Fisioterapia</a></li>
           <li><a href="#resenas">Reseñas</a></li>
           <li><a href="tienda.html">Productos</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
           <li><a href="#ubicacion">Ubicación</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
